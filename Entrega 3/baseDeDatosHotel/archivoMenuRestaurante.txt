@@ -1,0 +1,2 @@
+gaseosa;5000;800 cal;true;0600;2200
+desayuno;12000;1000 cal;true;0600;1000

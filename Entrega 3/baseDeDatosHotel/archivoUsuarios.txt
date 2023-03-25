@@ -1,0 +1,3 @@
+r.franco;123456;A
+rubenFranco;123456;R
+FrancoRuben;654321;E
