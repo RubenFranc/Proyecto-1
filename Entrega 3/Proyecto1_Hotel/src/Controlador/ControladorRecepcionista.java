@@ -13,6 +13,14 @@ import Model.Reserva;
 
 public class ControladorRecepcionista {
 	
+	public String fechaADias(String fecha) {
+		String[] partes = fecha.split("/");
+		int dia = Integer.parseInt(partes[0]);
+		int mes = Integer.parseInt(partes[1]);
+		int fechaADias = dia + mes*30;
+		return Integer.toString(fechaADias);
+	}
+	
 	public ArrayList<String> fechasEnRango(String fechaInicio, String fechaFinal){
 		ArrayList<String> fechas = new ArrayList<>();
 		String fechaI = fechaInicio;
@@ -45,7 +53,6 @@ public class ControladorRecepcionista {
 		return fechas;
 	}
 	
-	@SuppressWarnings("finally")
 	public String cancelarReserva(Hotel hotel, String documento, String fechaActual, 
 			String fechaInicio, String fechaFinal) {
 		ArrayList<Reserva> reservas = hotel.getReservas().get(documento);
@@ -97,6 +104,7 @@ public class ControladorRecepcionista {
 	public HabitacionOcupada habitacionDisponible(Hotel hotel, String fechaInicio, String fechaFinal, 
 			String tipoHabitacion, String documentoHuesped) {
 		if (hotel.getHabitacionesDisponiblesHotel().get(tipoHabitacion).size() != 0) {
+			System.out.println("ENTRÖ AQUÏ");
 			Set<String> keys = hotel.getHabitacionesDisponiblesHotel().get(tipoHabitacion).keySet();
 			ArrayList<String> ids = new ArrayList<>(keys);
 			Habitacion habitacion = hotel.getHabitacionesDisponiblesHotel().get(tipoHabitacion).get(ids.get(0));
@@ -108,34 +116,47 @@ public class ControladorRecepcionista {
 			habOcup.setFechaFinal(fechaFinal);
 			habOcup.setDocumentoHuesped(documentoHuesped);
 			habOcup.setOcupantes();
+			
 			return habOcup;
 		}
 		else if (hotel.getHabitacionesOcupadasHotel().get(tipoHabitacion).keySet().size() > 0) {
 			for (String id: hotel.getHabitacionesOcupadasHotel().get(tipoHabitacion).keySet()) {
 				boolean cruzada = false;
+				HabitacionOcupada habOcup1 = null;
 				for (HabitacionOcupada habitacion: hotel.getHabitacionesOcupadasHotel().get(tipoHabitacion).get(id)) {
-					if ((fechaInicio.compareTo(habitacion.getFechaFinal()) < 0 & fechaInicio.compareTo(habitacion.getFechaInicio()) > 0)|| 
-						(fechaFinal.compareTo(habitacion.getFechaInicio()) < 0 & fechaFinal.compareTo(habitacion.getFechaFinal()) > 0)|| 
-						(habitacion.getFechaInicio().compareTo(fechaInicio) < 0 & habitacion.getFechaInicio().compareTo(fechaFinal) > 0)|| 
-						(habitacion.getFechaFinal().compareTo(fechaInicio) < 0 & habitacion.getFechaFinal().compareTo(fechaFinal) > 0)) {
+					String fechaInicio1 = fechaADias(fechaInicio);
+					String fechaFinal1 = fechaADias(fechaFinal);
+					String fechaIni = fechaADias(habitacion.getFechaInicio());
+					String fechaFin = fechaADias(habitacion.getFechaFinal());
+					if ((fechaInicio1.compareTo(habitacion.getFechaFinal()) < 0 & fechaInicio1.compareTo(fechaIni) > 0)|| 
+						(fechaFinal1.compareTo(fechaIni) > 0 & fechaFinal1.compareTo(fechaFin) < 0)|| 
+						(fechaIni.compareTo(fechaInicio1) > 0 & fechaIni.compareTo(fechaFinal1) < 0)|| 
+						(fechaFin.compareTo(fechaInicio1) > 0 & fechaFin.compareTo(fechaFinal1) < 0)||
+						(fechaIni.equals(fechaInicio1) & fechaFin.equals(fechaFinal1))) {
 						cruzada = true;
+//						System.out.println("POR FIN");
+//						System.out.println(fechaInicio+"-"+fechaFinal);
+//						System.out.println(habitacion.getFechaInicio()+"-"+habitacion.getFechaFinal());
 						break;
 					}
+					else {
+						habOcup1 = new HabitacionOcupada(habitacion.getTipoHabitacion(), habitacion.getCapacidad(), 
+								habitacion.hasBalcon(), habitacion.hasVentana(), habitacion.hasCocina(), habitacion.getTarifa(), 
+								habitacion.getId(), habitacion.getDisponibilidad());;
+					}
 				}
-				if (cruzada == false) {
-					HabitacionOcupada habOcup = hotel.getHabitacionesOcupadasHotel().get(tipoHabitacion).get(id).get(hotel.getHabitacionesOcupadasHotel().get(tipoHabitacion).get(id).size()-1);
-					System.out.println("POR FIN");
-					habOcup.setDisponibilidad(false);
-					habOcup.setFechaInicio(fechaInicio);
-					habOcup.setFechaFinal(fechaFinal);
-					habOcup.setDocumentoHuesped(documentoHuesped);
-					habOcup.setOcupantes();
-					return habOcup;
+				if (cruzada == false) {				
+					habOcup1.setDisponibilidad(false);
+					habOcup1.setFechaInicio(fechaInicio);
+					habOcup1.setFechaFinal(fechaFinal);
+					habOcup1.setDocumentoHuesped(documentoHuesped);
+					habOcup1.setOcupantes();
+					return habOcup1;
 				}
 			}
 		}
-		HabitacionOcupada habOcup = new HabitacionOcupada("", 0, false, false, false, 0, "", false);
-		return habOcup;
+		HabitacionOcupada habOcup2 = new HabitacionOcupada("", 0, false, false, false, 0, "", false);
+		return habOcup2;
 	}
 	
 	public HabitacionOcupada ocuparHabitacion(Hotel hotel, String fechaInicio, String fechaFinal, 
@@ -151,7 +172,7 @@ public class ControladorRecepcionista {
 				hotel.getHabitacionesOcupadasHotel().get(habOcup.getTipoHabitacion()).put(habOcup.getId(),array);
 			}
 		}
-		else {
+		else if (! habOcup.getId().equals("")) {
 			Map<String, ArrayList<HabitacionOcupada>> mapa = new HashMap<>();			
 			mapa.put(habOcup.getId(), new ArrayList<>());
 			mapa.get(habOcup.getId()).add(habOcup);
@@ -160,6 +181,7 @@ public class ControladorRecepcionista {
 			hotel.getHabitacionesOcupadasHotel().put(habOcup.getTipoHabitacion(), mapa);
 			hotel.getHabitacionesDisponiblesHotel().get(habOcup.getTipoHabitacion()).remove(ids.get(0));
 		}
+		System.out.println(habOcup.getId());
 		return habOcup;
 	}
 	
@@ -210,6 +232,7 @@ public class ControladorRecepcionista {
 		factura += "---------------------------------------\n";
 		factura += "TOTAL A PAGAR: " + totalTotal;
 		factura += "\n****************************************\n\n¡Vuelva pronto!";
+		hotel.getReservas().get(reserva.getHuesped().getDocumento()).remove(reserva);
 		return factura;
 	}
 	

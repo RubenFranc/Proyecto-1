@@ -41,5 +41,9 @@ public class Huesped {
 	public void setAcompañantes(ArrayList<String> acompañantes) {
 		this.acompañantes = acompañantes;
 	}
+	
+	public void addAcompañante(String acomp) {
+		this.acompañantes.add(acomp);
+	}
 
 }

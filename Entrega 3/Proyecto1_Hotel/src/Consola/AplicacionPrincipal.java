@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import Controlador.ControladorPersistencia;
 import Model.Hotel;
 import Model.Usuario;
 
@@ -15,6 +17,13 @@ public class AplicacionPrincipal {
 		
 		Hotel hotel = new Hotel();
 		cargarUsuarios("../baseDeDatosHotel/archivoUsuarios.txt", hotel);
+		ControladorPersistencia controladorPersistencia= new ControladorPersistencia();
+		controladorPersistencia.cargarHabitacionesOcupadas(hotel, "../baseDeDatosHotel/archivoHabitacionesOcupadas.txt");
+		controladorPersistencia.cargarHabitacionesDisponibles(hotel, "../baseDeDatosHotel/archivoHabitaciones.txt");
+		controladorPersistencia.cargarModificacionesTarifasHabitaciones(hotel, "../baseDeDatosHotel/archivoModificacionesTarifaHabitaciones.txt");
+		controladorPersistencia.cargarReservas(hotel, "../baseDeDatosHotel/archivoReservas.txt");
+		controladorPersistencia.cargarProductosMenuArchivo(hotel, "../baseDeDatosHotel/archivoMenuRestaurante.txt");
+		controladorPersistencia.cargarServiciosArchivo(hotel, "../baseDeDatosHotel/archivoServicios.txt");
 //		String mssg = "";
 		boolean continuarIngreso = true;
 		while (continuarIngreso) {
@@ -53,6 +62,12 @@ public class AplicacionPrincipal {
 				System.out.println("\nIngrese una opcion válida\n");
 			}
 		}
+		controladorPersistencia.guardarArchivoHabitacionesOcupadas(hotel, "../baseDeDatosHotel/archivoHabitacionesOcupadas.txt");
+		controladorPersistencia.guardarArchivoHabitacionesDisponibles(hotel, "../baseDeDatosHotel/archivoHabitaciones.txt");
+		controladorPersistencia.guardarModificacionesTarifasHabitaciones(hotel, "../baseDeDatosHotel/archivoModificacionesTarifaHabitaciones.txt");
+		controladorPersistencia.guardarReservas(hotel, "../baseDeDatosHotel/archivoReservas.txt");
+		controladorPersistencia.guardarProductosMenuArchivo(hotel, "../baseDeDatosHotel/archivoMenuRestaurante.txt");
+		controladorPersistencia.guardarServiciosArchivo(hotel, "../baseDeDatosHotel/archivoServicios.txt");
 	}
 
 	public String verificacionIdentidad(String logIn, String password, Hotel hotel) {

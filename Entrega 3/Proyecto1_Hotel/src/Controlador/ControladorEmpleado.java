@@ -12,6 +12,14 @@ import Model.Servicio;
 
 public class ControladorEmpleado {
 	
+	public String fechaADias(String fecha) {
+		String[] partes = fecha.split("/");
+		int dia = Integer.parseInt(partes[0]);
+		int mes = Integer.parseInt(partes[1]);
+		int fechaADias = dia + mes*30;
+		return Integer.toString(fechaADias);
+	}
+	
 	public HabitacionOcupada buscarHabitacionPorId(Hotel hotel, double precioServicio, String idHabitacion, 
 			boolean cargarALaCuenta, String documentoHuesped, String fechaActual) {
 //		ArrayList<HabitacionOcupada> habsOcup= hotel.getHabitacionesOcupadasHotel().get(tipoHabitacion).get(idHabitacion);
@@ -37,9 +45,10 @@ public class ControladorEmpleado {
 		ArrayList<Reserva> reservasHuesped = hotel.getReservas().get(documentoHuesped);
 		Reserva reserva = null;
 		for (Reserva reserv: reservasHuesped) {
-			System.out.println(reserv.getfechaInicio().compareTo(fechaActual) >= 0);
-			System.out.println(reserv.getfechaFinal().compareTo(fechaActual) <= 0);
-			if (reserv.getfechaInicio().compareTo(fechaActual) <= 0 & reserv.getfechaFinal().compareTo(fechaActual) >= 0){
+			String fechaIni = fechaADias(reserv.getfechaInicio());
+			String fechaFin = fechaADias(reserv.getfechaFinal());
+			String actual = fechaADias(fechaActual);
+			if (fechaIni.compareTo(actual) <= 0 & fechaFin.compareTo(actual) >= 0){
 				reserva = reserv;
 				hotel.getReservas().get(documentoHuesped).remove(reserv);
 				break;

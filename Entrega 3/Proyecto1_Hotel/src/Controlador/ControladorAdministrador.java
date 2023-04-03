@@ -156,19 +156,27 @@ public class ControladorAdministrador {
 		}
 	}
 	
-	public void cambiarTarifaServicio(String nombre, double nuevoPrecio, Hotel hotel) {
+	public String cambiarTarifaServicio(String nombre, double nuevoPrecio, Hotel hotel) {
 		if (hotel.getServiciosHotel().containsKey(nombre)) {
 			hotel.getServiciosHotel().get(nombre).setPrecio(nuevoPrecio);
+			return "La nueva tarifa del servicio de " + nombre + " es " + nuevoPrecio;
+		}
+		else {
+			return "El servicio de " + nombre + " no se encuentra en los ofrecidos por el hotel";
 		}
 	}
 	
-	public void cambiarInfoProductoRestaurante(String nombre, double nuevoPrecio, boolean servicioACuarto,
+	public String cambiarInfoProductoRestaurante(String nombre, double nuevoPrecio, boolean servicioACuarto,
 			int horaInicio, int horaFinal, Hotel hotel) {
 		if (hotel.getMenuHotel().containsKey(nombre)) {
 			hotel.getMenuHotel().get(nombre).setPrecio(nuevoPrecio);
 			hotel.getMenuHotel().get(nombre).setServicioACuarto(servicioACuarto);
 			hotel.getMenuHotel().get(nombre).setHoraInicioDisponibilidad(horaInicio);
 			hotel.getMenuHotel().get(nombre).setHoraFinDisponibilidad(horaFinal);
+			return "Se actualizó la información del producto " + nombre + " del menú";
+		}
+		else {
+			return "El producto " + nombre + " no se encuentra entre los productos del restaurante";
 		}
 	}
 	

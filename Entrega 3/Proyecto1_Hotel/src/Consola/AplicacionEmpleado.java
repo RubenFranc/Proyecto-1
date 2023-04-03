@@ -52,6 +52,9 @@ public class AplicacionEmpleado {
 							System.out.println("\nEl producto " + nombreProducto + "no se encuentra en el menú");
 						}
 					}
+					else {
+						agregarProducto = false;
+					}
 				}
 				String factura = controlador.registrarConsumoRestaurante(hotel, id, documento, cargarALaCuenta, productos, fechaActual, horaActual);
 				System.out.println(factura);

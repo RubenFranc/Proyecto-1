@@ -13,6 +13,7 @@ public class Hotel {
 	private Map<String, ProductoMenu> menu;
 	private Map<String, ArrayList<Reserva>> reservas;
 	private Map<String, Map<String, Double>> modificacionesTarifasHabitaciones;
+	private Map<String, ArrayList<Huesped>> huespedes;
 	
 	public Hotel() {
 		this.habitacionesDisponibles = new HashMap<>();
@@ -21,7 +22,8 @@ public class Hotel {
 		this.usuarios = new HashMap<>();
 		this.menu = new HashMap<>();
 		this.reservas = new HashMap<>();
-		this.modificacionesTarifasHabitaciones = new HashMap<>();		
+		this.modificacionesTarifasHabitaciones = new HashMap<>();	
+		this.huespedes = new HashMap<>();
 	}
 	
 	public Map<String, Map<String, Habitacion>> getHabitacionesDisponiblesHotel(){
@@ -50,6 +52,10 @@ public class Hotel {
 	
 	public Map<String, Map<String, Double>> getModificacionesHabitaciones(){
 		return modificacionesTarifasHabitaciones;
+	}
+	
+	public Map<String, ArrayList<Huesped>> getHuespedes(){
+		return huespedes;
 	}
 			
 }

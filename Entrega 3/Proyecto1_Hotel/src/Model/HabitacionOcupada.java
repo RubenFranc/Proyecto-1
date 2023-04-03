@@ -12,6 +12,7 @@ public class HabitacionOcupada extends Habitacion{
 	public HabitacionOcupada(String tipoHabitacion, int capacidad, boolean balcon, boolean ventana, boolean cocina,
 			double tarifa, String id, boolean disponibilidad) {
 		super(tipoHabitacion, capacidad, balcon, ventana, cocina, tarifa, id, disponibilidad);
+		this.ocupantes = new ArrayList<>();
 	}
 	
 	public void setFechaInicio(String fechaInicio) {

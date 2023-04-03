@@ -78,7 +78,8 @@ public class AplicacionAdministrador {
 			else if (opcionSeleccionadaA.equals("6")) {
 				String nombre = input("\nIngrese el nombre del servicio");
 				double nuevoPrecio = Double.parseDouble(input("\nIngrese el nuevo precio del servicio"));
-				controlador.cambiarTarifaServicio(nombre, nuevoPrecio, hotel);
+				String mssg = controlador.cambiarTarifaServicio(nombre, nuevoPrecio, hotel);
+				System.out.println(mssg);
 			}
 			else if (opcionSeleccionadaA.equals("7")) {
 				String nombre = input("\nIngrese el nombre del producto");
@@ -86,7 +87,8 @@ public class AplicacionAdministrador {
 				boolean servicioACuarto = Boolean.parseBoolean(input("\nDigite true si el producto tendrá servicio a cuarto, false de lo contrario"));
 				int horaInicio = Integer.parseInt(input("\nIngrese la hora inicial de la disponibiliad del producto en formato 24h (HHmm)"));
 				int horaFinal = Integer.parseInt(input("\nIngrese la hora final de la disponibiliad del producto en formato 24h (HHmm)"));
-				controlador.cambiarInfoProductoRestaurante(nombre, nuevoPrecio, servicioACuarto, horaInicio, horaFinal, hotel);
+				String mssg = controlador.cambiarInfoProductoRestaurante(nombre, nuevoPrecio, servicioACuarto, horaInicio, horaFinal, hotel);
+				System.out.println(mssg);
 			}
 			else if (opcionSeleccionadaA.equals("8")) {
 				continuarEjecutandoA = false;

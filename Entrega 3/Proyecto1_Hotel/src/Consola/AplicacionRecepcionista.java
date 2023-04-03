@@ -96,7 +96,8 @@ public class AplicacionRecepcionista {
 									System.out.println("\nTarifa total habitación: $" + totalTarifa);
 									int last = hotel.getHabitacionesOcupadasHotel().get(habOcup.getTipoHabitacion()).get(habOcup.getId()).lastIndexOf(habOcup);
 									boolean agregarOcupante = true;
-									while (agregarOcupante) {
+									int cont = 0;
+									while (agregarOcupante & cont < hotel.getHabitacionesOcupadasHotel().get(habOcup.getTipoHabitacion()).get(habOcup.getId()).get(last).getCapacidad()) {
 										mostrarMenuAplicacion("ocup");
 										String opcionSeleccionada3 = input("\nPor favor seleccione una opción");
 										if (opcionSeleccionada3.equals("1") & acompañantes.size() > 0) {
@@ -110,6 +111,7 @@ public class AplicacionRecepcionista {
 											String ocupante = acompañantes.get(Integer.parseInt(num) - 1);
 											System.out.println(ocupante);
 											hotel.getHabitacionesOcupadasHotel().get(habOcup.getTipoHabitacion()).get(habOcup.getId()).get(last).addOcupante(ocupante);
+											cont++;
 											acompañantes.remove(Integer.parseInt(num) - 1);
 											if (acompañantes.size() == 0) {
 												agregarOcupante = false;
@@ -129,7 +131,7 @@ public class AplicacionRecepcionista {
 										for (int index = 0; index < reservasHuesped.size(); index++) {
 											ArrayList<String> acomp = reservasHuesped.get(index).getHuesped().getAcompañantes();
 											Collections.sort(acomp);
-											if (reservasHuesped.get(index).getfechaInicio().equals(fechaInicio) & acomp == acompañantes) {
+											if (reservasHuesped.get(index).getfechaInicio().equals(fechaInicio)) {// & acomp == acompañantes) {
 												controlador.agregarHabitacionAReserva(hotel.getReservas().get(documento).get(index), hotel.getHabitacionesOcupadasHotel().get(habOcup.getTipoHabitacion()).get(habOcup.getId()).get(last));
 												indexReserva = index;
 												break;
@@ -143,6 +145,9 @@ public class AplicacionRecepcionista {
 									}
 									
 								}
+								else {
+									System.out.println("\nNo hay habitaciones disponibles de ese tipo");
+								}
 							}
 							catch (IndexOutOfBoundsException e) {
 								System.out.println("\nNo hay habitaciones disponibles de ese tipo para el rango de fechas ingresado,\nse cruza con las fechas de otra reserva del hotel");
@@ -150,9 +155,12 @@ public class AplicacionRecepcionista {
 						}
 					}
 					if (indexReserva != 10000000) {
-						if (opcionSeleccionada2.equals("2")) {
+						if (opcionSeleccionada2.equals("2") & acompañantes.size() == 0) {
 							agregarHabitacionAReserva = false;
 							System.out.println("\nReserva a nombre de " + nombre + " creada");
+						}
+						else if (opcionSeleccionada2.equals("2")) {
+							System.out.println("\nAún faltan personas de la reserva por ser asignadas a una habitación");
 						}
 						else if (! opcionSeleccionada2.equals("1")){ 
 							System.out.println("\nIngrese una opcion válida\n");
