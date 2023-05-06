@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class menu_administrador extends JFrame implements ActionListener {
+public class menu_empleado extends JFrame implements ActionListener {
     
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Menu Administrador");
+        JFrame frame = new JFrame("Menu Empleado");
         JPanel encabezado = new JPanel();
         JPanel cuerpo = new JPanel();
         JPanel pieDePagina = new JPanel();
@@ -44,6 +44,11 @@ public class menu_administrador extends JFrame implements ActionListener {
         
         // Contenido
 
+
+        // Cuerpo
+        cuerpo.setBackground(colorCuerpo);
+        cuerpo.setPreferredSize(dimensionCuerpo);
+
         // Layout
         cuerpo.setLayout(new GridLayout(2, 2));
         frame.setLayout(new BorderLayout());
@@ -67,20 +72,11 @@ public class menu_administrador extends JFrame implements ActionListener {
         logoutPanel.setPreferredSize(dimensionBotonArriba);
         logoutPanel.setBackground(colorTitulo);
         logoutPanel.add(botonLogout);
-        JPanel confirmarPanel = new JPanel();
-        confirmarPanel.setLayout(new BoxLayout(confirmarPanel, BoxLayout.X_AXIS));
-        confirmarPanel.setPreferredSize(dimensionBotonBarra);
-        confirmarPanel.setBackground(colorCuerpo);
-        confirmarPanel.add(Box.createVerticalGlue());
-        confirmarPanel.add(Box.createHorizontalGlue());
-        confirmarPanel.add(botonConfirmar);
-        confirmarPanel.add(Box.createVerticalGlue());
-        confirmarPanel.add(Box.createHorizontalGlue());
                 
         
         // Encabezado
         encabezado.setLayout(new BorderLayout());
-        JLabel titulo = new JLabel("MENÚ ADMINISTRADOR", SwingConstants.CENTER);
+        JLabel titulo = new JLabel("MENÚ EMPLEADO", SwingConstants.CENTER);
         titulo.setFont(fuenteTitulo);
         titulo.setPreferredSize(dimensionTitulo);
         encabezado.add(titulo, BorderLayout.CENTER);
@@ -97,56 +93,35 @@ public class menu_administrador extends JFrame implements ActionListener {
         // Barra Iquierda
         
         //Pestañas
-        JButton botonPestaniaCargarDatos = new JButton("Cargar Datos");
-        JButton botonPestaniaCrearHabitacion = new JButton("Crear Habitación");
-        JButton botonPestaniaCargarMenu = new JButton("Cargar Menú");
-        JButton botonPestaniaCargarServicios = new JButton("Cargar Servicios");
-        JButton botonPestaniaCambiarTarifaServicio = new JButton("Cambiar Tarifa Servicio");
-        JButton botonPestaniaAsignarTarifaHabitacionFecha = new JButton("Asignar Tarifa Habitación por Fecha");
-        JButton botonPestaniaEditarProductoMenu = new JButton("Editar Producto Menú");
+        JButton botonPestaniaAgregarServicio = new JButton("Agregar Servicio");
+        JButton botonPestaniaRegistrarConsumo = new JButton("Registrar Consumo");
+        JButton botonPestaniaHabitacionesDisponibles = new JButton("Habitaciones Disponibles");
+        JButton botonPestaniaHabitacionesOcupadas = new JButton("Habitaciones Ocupadas");
+        JButton botonPestaniaServiciosHotel = new JButton("Servicios del Hotel");
+        JButton botonPestaniaProductoMenu = new JButton("Productos del Menu");
         
-        botonPestaniaCargarDatos.setPreferredSize(dimensionBotonBarra);
-        botonPestaniaCrearHabitacion.setPreferredSize(dimensionBotonBarra);
-        botonPestaniaCargarMenu.setPreferredSize(dimensionBotonBarra);
-        botonPestaniaCargarServicios.setPreferredSize(dimensionBotonBarra);
-        botonPestaniaCambiarTarifaServicio.setPreferredSize(dimensionBotonBarra);
-        botonPestaniaAsignarTarifaHabitacionFecha.setPreferredSize(dimensionBotonBarra);
-        botonPestaniaEditarProductoMenu.setPreferredSize(dimensionBotonBarra);
+        botonPestaniaAgregarServicio.setPreferredSize(dimensionBotonBarra);
+        botonPestaniaRegistrarConsumo.setPreferredSize(dimensionBotonBarra);
+        botonPestaniaHabitacionesDisponibles.setPreferredSize(dimensionBotonBarra);
+        botonPestaniaHabitacionesOcupadas.setPreferredSize(dimensionBotonBarra);
+        botonPestaniaServiciosHotel.setPreferredSize(dimensionBotonBarra);
+        botonPestaniaProductoMenu.setPreferredSize(dimensionBotonBarra);
         
         //Izquierda
         izquierda.setLayout(new FlowLayout());
         izquierda.setBackground(colorIzquierda);
         izquierda.setPreferredSize(dimensionIzquierda);
         
-        izquierda.add(botonPestaniaCargarDatos);
-        izquierda.add(botonPestaniaCrearHabitacion);
-        izquierda.add(botonPestaniaCargarMenu);
-        izquierda.add(botonPestaniaCargarServicios);
-        izquierda.add(botonPestaniaCambiarTarifaServicio);
-        izquierda.add(botonPestaniaAsignarTarifaHabitacionFecha);
-        izquierda.add(botonPestaniaEditarProductoMenu);
-        
-        
-        // Derecha
-         
+        izquierda.add(botonPestaniaAgregarServicio);
+        izquierda.add(botonPestaniaRegistrarConsumo);
+        izquierda.add(botonPestaniaHabitacionesDisponibles);
+        izquierda.add(botonPestaniaHabitacionesOcupadas);
+        izquierda.add(botonPestaniaServiciosHotel);
+        izquierda.add(botonPestaniaProductoMenu);
+                
+        // Derecha         
         derecha.setBackground(colorDerecha);
         derecha.setPreferredSize(dimensionDerecha);
-        
-
-        // Cuerpo
-        cuerpo.setLayout(new BorderLayout());
-        cuerpo.setBackground(colorCuerpo);
-        cuerpo.setPreferredSize(dimensionCuerpo);
-        
-        cuerpo.add(adminPestaniaCargarDatos.getPestania(),  BorderLayout.CENTER);
-        cuerpo.add(adminPestaniaCargarHabitacion.getPestania(),  BorderLayout.CENTER);
-        cuerpo.add(adminPestaniaCargarMenu.getPestania(),  BorderLayout.CENTER);
-        cuerpo.add(adminPestaniaCargarServicios.getPestania(),  BorderLayout.CENTER);
-        cuerpo.add(adminPestaniaCambiarTarifaServicio.getPestania(),  BorderLayout.CENTER);
-        cuerpo.add(adminPestaniaAsignarTarifaHabitacionFecha.getPestania(),  BorderLayout.CENTER);
-        cuerpo.add(adminPestaniaEditarProductoMenu.getPestania(), BorderLayout.CENTER);
-        
-        cuerpo.add(confirmarPanel, BorderLayout.SOUTH);
         
         // Frame
         frame.add(encabezado, BorderLayout.NORTH);

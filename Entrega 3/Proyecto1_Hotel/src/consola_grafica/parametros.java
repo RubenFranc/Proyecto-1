@@ -41,7 +41,8 @@ public class parametros {
     private static Dimension dimensionIzquierda = new Dimension(300, 0); 
     private static Dimension dimensionTitulo = new Dimension(0, 200);
     private static Dimension dimensionSubtitulo = new Dimension(0, 50);
-    private static Dimension dimensionBotonBarra = new Dimension(250, 100);
+    private static Dimension dimensionBotonBarra = new Dimension(250, 40);
+    private static Dimension dimensionBotonArriba = new Dimension(100, 100);
 	
     public static Dimension getDimensionVentana() {
 		return dimensionVentana;
@@ -66,6 +67,9 @@ public class parametros {
 	}
 	public static Dimension getDimensionBotonBarra() {
 		return dimensionBotonBarra;
+	}
+	public static Dimension getDimensionBotonArriba() {
+		return dimensionBotonArriba;
 	}
 	
 	// Fuentes
