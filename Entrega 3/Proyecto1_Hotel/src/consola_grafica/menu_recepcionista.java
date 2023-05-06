@@ -154,3 +154,4 @@ public class menu_recepcionista extends JFrame implements ActionListener {
 		
 	}
 }
+

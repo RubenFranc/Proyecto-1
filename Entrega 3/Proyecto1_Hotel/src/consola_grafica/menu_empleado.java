@@ -132,6 +132,14 @@ public class menu_empleado extends JFrame implements ActionListener {
         // Cuerpo
         cuerpo.setBackground(colorCuerpo);
         cuerpo.setPreferredSize(dimensionCuerpo);
+        cuerpo.setLayout(new BorderLayout());
+        
+        cuerpo.add(empleadoPestaniaAgregarServicio.getPestania());
+        cuerpo.add(empleadoPestaniaRegistrarConsumo.getPestania());
+        cuerpo.add(empleadoPestaniaHabitacionesDisponibles.getPestania());
+        cuerpo.add(empleadoPestaniaHabitacionesOcupadas.getPestania());
+        cuerpo.add(empleadoPestaniaServiciosHotel.getPestania());
+        cuerpo.add(empleadoPestaniaProductosMenu.getPestania());
         
         cuerpo.add(confirmarPanel, BorderLayout.SOUTH);
         
