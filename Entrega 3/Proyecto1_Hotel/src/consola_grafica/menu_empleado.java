@@ -45,9 +45,6 @@ public class menu_empleado extends JFrame implements ActionListener {
         // Contenido
 
 
-        // Cuerpo
-        cuerpo.setBackground(colorCuerpo);
-        cuerpo.setPreferredSize(dimensionCuerpo);
 
         // Layout
         cuerpo.setLayout(new GridLayout(2, 2));
@@ -72,6 +69,15 @@ public class menu_empleado extends JFrame implements ActionListener {
         logoutPanel.setPreferredSize(dimensionBotonArriba);
         logoutPanel.setBackground(colorTitulo);
         logoutPanel.add(botonLogout);
+        JPanel confirmarPanel = new JPanel();
+        confirmarPanel.setLayout(new BoxLayout(confirmarPanel, BoxLayout.X_AXIS));
+        confirmarPanel.setPreferredSize(dimensionBotonBarra);
+        confirmarPanel.setBackground(colorCuerpo);
+        confirmarPanel.add(Box.createVerticalGlue());
+        confirmarPanel.add(Box.createHorizontalGlue());
+        confirmarPanel.add(botonConfirmar);
+        confirmarPanel.add(Box.createVerticalGlue());
+        confirmarPanel.add(Box.createHorizontalGlue());
                 
         
         // Encabezado
@@ -122,6 +128,12 @@ public class menu_empleado extends JFrame implements ActionListener {
         // Derecha         
         derecha.setBackground(colorDerecha);
         derecha.setPreferredSize(dimensionDerecha);
+        
+        // Cuerpo
+        cuerpo.setBackground(colorCuerpo);
+        cuerpo.setPreferredSize(dimensionCuerpo);
+        
+        cuerpo.add(confirmarPanel, BorderLayout.SOUTH);
         
         // Frame
         frame.add(encabezado, BorderLayout.NORTH);

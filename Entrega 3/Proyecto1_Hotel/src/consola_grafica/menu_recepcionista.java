@@ -46,11 +46,6 @@ public class menu_recepcionista extends JFrame implements ActionListener {
         
         // Contenido
 
-
-        // Cuerpo
-        cuerpo.setBackground(colorCuerpo);
-        cuerpo.setPreferredSize(dimensionCuerpo);
-
         // Layout
         cuerpo.setLayout(new GridLayout(2, 2));
         frame.setLayout(new BorderLayout());
@@ -74,6 +69,15 @@ public class menu_recepcionista extends JFrame implements ActionListener {
         logoutPanel.setPreferredSize(dimensionBotonArriba);
         logoutPanel.setBackground(colorTitulo);
         logoutPanel.add(botonLogout);
+        JPanel confirmarPanel = new JPanel();
+        confirmarPanel.setLayout(new BoxLayout(confirmarPanel, BoxLayout.X_AXIS));
+        confirmarPanel.setPreferredSize(dimensionBotonBarra);
+        confirmarPanel.setBackground(colorCuerpo);
+        confirmarPanel.add(Box.createVerticalGlue());
+        confirmarPanel.add(Box.createHorizontalGlue());
+        confirmarPanel.add(botonConfirmar);
+        confirmarPanel.add(Box.createVerticalGlue());
+        confirmarPanel.add(Box.createHorizontalGlue());
                 
         
         // Encabezado
@@ -119,6 +123,18 @@ public class menu_recepcionista extends JFrame implements ActionListener {
          
         derecha.setBackground(colorDerecha);
         derecha.setPreferredSize(dimensionDerecha);
+        
+        // Cuerpo
+        cuerpo.setBackground(colorCuerpo);
+        cuerpo.setPreferredSize(dimensionCuerpo);
+        cuerpo.setLayout(new BorderLayout());
+        
+        cuerpo.add(recepcionPestaniaHotel.getPestania());
+        cuerpo.add(recepcionPestaniaCrearReserva.getPestania());
+        cuerpo.add(recepcionPestaniaCancelarReserva.getPestania());
+        cuerpo.add(recepcionPestaniaGenerarFactura.getPestania());
+        
+        cuerpo.add(confirmarPanel, BorderLayout.SOUTH);
         
         // Frame
         frame.add(encabezado, BorderLayout.NORTH);
