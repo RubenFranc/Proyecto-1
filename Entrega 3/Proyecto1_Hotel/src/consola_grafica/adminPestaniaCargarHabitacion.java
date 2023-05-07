@@ -20,7 +20,7 @@ public class adminPestaniaCargarHabitacion extends JPanel {
 		JLabel cocina = new JLabel("Cocina", SwingConstants.CENTER);
 		JLabel ventana = new JLabel("Ventana", SwingConstants.CENTER);
 		JLabel capacidad = new JLabel("Capacidad", SwingConstants.CENTER);
-		JLabel tipo = new JLabel("Tipo", SwingConstants.CENTER);
+		JLabel tipo = new JLabel("Tipo de habitación", SwingConstants.CENTER);
 		JLabel tarifa = new JLabel("Tarifa", SwingConstants.CENTER);
 
 		// balcon

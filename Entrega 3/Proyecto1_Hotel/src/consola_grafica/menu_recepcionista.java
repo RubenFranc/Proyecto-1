@@ -47,7 +47,7 @@ public class menu_recepcionista extends JFrame implements ActionListener {
         // Contenido
 
         // Layout
-        cuerpo.setLayout(new GridLayout(2, 2));
+        cuerpo.setLayout(new BorderLayout());
         frame.setLayout(new BorderLayout());
         
         // Botones Varios
@@ -117,10 +117,10 @@ public class menu_recepcionista extends JFrame implements ActionListener {
         //Pestañas
         JButton botonPestaniaHotel = new JButton("Hotel");
         botonPestaniaHotel.addActionListener(event -> {
-        	recepcionPestaniaHotel pestaniaHotel= new recepcionPestaniaHotel();
-        	pestaniaHotel.add(confirmarPanel, BorderLayout.SOUTH);
-        	pestaniaHotel.setLocation(0,0);
-        	pestaniaHotel.setSize(500, 400);
+        	JPanel pestaniaHotel= recepcionPestaniaHotel.getPestania();
+        	//pestaniaHotel.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaHotel.setLocation(0,0);
+        	//pestaniaHotel.setSize(500, 400);
         	cuerpo.removeAll();
         	cuerpo.add(pestaniaHotel, BorderLayout.CENTER);
         	cuerpo.revalidate();
@@ -129,10 +129,10 @@ public class menu_recepcionista extends JFrame implements ActionListener {
          });
         JButton botonPestaniaCrearReserva = new JButton("Crear Reserva");
         botonPestaniaCrearReserva.addActionListener(event -> {
-        	recepcionPestaniaCrearReserva pestaniaCrearReserva= new recepcionPestaniaCrearReserva();
-        	pestaniaCrearReserva.add(confirmarPanel, BorderLayout.SOUTH);
-        	pestaniaCrearReserva.setLocation(0,0);
-        	pestaniaCrearReserva.setSize(500, 400);
+        	JPanel pestaniaCrearReserva= recepcionPestaniaCrearReserva.getPestania();
+        	//pestaniaCrearReserva.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaCrearReserva.setLocation(0,0);
+        	//pestaniaCrearReserva.setSize(500, 400);
         	cuerpo.removeAll();
         	cuerpo.add(pestaniaCrearReserva, BorderLayout.CENTER);
         	cuerpo.revalidate();
@@ -141,10 +141,10 @@ public class menu_recepcionista extends JFrame implements ActionListener {
          });
         JButton botonPestaniaCancelarReserva = new JButton("Cancelar Reserva");
         botonPestaniaCancelarReserva.addActionListener(event -> {
-        	recepcionPestaniaCancelarReserva pestaniaCancelarReserva= new recepcionPestaniaCancelarReserva();
-        	pestaniaCancelarReserva.add(confirmarPanel, BorderLayout.SOUTH);
-        	pestaniaCancelarReserva.setLocation(0,0);
-        	pestaniaCancelarReserva.setSize(500, 400);
+        	JPanel pestaniaCancelarReserva= recepcionPestaniaCancelarReserva.getPestania();
+        	//pestaniaCancelarReserva.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaCancelarReserva.setLocation(0,0);
+        	//pestaniaCancelarReserva.setSize(500, 400);
         	cuerpo.removeAll();
         	cuerpo.add(pestaniaCancelarReserva, BorderLayout.CENTER);
         	cuerpo.revalidate();
@@ -153,10 +153,10 @@ public class menu_recepcionista extends JFrame implements ActionListener {
          });
         JButton botonPestaniaGenerarFactura = new JButton("Generar Factura");
         botonPestaniaGenerarFactura.addActionListener(event -> {
-        	recepcionPestaniaGenerarFactura pestaniaGenerarFactura= new recepcionPestaniaGenerarFactura();
-        	pestaniaGenerarFactura.add(confirmarPanel, BorderLayout.SOUTH);
-        	pestaniaGenerarFactura.setLocation(0,0);
-        	pestaniaGenerarFactura.setSize(500, 400);
+        	JPanel pestaniaGenerarFactura= recepcionPestaniaGenerarFactura.getPestania();
+        	//pestaniaGenerarFactura.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaGenerarFactura.setLocation(0,0);
+        	//pestaniaGenerarFactura.setSize(500, 400);
         	cuerpo.removeAll();
         	cuerpo.add(pestaniaGenerarFactura, BorderLayout.CENTER);
         	cuerpo.revalidate();
@@ -188,10 +188,6 @@ public class menu_recepcionista extends JFrame implements ActionListener {
         cuerpo.setBackground(colorCuerpo);
         cuerpo.setPreferredSize(dimensionCuerpo);
         cuerpo.setLayout(new BorderLayout());
-        
-      
-        
-        cuerpo.add(confirmarPanel, BorderLayout.SOUTH);
         
         // Frame
         frame.add(encabezado, BorderLayout.NORTH);
