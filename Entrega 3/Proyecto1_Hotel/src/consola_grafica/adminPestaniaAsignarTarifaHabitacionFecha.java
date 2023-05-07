@@ -8,7 +8,7 @@ public class adminPestaniaAsignarTarifaHabitacionFecha extends JPanel {
 
 	public static JPanel getPestania() {
 		JPanel panel = new JPanel();
-		
+
 		/// CONFIGURACION
 		panel.setPreferredSize(parametros.getDimensionCuerpo());
 		panel.setBackground(parametros.getColorCuerpo());
@@ -62,31 +62,30 @@ public class adminPestaniaAsignarTarifaHabitacionFecha extends JPanel {
 		panel.add(auxiliarFechaInicio);
 		panel.add(fechaFin);
 		panel.add(auxiliarFechaFin);
-		
-		
+
 		// FINAL
 
 		JPanel panelFinal = new JPanel();
-		
+
 		panelFinal.setPreferredSize(parametros.getDimensionCuerpo());
 		panelFinal.setBackground(parametros.getColorCuerpo());
 		panelFinal.setLayout(new BorderLayout());
-		
-		JButton botonConfirmar = new JButton("Confirmar");   
-        botonConfirmar.setPreferredSize(parametros.getDimensionBotonArriba());
-        JPanel confirmarPanel = new JPanel();
-        confirmarPanel.setLayout(new BoxLayout(confirmarPanel, BoxLayout.X_AXIS));
-        confirmarPanel.setPreferredSize(parametros.getDimensionBotonArriba());
-        confirmarPanel.setBackground(parametros.getColorCuerpo());
-        confirmarPanel.add(Box.createVerticalGlue());
-        confirmarPanel.add(Box.createHorizontalGlue());
-        confirmarPanel.add(botonConfirmar);
-        confirmarPanel.add(Box.createVerticalGlue());
-        confirmarPanel.add(Box.createHorizontalGlue());
-        
-        panelFinal.add(panel, BorderLayout.CENTER);
-		panelFinal.add(confirmarPanel, BorderLayout.SOUTH);
-		
+
+		JButton botonContinuar = new JButton("Continuar");
+		botonContinuar.setPreferredSize(parametros.getDimensionBotonArriba());
+		JPanel continuarPanel = new JPanel();
+		continuarPanel.setLayout(new BoxLayout(continuarPanel, BoxLayout.X_AXIS));
+		continuarPanel.setPreferredSize(parametros.getDimensionBotonArriba());
+		continuarPanel.setBackground(parametros.getColorCuerpo());
+		continuarPanel.add(Box.createVerticalGlue());
+		continuarPanel.add(Box.createHorizontalGlue());
+		continuarPanel.add(botonContinuar);
+		continuarPanel.add(Box.createVerticalGlue());
+		continuarPanel.add(Box.createHorizontalGlue());
+
+		panelFinal.add(panel, BorderLayout.CENTER);
+		panelFinal.add(continuarPanel, BorderLayout.SOUTH);
+
 		return panelFinal;
 	}
 

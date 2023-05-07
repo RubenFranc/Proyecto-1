@@ -47,7 +47,7 @@ public class menu_empleado extends JFrame implements ActionListener {
 
 
         // Layout
-        cuerpo.setLayout(new GridLayout(2, 2));
+        cuerpo.setLayout(new BorderLayout());
         frame.setLayout(new BorderLayout());
         
         // Botones Varios
@@ -118,10 +118,10 @@ public class menu_empleado extends JFrame implements ActionListener {
         //Pestañas
         JButton botonPestaniaAgregarServicio = new JButton("Agregar Servicio");
         botonPestaniaAgregarServicio.addActionListener(event -> {
-        	empleadoPestaniaAgregarServicio pestaniaAgregarServicio= new empleadoPestaniaAgregarServicio();
-        	pestaniaAgregarServicio.add(confirmarPanel, BorderLayout.SOUTH);
-        	pestaniaAgregarServicio.setLocation(0,0);
-        	pestaniaAgregarServicio.setSize(500, 400);
+        	JPanel pestaniaAgregarServicio= empleadoPestaniaAgregarServicio.getPestania();
+        	//pestaniaAgregarServicio.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaAgregarServicio.setLocation(0,0);
+        	//pestaniaAgregarServicio.setSize(500, 400);
         	cuerpo.removeAll();
         	cuerpo.add(pestaniaAgregarServicio, BorderLayout.CENTER);
         	cuerpo.revalidate();
@@ -130,10 +130,10 @@ public class menu_empleado extends JFrame implements ActionListener {
          });
         JButton botonPestaniaRegistrarConsumo = new JButton("Registrar Consumo");
         botonPestaniaRegistrarConsumo.addActionListener(event -> {
-        	empleadoPestaniaRegistrarConsumo pestaniaRegistrarConsumo= new empleadoPestaniaRegistrarConsumo();
-        	pestaniaRegistrarConsumo.add(confirmarPanel, BorderLayout.SOUTH);
-        	pestaniaRegistrarConsumo.setLocation(0,0);
-        	pestaniaRegistrarConsumo.setSize(500, 400);
+        	JPanel pestaniaRegistrarConsumo= empleadoPestaniaRegistrarConsumo.getPestania();
+        	//pestaniaRegistrarConsumo.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaRegistrarConsumo.setLocation(0,0);
+        	//pestaniaRegistrarConsumo.setSize(500, 400);
         	cuerpo.removeAll();
         	cuerpo.add(pestaniaRegistrarConsumo, BorderLayout.CENTER);
         	cuerpo.revalidate();
@@ -142,10 +142,10 @@ public class menu_empleado extends JFrame implements ActionListener {
          });
         JButton botonPestaniaHabitacionesDisponibles = new JButton("Habitaciones Disponibles");
         botonPestaniaHabitacionesDisponibles.addActionListener(event -> {
-        	empleadoPestaniaHabitacionesDisponibles pestaniaHabitacionesDisponibles= new empleadoPestaniaHabitacionesDisponibles();
-        	pestaniaHabitacionesDisponibles.add(confirmarPanel, BorderLayout.SOUTH);
-        	pestaniaHabitacionesDisponibles.setLocation(0,0);
-        	pestaniaHabitacionesDisponibles.setSize(500, 400);
+        	JPanel pestaniaHabitacionesDisponibles= empleadoPestaniaHabitacionesDisponibles.getPestania();
+        	//pestaniaHabitacionesDisponibles.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaHabitacionesDisponibles.setLocation(0,0);
+        	//pestaniaHabitacionesDisponibles.setSize(500, 400);
         	cuerpo.removeAll();
         	cuerpo.add(pestaniaHabitacionesDisponibles, BorderLayout.CENTER);
         	cuerpo.revalidate();
@@ -154,10 +154,10 @@ public class menu_empleado extends JFrame implements ActionListener {
          });
         JButton botonPestaniaHabitacionesOcupadas = new JButton("Habitaciones Ocupadas");
         botonPestaniaHabitacionesOcupadas.addActionListener(event -> {
-        	empleadoPestaniaHabitacionesOcupadas pestaniaHabitacionesOcupadas= new empleadoPestaniaHabitacionesOcupadas();
-        	pestaniaHabitacionesOcupadas.add(confirmarPanel, BorderLayout.SOUTH);
-        	pestaniaHabitacionesOcupadas.setLocation(0,0);
-        	pestaniaHabitacionesOcupadas.setSize(500, 400);
+        	JPanel pestaniaHabitacionesOcupadas= empleadoPestaniaHabitacionesOcupadas.getPestania();
+        	//pestaniaHabitacionesOcupadas.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaHabitacionesOcupadas.setLocation(0,0);
+        	//pestaniaHabitacionesOcupadas.setSize(500, 400);
         	cuerpo.removeAll();
         	cuerpo.add(pestaniaHabitacionesOcupadas, BorderLayout.CENTER);
         	cuerpo.revalidate();
@@ -166,10 +166,10 @@ public class menu_empleado extends JFrame implements ActionListener {
          });
         JButton botonPestaniaServiciosHotel = new JButton("Servicios del Hotel");
         botonPestaniaServiciosHotel.addActionListener(event -> {
-        	empleadoPestaniaServiciosHotel pestaniaServiciosHotel= new empleadoPestaniaServiciosHotel();
-        	pestaniaServiciosHotel.add(confirmarPanel, BorderLayout.SOUTH);
-        	pestaniaServiciosHotel.setLocation(0,0);
-        	pestaniaServiciosHotel.setSize(500, 400);
+        	JPanel pestaniaServiciosHotel= empleadoPestaniaServiciosHotel.getPestania();
+        	//pestaniaServiciosHotel.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaServiciosHotel.setLocation(0,0);
+        	//pestaniaServiciosHotel.setSize(500, 400);
         	cuerpo.removeAll();
         	cuerpo.add(pestaniaServiciosHotel, BorderLayout.CENTER);
         	cuerpo.revalidate();
@@ -178,10 +178,10 @@ public class menu_empleado extends JFrame implements ActionListener {
          });
         JButton botonPestaniaProductoMenu = new JButton("Productos del Menu");
         botonPestaniaProductoMenu.addActionListener(event -> {
-        	empleadoPestaniaProductosMenu pestaniaProductoMenu= new empleadoPestaniaProductosMenu();
-        	pestaniaProductoMenu.add(confirmarPanel, BorderLayout.SOUTH);
-        	pestaniaProductoMenu.setLocation(0,0);
-        	pestaniaProductoMenu.setSize(500, 400);
+        	JPanel pestaniaProductoMenu= empleadoPestaniaProductosMenu.getPestania();
+        	//pestaniaProductoMenu.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaProductoMenu.setLocation(0,0);
+        	//pestaniaProductoMenu.setSize(500, 400);
         	cuerpo.removeAll();
         	cuerpo.add(pestaniaProductoMenu, BorderLayout.CENTER);
         	cuerpo.revalidate();
