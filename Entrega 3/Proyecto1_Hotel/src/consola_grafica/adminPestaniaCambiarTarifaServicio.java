@@ -4,49 +4,108 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class adminPestaniaCambiarTarifaServicio extends JPanel{
-	
-	
-	public adminPestaniaCambiarTarifaServicio(){
-		
+public class adminPestaniaCambiarTarifaServicio extends JPanel {
+
+	public static JPanel getPestania() {
+
+		JPanel panel = new JPanel();
+
+		/// CONFIGURACION
+		panel.setPreferredSize(parametros.getDimensionCuerpo());
+		panel.setBackground(parametros.getColorCuerpo());
+		panel.setLayout(new GridLayout(2, 2, 10, 10));
+
+		/// ELEMENTOS
+		JLabel servicioLabel = new JLabel("Servicio", SwingConstants.CENTER);
+		JLabel nuevaTarifaLabel = new JLabel("Nueva Tarifa", SwingConstants.CENTER);
+
+		// Servicios
+		String[] servicios = { "a", "b", "c", "d", "e" };
+		// TODO agregar los servicios correctos!!!
+		JComboBox comboServicios = new JComboBox(servicios);
+
+		JPanel auxiliarServicios = new JPanel();
+		auxiliarServicios.setLayout(new BoxLayout(auxiliarServicios, BoxLayout.X_AXIS));
+		auxiliarServicios.setBackground(parametros.getColorCuerpo());
+		auxiliarServicios.add(comboServicios, SwingConstants.CENTER);
+
+		// Fecha Inicio
+		JPanel auxiliarNuevaTarifa = new JPanel();
+		auxiliarNuevaTarifa.setLayout(new BoxLayout(auxiliarNuevaTarifa, BoxLayout.X_AXIS));
+		auxiliarNuevaTarifa.setBackground(parametros.getColorCuerpo());
+		JTextField nuevaTarifaTextField = new JTextField();
+		nuevaTarifaTextField.setPreferredSize(new Dimension(200, 75));
+		auxiliarNuevaTarifa.add(nuevaTarifaTextField);
+
+		/// ADD
+
+		panel.add(servicioLabel);
+		panel.add(auxiliarServicios);
+		panel.add(nuevaTarifaLabel);
+		panel.add(auxiliarNuevaTarifa);
+
+		// FINAL
+
+		JPanel panelFinal = new JPanel();
+
+		panelFinal.setPreferredSize(parametros.getDimensionCuerpo());
+		panelFinal.setBackground(parametros.getColorCuerpo());
+		panelFinal.setLayout(new BorderLayout());
+
+		JButton botonConfirmar = new JButton("Confirmar");
+		botonConfirmar.setPreferredSize(parametros.getDimensionBotonArriba());
+		JPanel confirmarPanel = new JPanel();
+		confirmarPanel.setLayout(new BoxLayout(confirmarPanel, BoxLayout.X_AXIS));
+		confirmarPanel.setPreferredSize(parametros.getDimensionBotonArriba());
+		confirmarPanel.setBackground(parametros.getColorCuerpo());
+		confirmarPanel.add(Box.createVerticalGlue());
+		confirmarPanel.add(Box.createHorizontalGlue());
+		confirmarPanel.add(botonConfirmar);
+		confirmarPanel.add(Box.createVerticalGlue());
+		confirmarPanel.add(Box.createHorizontalGlue());
+
+		panelFinal.add(panel, BorderLayout.CENTER);
+		panelFinal.add(confirmarPanel, BorderLayout.SOUTH);
+
+		return panelFinal;
+	}
+
+	public adminPestaniaCambiarTarifaServicio() {
+
 		/// CONFIGURACION
 		setPreferredSize(parametros.getDimensionCuerpo());
-	    setBackground(parametros.getColorCuerpo());
-	    setLayout(new GridLayout(2,2, 10, 10));
-	    
-	    /// ELEMENTOS
-        JLabel servicioLabel = new JLabel("Servicio", SwingConstants.CENTER);
-        JLabel nuevaTarifaLabel = new JLabel("Nueva Tarifa", SwingConstants.CENTER);
-               
-        // Servicios
-        String[] servicios = { "a", "b", "c", "d", "e" };
-        // TODO agregar los servicios correctos!!!
-        JComboBox comboServicios = new JComboBox(servicios);
-        
-        JPanel auxiliarServicios = new JPanel();
-        auxiliarServicios.setLayout(new BoxLayout(auxiliarServicios, BoxLayout.X_AXIS));
-        auxiliarServicios.setBackground(parametros.getColorCuerpo());
-        auxiliarServicios.add(comboServicios, SwingConstants.CENTER);
-        
-        // Fecha Inicio
-        JPanel auxiliarNuevaTarifa = new JPanel();
-        auxiliarNuevaTarifa.setLayout(new BoxLayout(auxiliarNuevaTarifa, BoxLayout.X_AXIS));
-        auxiliarNuevaTarifa.setBackground(parametros.getColorCuerpo());
-        JTextField nuevaTarifaTextField = new JTextField();
-        nuevaTarifaTextField.setPreferredSize(new Dimension(200, 75));
-        auxiliarNuevaTarifa.add(nuevaTarifaTextField);
-        
-        /// ADD
+		setBackground(parametros.getColorCuerpo());
+		setLayout(new GridLayout(2, 2, 10, 10));
 
-        add(servicioLabel);
-        add(auxiliarServicios);
-        add(nuevaTarifaLabel);
-        add(auxiliarNuevaTarifa);
-        
+		/// ELEMENTOS
+		JLabel servicioLabel = new JLabel("Servicio", SwingConstants.CENTER);
+		JLabel nuevaTarifaLabel = new JLabel("Nueva Tarifa", SwingConstants.CENTER);
+
+		// Servicios
+		String[] servicios = { "a", "b", "c", "d", "e" };
+		// TODO agregar los servicios correctos!!!
+		JComboBox comboServicios = new JComboBox(servicios);
+
+		JPanel auxiliarServicios = new JPanel();
+		auxiliarServicios.setLayout(new BoxLayout(auxiliarServicios, BoxLayout.X_AXIS));
+		auxiliarServicios.setBackground(parametros.getColorCuerpo());
+		auxiliarServicios.add(comboServicios, SwingConstants.CENTER);
+
+		// Fecha Inicio
+		JPanel auxiliarNuevaTarifa = new JPanel();
+		auxiliarNuevaTarifa.setLayout(new BoxLayout(auxiliarNuevaTarifa, BoxLayout.X_AXIS));
+		auxiliarNuevaTarifa.setBackground(parametros.getColorCuerpo());
+		JTextField nuevaTarifaTextField = new JTextField();
+		nuevaTarifaTextField.setPreferredSize(new Dimension(200, 75));
+		auxiliarNuevaTarifa.add(nuevaTarifaTextField);
+
+		/// ADD
+
+		add(servicioLabel);
+		add(auxiliarServicios);
+		add(nuevaTarifaLabel);
+		add(auxiliarNuevaTarifa);
+
 	}
-	
-			
-
 
 }
-
