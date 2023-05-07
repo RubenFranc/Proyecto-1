@@ -4,16 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class adminPestaniaCargarHabitacion extends JFrame implements ActionListener{
+public class adminPestaniaCargarHabitacion extends JPanel{
 	
-	private static JPanel pestania = new JPanel();
 	
-	public static JPanel getPestania (){
+	public adminPestaniaCargarHabitacion (){
 		
 		/// CONFIGURACION
-		pestania.setPreferredSize(parametros.getDimensionCuerpo());
-	    pestania.setBackground(parametros.getColorCuerpo());
-	    pestania.setLayout(new GridLayout(6,2, 10, 10));
+		 //setPreferredSize(parametros.getDimensionCuerpo());
+	     setBackground(parametros.getColorCuerpo());
+	     setLayout(new GridLayout(6,2, 10, 10));
 	    
 	    /// ELEMENTOS
         JLabel balcon = new JLabel("Balcon", SwingConstants.CENTER);
@@ -105,46 +104,20 @@ public class adminPestaniaCargarHabitacion extends JFrame implements ActionListe
         
         /// ADD
         
-        pestania.add(balcon);
-        pestania.add(auxiliarBalcon);
-        pestania.add(cocina);
-        pestania.add(auxiliarCocina);
-        pestania.add(ventana);
-        pestania.add(auxiliarVentana);
-        pestania.add(capacidad);
-        pestania.add(auxiliarCapacidad);
-        pestania.add(tipo);
-        pestania.add(auxiliarTipo);
-        pestania.add(tarifa);
-        pestania.add(auxiliarTarifa);
+         add(balcon);
+         add(auxiliarBalcon);
+         add(cocina);
+         add(auxiliarCocina);
+         add(ventana);
+         add(auxiliarVentana);
+         add(capacidad);
+         add(auxiliarCapacidad);
+         add(tipo);
+         add(auxiliarTipo);
+         add(tarifa);
+         add(auxiliarTarifa);
         
-        /// RETURN
-		return pestania;
+    
 	}
-	
-			
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("PRUEBA");
-        frame.setSize(parametros.getDimensionCuerpo());
-        frame.setBackground(parametros.getColorCuerpo());
-
-        JPanel panel = getPestania();
-        
-        frame.add(panel);
-        
-
-        // Set Close
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Make visible
-        frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
 

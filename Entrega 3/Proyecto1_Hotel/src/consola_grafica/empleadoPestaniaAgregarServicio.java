@@ -4,16 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class empleadoPestaniaAgregarServicio extends JFrame implements ActionListener{
+public class empleadoPestaniaAgregarServicio extends JPanel{
 	
-	private static JPanel pestania = new JPanel();
 	
-	public static JPanel getPestania (){
+	
+	public empleadoPestaniaAgregarServicio (){
 		
 		/// CONFIGURACION
-		pestania.setPreferredSize(parametros.getDimensionCuerpo());
-	    pestania.setBackground(parametros.getColorCuerpo());
-	    pestania.setLayout(new GridLayout(4,2, 10, 10));
+		setPreferredSize(parametros.getDimensionCuerpo());
+	    setBackground(parametros.getColorCuerpo());
+	    setLayout(new GridLayout(4,2, 10, 10));
 	    
 	    /// ELEMENTOS
         JLabel servicio = new JLabel("Servicio", SwingConstants.CENTER);
@@ -66,41 +66,19 @@ public class empleadoPestaniaAgregarServicio extends JFrame implements ActionLis
         
         /// ADD
         
-        pestania.add(servicio);
-        pestania.add(auxiliarServicios);
-        pestania.add(cuentaHabitacion);
-        pestania.add(auxiliarCuentaHabitacion);
-        pestania.add(documento);
-        pestania.add(auxiliarDocumento);
-        pestania.add(idHabitacion);
-        pestania.add(auxiliarIdHabitacion);
+        add(servicio);
+        add(auxiliarServicios);
+        add(cuentaHabitacion);
+        add(auxiliarCuentaHabitacion);
+        add(documento);
+        add(auxiliarDocumento);
+        add(idHabitacion);
+        add(auxiliarIdHabitacion);
         
-        /// RETURN
-		return pestania;
+        
 	}
 	
 			
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("PRUEBA");
-        frame.setSize(parametros.getDimensionCuerpo());
-        frame.setBackground(parametros.getColorCuerpo());
-
-        JPanel panel = getPestania();
-        
-        frame.add(panel);
-        
-
-        // Set Close
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Make visible
-        frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

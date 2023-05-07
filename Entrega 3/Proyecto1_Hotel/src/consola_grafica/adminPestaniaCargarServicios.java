@@ -4,16 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class adminPestaniaCargarServicios extends JFrame implements ActionListener{
+public class adminPestaniaCargarServicios extends JPanel{
 	
-	private static JPanel pestania = new JPanel();
 	
-	public static JPanel getPestania (){
+	public adminPestaniaCargarServicios(){
 		
 		/// CONFIGURACION
-		pestania.setPreferredSize(parametros.getDimensionCuerpo());
-	    pestania.setBackground(parametros.getColorCuerpo());
-	    pestania.setLayout(new BorderLayout());
+		setPreferredSize(parametros.getDimensionCuerpo());
+	    setBackground(parametros.getColorCuerpo());
+	    setLayout(new BorderLayout());
 	    
 	    /// ELEMENTOS
         JLabel pregunta = new JLabel("¿Desea cargar los servicios desde la base de datos?", SwingConstants.CENTER);
@@ -28,40 +27,18 @@ public class adminPestaniaCargarServicios extends JFrame implements ActionListen
         
         /// ADD
         
-        pestania.add(pregunta, BorderLayout.NORTH);
+        add(pregunta, BorderLayout.NORTH);
         JPanel auxiliar = new JPanel();
         auxiliar.setLayout(new FlowLayout());
         auxiliar.setBackground(parametros.getColorCuerpo());
         auxiliar.add(botonSi);
         auxiliar.add(botonNo);
-        pestania.add(auxiliar, BorderLayout.CENTER);
+        add(auxiliar, BorderLayout.CENTER);
         
-        /// RETURN
-		return pestania;
+       
 	}
 			
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("PRUEBA");
-        frame.setSize(parametros.getDimensionCuerpo());
-        frame.setBackground(parametros.getColorCuerpo());
-
-        JPanel panel = getPestania();
-        
-        frame.add(panel);
-        
-
-        // Set Close
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Make visible
-        frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
 

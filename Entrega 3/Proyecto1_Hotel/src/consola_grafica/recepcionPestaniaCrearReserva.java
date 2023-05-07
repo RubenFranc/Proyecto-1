@@ -4,16 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class recepcionPestaniaCrearReserva extends JFrame implements ActionListener{
+public class recepcionPestaniaCrearReserva extends JPanel{
 	
-	private static JPanel pestania = new JPanel();
 	
-	public static JPanel getPestania (){
+	public recepcionPestaniaCrearReserva (){
 		
 		/// CONFIGURACION
-		pestania.setPreferredSize(parametros.getDimensionCuerpo());
-	    pestania.setBackground(parametros.getColorCuerpo());
-	    pestania.setLayout(new GridLayout(4,2, 10, 10));
+		setPreferredSize(parametros.getDimensionCuerpo());
+	    setBackground(parametros.getColorCuerpo());
+	    setLayout(new GridLayout(4,2, 10, 10));
 	    
 	    /// ELEMENTOS
         JLabel documento = new JLabel("Documento", SwingConstants.CENTER);
@@ -55,41 +54,18 @@ public class recepcionPestaniaCrearReserva extends JFrame implements ActionListe
         
         /// ADD
         
-        pestania.add(documento);
-        pestania.add(auxiliarDocumento);
-        pestania.add(fechaInicio);
-        pestania.add(auxiliarFechaInicio);
-        pestania.add(fechaFin);
-        pestania.add(auxiliarFechaFin);
-        pestania.add(acompaniantes);
-        pestania.add(auxiliarAcompaniantes);
+        add(documento);
+        add(auxiliarDocumento);
+        add(fechaInicio);
+        add(auxiliarFechaInicio);
+        add(fechaFin);
+        add(auxiliarFechaFin);
+        add(acompaniantes);
+        add(auxiliarAcompaniantes);
         
-        /// RETURN
-		return pestania;
+        
 	}
 	
 			
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("PRUEBA");
-        frame.setSize(parametros.getDimensionCuerpo());
-        frame.setBackground(parametros.getColorCuerpo());
-
-        JPanel panel = getPestania();
-        
-        frame.add(panel);
-        
-
-        // Set Close
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Make visible
-        frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

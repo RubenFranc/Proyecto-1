@@ -5,9 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class login extends JFrame implements ActionListener {
+public class login extends JFrame  {
     
-    public static void main(String[] args) {
+    public login() {
         JFrame frame = new JFrame("Iniciar Sescion HOTEL");
         JPanel encabezado = new JPanel();
         JPanel cuerpo = new JPanel();
@@ -136,10 +136,6 @@ public class login extends JFrame implements ActionListener {
         // Make visible
         frame.setVisible(true);
     }
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
 

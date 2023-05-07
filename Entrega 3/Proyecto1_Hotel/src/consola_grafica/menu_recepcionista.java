@@ -53,9 +53,25 @@ public class menu_recepcionista extends JFrame implements ActionListener {
         // Botones Varios
         JButton botonAtras = new JButton("<- Atrás");
         botonAtras.setPreferredSize(dimensionBotonArriba);
-        
+        botonAtras.addActionListener(event -> {
+        	
+        	cuerpo.removeAll();
+        	cuerpo.revalidate();
+        	cuerpo.repaint();
+            
+         });
         JButton botonLogout = new JButton("Logout");
         botonLogout.setPreferredSize(dimensionBotonArriba);
+        botonLogout.addActionListener(event -> {
+        	
+        	cuerpo.removeAll();
+        	frame.removeAll();
+        	frame.dispose();
+        	JFrame login= new login();
+        	login.setVisible(true);
+        	
+            
+         });
         JButton botonConfirmar = new JButton("Confirmar");   
         botonConfirmar.setPreferredSize(dimensionBotonArriba);
         
@@ -100,9 +116,53 @@ public class menu_recepcionista extends JFrame implements ActionListener {
         
         //Pestañas
         JButton botonPestaniaHotel = new JButton("Hotel");
+        botonPestaniaHotel.addActionListener(event -> {
+        	recepcionPestaniaHotel pestaniaHotel= new recepcionPestaniaHotel();
+        	pestaniaHotel.add(confirmarPanel, BorderLayout.SOUTH);
+        	pestaniaHotel.setLocation(0,0);
+        	pestaniaHotel.setSize(500, 400);
+        	cuerpo.removeAll();
+        	cuerpo.add(pestaniaHotel, BorderLayout.CENTER);
+        	cuerpo.revalidate();
+        	cuerpo.repaint();
+            
+         });
         JButton botonPestaniaCrearReserva = new JButton("Crear Reserva");
+        botonPestaniaCrearReserva.addActionListener(event -> {
+        	recepcionPestaniaCrearReserva pestaniaCrearReserva= new recepcionPestaniaCrearReserva();
+        	pestaniaCrearReserva.add(confirmarPanel, BorderLayout.SOUTH);
+        	pestaniaCrearReserva.setLocation(0,0);
+        	pestaniaCrearReserva.setSize(500, 400);
+        	cuerpo.removeAll();
+        	cuerpo.add(pestaniaCrearReserva, BorderLayout.CENTER);
+        	cuerpo.revalidate();
+        	cuerpo.repaint();
+            
+         });
         JButton botonPestaniaCancelarReserva = new JButton("Cancelar Reserva");
+        botonPestaniaCancelarReserva.addActionListener(event -> {
+        	recepcionPestaniaCancelarReserva pestaniaCancelarReserva= new recepcionPestaniaCancelarReserva();
+        	pestaniaCancelarReserva.add(confirmarPanel, BorderLayout.SOUTH);
+        	pestaniaCancelarReserva.setLocation(0,0);
+        	pestaniaCancelarReserva.setSize(500, 400);
+        	cuerpo.removeAll();
+        	cuerpo.add(pestaniaCancelarReserva, BorderLayout.CENTER);
+        	cuerpo.revalidate();
+        	cuerpo.repaint();
+            
+         });
         JButton botonPestaniaGenerarFactura = new JButton("Generar Factura");
+        botonPestaniaGenerarFactura.addActionListener(event -> {
+        	recepcionPestaniaGenerarFactura pestaniaGenerarFactura= new recepcionPestaniaGenerarFactura();
+        	pestaniaGenerarFactura.add(confirmarPanel, BorderLayout.SOUTH);
+        	pestaniaGenerarFactura.setLocation(0,0);
+        	pestaniaGenerarFactura.setSize(500, 400);
+        	cuerpo.removeAll();
+        	cuerpo.add(pestaniaGenerarFactura, BorderLayout.CENTER);
+        	cuerpo.revalidate();
+        	cuerpo.repaint();
+            
+         });
         
         botonPestaniaHotel.setPreferredSize(dimensionBotonBarra);
         botonPestaniaCrearReserva.setPreferredSize(dimensionBotonBarra);
@@ -129,10 +189,7 @@ public class menu_recepcionista extends JFrame implements ActionListener {
         cuerpo.setPreferredSize(dimensionCuerpo);
         cuerpo.setLayout(new BorderLayout());
         
-        cuerpo.add(recepcionPestaniaHotel.getPestania());
-        cuerpo.add(recepcionPestaniaCrearReserva.getPestania());
-        cuerpo.add(recepcionPestaniaCancelarReserva.getPestania());
-        cuerpo.add(recepcionPestaniaGenerarFactura.getPestania());
+      
         
         cuerpo.add(confirmarPanel, BorderLayout.SOUTH);
         

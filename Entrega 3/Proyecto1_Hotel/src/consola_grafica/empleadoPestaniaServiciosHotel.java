@@ -4,16 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class empleadoPestaniaServiciosHotel extends JFrame implements ActionListener{
+public class empleadoPestaniaServiciosHotel extends JPanel{
 	
-	private static JPanel pestania = new JPanel();
-	
-	public static JPanel getPestania (){
+	public empleadoPestaniaServiciosHotel (){
 		
 		/// CONFIGURACION
-		pestania.setPreferredSize(parametros.getDimensionCuerpo());
-	    pestania.setBackground(parametros.getColorCuerpo());
-	    pestania.setLayout(new GridLayout(3,2, 10, 10));
+		setPreferredSize(parametros.getDimensionCuerpo());
+	    setBackground(parametros.getColorCuerpo());
+	    setLayout(new GridLayout(3,2, 10, 10));
 	    
 	    /// ELEMENTOS
         JLabel servicio = new JLabel("Servicio", SwingConstants.CENTER);
@@ -40,40 +38,18 @@ public class empleadoPestaniaServiciosHotel extends JFrame implements ActionList
         
         /// ADD
         
-        pestania.add(servicio);
-        pestania.add(auxiliarServicios);
-        pestania.add(precio);
-        pestania.add(infoPrecio);
-        pestania.add(descripcion);
-        pestania.add(infoDescripcion);
+        add(servicio);
+        add(auxiliarServicios);
+        add(precio);
+        add(infoPrecio);
+        add(descripcion);
+        add(infoDescripcion);
         
-        /// RETURN
-		return pestania;
+       
 	}
 	
 			
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("PRUEBA");
-        frame.setSize(parametros.getDimensionCuerpo());
-        frame.setBackground(parametros.getColorCuerpo());
-
-        JPanel panel = getPestania();
-        
-        frame.add(panel);
-        
-
-        // Set Close
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Make visible
-        frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
 

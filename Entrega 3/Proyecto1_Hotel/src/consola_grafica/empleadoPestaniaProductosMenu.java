@@ -4,16 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class empleadoPestaniaProductosMenu extends JFrame implements ActionListener{
+public class empleadoPestaniaProductosMenu extends JPanel{
 	
-	private static JPanel pestania = new JPanel();
-	
-	public static JPanel getPestania (){
+	public empleadoPestaniaProductosMenu(){
 		
 		/// CONFIGURACION
-		pestania.setPreferredSize(parametros.getDimensionCuerpo());
-	    pestania.setBackground(parametros.getColorCuerpo());
-	    pestania.setLayout(new GridLayout(5,2, 10, 10));
+		setPreferredSize(parametros.getDimensionCuerpo());
+	    setBackground(parametros.getColorCuerpo());
+	    setLayout(new GridLayout(5,2, 10, 10));
 	    
 	    /// ELEMENTOS
         JLabel productos = new JLabel("Producto", SwingConstants.CENTER);
@@ -50,43 +48,21 @@ public class empleadoPestaniaProductosMenu extends JFrame implements ActionListe
         
         /// ADD
         
-        pestania.add(productos);
-        pestania.add(auxiliarProducto);
-        pestania.add(precio);
-        pestania.add(infoPrecio);
-        pestania.add(horaInicio);
-        pestania.add(infoHoraInicio);
-        pestania.add(horaFin);
-        pestania.add(infoHoraFin);
-        pestania.add(descripcion);
-        pestania.add(infoDescripcion);
+        add(productos);
+        add(auxiliarProducto);
+        add(precio);
+        add(infoPrecio);
+        add(horaInicio);
+        add(infoHoraInicio);
+        add(horaFin);
+        add(infoHoraFin);
+        add(descripcion);
+        add(infoDescripcion);
         
-        /// RETURN
-		return pestania;
+        
 	}
 	
 			
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("PRUEBA");
-        frame.setSize(parametros.getDimensionCuerpo());
-        frame.setBackground(parametros.getColorCuerpo());
-
-        JPanel panel = getPestania();
-        
-        frame.add(panel);
-        
-
-        // Set Close
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Make visible
-        frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

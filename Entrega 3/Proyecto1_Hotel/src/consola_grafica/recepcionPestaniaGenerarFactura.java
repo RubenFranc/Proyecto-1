@@ -4,16 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class recepcionPestaniaGenerarFactura extends JFrame implements ActionListener{
+public class recepcionPestaniaGenerarFactura extends JPanel{
 	
-	private static JPanel pestania = new JPanel();
 	
-	public static JPanel getPestania (){
+	public recepcionPestaniaGenerarFactura (){
 		
 		/// CONFIGURACION
-		pestania.setPreferredSize(parametros.getDimensionCuerpo());
-	    pestania.setBackground(parametros.getColorCuerpo());
-	    pestania.setLayout(new BorderLayout());
+		setPreferredSize(parametros.getDimensionCuerpo());
+	    setBackground(parametros.getColorCuerpo());
+	    setLayout(new BorderLayout());
 	    
 	    /// ELEMENTOS
 	    JLabel titulo = new JLabel("Generar Factura", SwingConstants.CENTER);
@@ -58,35 +57,13 @@ public class recepcionPestaniaGenerarFactura extends JFrame implements ActionLis
         auxiliar.add(fechaFin);
         auxiliar.add(auxiliarFechaFin);
         
-        pestania.add(auxiliar);
-        pestania.add(titulo, BorderLayout.NORTH);
+        add(auxiliar);
+        add(titulo, BorderLayout.NORTH);
         
-        /// RETURN
-		return pestania;
+  
 	}
 	
 			
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("PRUEBA");
-        frame.setSize(parametros.getDimensionCuerpo());
-        frame.setBackground(parametros.getColorCuerpo());
-
-        JPanel panel = getPestania();
-        
-        frame.add(panel);
-        
-
-        // Set Close
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Make visible
-        frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

@@ -4,16 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class empleadoPestaniaHabitacionesOcupadas  extends JFrame implements ActionListener{
+public class empleadoPestaniaHabitacionesOcupadas  extends JPanel{
 	
-	private static JPanel pestania = new JPanel();
 	
-	public static JPanel getPestania (){
+	
+	public empleadoPestaniaHabitacionesOcupadas (){
 		
 		/// CONFIGURACION
-		pestania.setPreferredSize(parametros.getDimensionCuerpo());
-	    pestania.setBackground(parametros.getColorCuerpo());
-	    pestania.setLayout(new GridLayout(2,1, 20, 20));
+		setPreferredSize(parametros.getDimensionCuerpo());
+	    setBackground(parametros.getColorCuerpo());
+	    setLayout(new GridLayout(2,1, 20, 20));
 	    
 	    /// ELEMENTOS
         JLabel informacion = new JLabel("Información", SwingConstants.CENTER);
@@ -40,35 +40,12 @@ public class empleadoPestaniaHabitacionesOcupadas  extends JFrame implements Act
         
         /// ADD
         
-        pestania.add(auxiliar);
-        pestania.add(informacion);
+        add(auxiliar);
+        add(informacion);
         
-        /// RETURN
-		return pestania;
+      
 	}
 	
 			
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("PRUEBA");
-        frame.setSize(parametros.getDimensionCuerpo());
-        frame.setBackground(parametros.getColorCuerpo());
-
-        JPanel panel = getPestania();
-        
-        frame.add(panel);
-        
-
-        // Set Close
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Make visible
-        frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -4,16 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class adminPestaniaAsignarTarifaHabitacionFecha extends JFrame implements ActionListener{
+public class adminPestaniaAsignarTarifaHabitacionFecha extends JPanel{
 	
-	private static JPanel pestania = new JPanel();
 	
-	public static JPanel getPestania (){
+	public adminPestaniaAsignarTarifaHabitacionFecha(){
 		
 		/// CONFIGURACION
-		pestania.setPreferredSize(parametros.getDimensionCuerpo());
-	    pestania.setBackground(parametros.getColorCuerpo());
-	    pestania.setLayout(new GridLayout(3,2, 10, 10));
+		setPreferredSize(parametros.getDimensionCuerpo());
+	    setBackground(parametros.getColorCuerpo());
+	    setLayout(new GridLayout(3,2, 10, 10));
 	    
 	    /// ELEMENTOS
         JLabel tipo = new JLabel("Tipo", SwingConstants.CENTER);
@@ -57,40 +56,17 @@ public class adminPestaniaAsignarTarifaHabitacionFecha extends JFrame implements
         
         /// ADD
 
-        pestania.add(tipo);
-        pestania.add(auxiliarTipo);
-        pestania.add(fechaInicio);
-        pestania.add(auxiliarFechaInicio);
-        pestania.add(fechaFin);
-        pestania.add(auxiliarFechaFin);
-        
-        /// RETURN
-		return pestania;
+        add(tipo);
+        add(auxiliarTipo);
+        add(fechaInicio);
+        add(auxiliarFechaInicio);
+        add(fechaFin);
+        add(auxiliarFechaFin);
+       
 	}
 	
 			
-	public static void main(String[] args) {
-        JFrame frame = new JFrame("PRUEBA");
-        frame.setSize(parametros.getDimensionCuerpo());
-        frame.setBackground(parametros.getColorCuerpo());
-
-        JPanel panel = getPestania();
-        
-        frame.add(panel);
-        
-
-        // Set Close
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Make visible
-        frame.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
 
