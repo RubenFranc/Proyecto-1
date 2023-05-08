@@ -71,6 +71,9 @@ public class ControladorRecepcionista {
 			if (cancelada == true) {
 				boolean remove = hotel.getReservas().get(documento).remove(reservaCancelada);
 				mensaje = "La reserva se canceló con éxito";
+				for (HabitacionOcupada hab: reservaCancelada.getHabitacionesReserva()) {
+					desocuparHabitaciones(hotel, hab);
+				}
 				if (hotel.getReservas().get(documento).size() == 0) {
 					ArrayList<Reserva> reservaRemovida = hotel.getReservas().remove(documento);
 				}
@@ -104,7 +107,7 @@ public class ControladorRecepcionista {
 	public HabitacionOcupada habitacionDisponible(Hotel hotel, String fechaInicio, String fechaFinal, 
 			String tipoHabitacion, String documentoHuesped) {
 		if (hotel.getHabitacionesDisponiblesHotel().get(tipoHabitacion).size() != 0) {
-			System.out.println("ENTRÖ AQUÏ");
+//			System.out.println("ENTRÖ AQUÏ");
 			Set<String> keys = hotel.getHabitacionesDisponiblesHotel().get(tipoHabitacion).keySet();
 			ArrayList<String> ids = new ArrayList<>(keys);
 			Habitacion habitacion = hotel.getHabitacionesDisponiblesHotel().get(tipoHabitacion).get(ids.get(0));
@@ -181,7 +184,7 @@ public class ControladorRecepcionista {
 			hotel.getHabitacionesOcupadasHotel().put(habOcup.getTipoHabitacion(), mapa);
 			hotel.getHabitacionesDisponiblesHotel().get(habOcup.getTipoHabitacion()).remove(ids.get(0));
 		}
-		System.out.println(habOcup.getId());
+//		System.out.println(habOcup.getId());
 		return habOcup;
 	}
 	

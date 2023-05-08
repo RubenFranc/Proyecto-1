@@ -35,6 +35,10 @@ public class HabitacionOcupada extends Habitacion{
 		ocupantes.add(ocupante);
 	}
 	
+	public void addOcupantes(ArrayList<String> ocupantes) {
+		this.ocupantes = ocupantes;
+	}
+	
 	public ArrayList<String> getOcupantes(){
 		return ocupantes;
 	}

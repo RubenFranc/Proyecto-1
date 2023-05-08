@@ -89,8 +89,8 @@ public class login extends JFrame  {
         loginButton.setPreferredSize(dimensionBotonBarra);
         loginButton.addActionListener(event -> {
         	
-        	String user = "rubenFranco"; //usuarioTextField.getText();
-        	String password = "123456"; //contraseniaTextField.getText();
+        	String user = "FrancoRuben"; //usuarioTextField.getText();
+        	String password = "654321"; //contraseniaTextField.getText();
         	String mssg = verificacionIdentidad(user, password, hotel);
         	if (mssg.equals("A") || mssg.equals("R") || mssg.equals("E")) {
             	if (mssg.equals("A")) {
@@ -111,9 +111,12 @@ public class login extends JFrame  {
             		cuerpo.removeAll();
                 	frame.removeAll();
                 	frame.dispose();
-                	JFrame menuEmpleado = new menu_empleado();
+                	JFrame menuEmpleado = new menu_empleado(hotel);
                 	menuEmpleado.setVisible(true);
             	}
+        	}
+        	else {
+        		JOptionPane.showMessageDialog(null, mssg);
         	}
             
          });

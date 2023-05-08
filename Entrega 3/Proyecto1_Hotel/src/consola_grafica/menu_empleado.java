@@ -1,12 +1,15 @@
 package consola_grafica;
 
 import javax.swing.*;
+
+import Model.Hotel;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class menu_empleado extends JFrame implements ActionListener {
     
-    public menu_empleado() {
+    public menu_empleado(Hotel hotel) {
         JFrame frame = new JFrame("Menu Empleado");
         JPanel encabezado = new JPanel();
         JPanel cuerpo = new JPanel();
@@ -116,7 +119,7 @@ public class menu_empleado extends JFrame implements ActionListener {
         // Barra Iquierda
         
         //Pestañas
-        JButton botonPestaniaAgregarServicio = new JButton("Agregar Servicio");
+        JButton botonPestaniaAgregarServicio = new JButton("Registrar Servicio");
         botonPestaniaAgregarServicio.addActionListener(event -> {
         	JPanel pestaniaAgregarServicio= empleadoPestaniaAgregarServicio.getPestania();
         	//pestaniaAgregarServicio.add(confirmarPanel, BorderLayout.SOUTH);

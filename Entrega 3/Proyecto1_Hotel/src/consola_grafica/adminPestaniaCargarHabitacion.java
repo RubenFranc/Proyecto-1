@@ -86,7 +86,7 @@ public class adminPestaniaCargarHabitacion extends JPanel {
 		auxiliarCapacidad.setLayout(new FlowLayout());
 		auxiliarCapacidad.setBackground(parametros.getColorCuerpo());
 		JTextField capacidadTextField = new JTextField();
-		capacidadTextField.setPreferredSize(new Dimension(200, 58));
+		capacidadTextField.setPreferredSize(new Dimension(200, 20));
 		auxiliarCapacidad.add(capacidadTextField);
 
 		// tipo
@@ -116,7 +116,7 @@ public class adminPestaniaCargarHabitacion extends JPanel {
 		auxiliarTarifa.setLayout(new FlowLayout());
 		auxiliarTarifa.setBackground(parametros.getColorCuerpo());
 		JTextField tarifaTextField = new JTextField();
-		tarifaTextField.setPreferredSize(new Dimension(200, 58));
+		tarifaTextField.setPreferredSize(new Dimension(200, 20));
 		auxiliarTarifa.add(tarifaTextField);
 
 		// ID
@@ -124,7 +124,7 @@ public class adminPestaniaCargarHabitacion extends JPanel {
 		auxiliarId.setLayout(new FlowLayout());
 		auxiliarId.setBackground(parametros.getColorCuerpo());
 		JTextField idTextField = new JTextField();
-		idTextField.setPreferredSize(new Dimension(200, 58));
+		idTextField.setPreferredSize(new Dimension(200, 20));
 		auxiliarId.add(idTextField);
 		
 		/// ADD
@@ -191,6 +191,7 @@ public class adminPestaniaCargarHabitacion extends JPanel {
 			double tari = Double.parseDouble(opTarifa);
 			String opId = idTextField.getText();
 			controlador.crearHabitacion(opId, tipi, capa, balc, coci, vent, tari, true, hotel);
+			JOptionPane.showMessageDialog(null, "Operación realizada con éxito.");
 //			System.out.println(hotel.getHabitacionesDisponiblesHotel().get(tipi));
 		});
 		
@@ -210,126 +211,126 @@ public class adminPestaniaCargarHabitacion extends JPanel {
 		return panelFinal;
 	}
 
-	public adminPestaniaCargarHabitacion() {
-
-		/// CONFIGURACION
-		// setPreferredSize(parametros.getDimensionCuerpo());
-		setBackground(parametros.getColorCuerpo());
-		setLayout(new GridLayout(7, 2, 10, 5));
-
-		/// ELEMENTOS
-		JLabel balcon = new JLabel("Balcon", SwingConstants.CENTER);
-		JLabel cocina = new JLabel("Cocina", SwingConstants.CENTER);
-		JLabel ventana = new JLabel("Ventana", SwingConstants.CENTER);
-		JLabel capacidad = new JLabel("Capacidad", SwingConstants.CENTER);
-		JLabel tipo = new JLabel("Tipo", SwingConstants.CENTER);
-		JLabel tarifa = new JLabel("Tarifa", SwingConstants.CENTER);
-		JLabel id = new JLabel("ID", SwingConstants.CENTER);
-
-		// balcon
-		ButtonGroup grupoBalcon = new ButtonGroup();
-		JRadioButton botonSiBalcon = new JRadioButton("Sí");
-		botonSiBalcon.setBackground(parametros.getColorCuerpo());
-		grupoBalcon.add(botonSiBalcon);
-		JRadioButton botonNoBalcon = new JRadioButton("No");
-		botonNoBalcon.setBackground(parametros.getColorCuerpo());
-		grupoBalcon.add(botonNoBalcon);
-
-		JPanel auxiliarBalcon = new JPanel();
-		auxiliarBalcon.setLayout(new FlowLayout());
-		auxiliarBalcon.setBackground(parametros.getColorCuerpo());
-		auxiliarBalcon.add(botonSiBalcon);
-		auxiliarBalcon.add(botonNoBalcon);
-
-		// cocina
-		ButtonGroup grupoCocina = new ButtonGroup();
-		JRadioButton botonSiCocina = new JRadioButton("Sí");
-		botonSiCocina.setBackground(parametros.getColorCuerpo());
-		grupoCocina.add(botonSiCocina);
-		JRadioButton botonNoCocina = new JRadioButton("No");
-		botonNoCocina.setBackground(parametros.getColorCuerpo());
-		grupoBalcon.add(botonNoCocina);
-
-		JPanel auxiliarCocina = new JPanel();
-		auxiliarCocina.setLayout(new FlowLayout());
-		auxiliarCocina.setBackground(parametros.getColorCuerpo());
-		auxiliarCocina.add(botonSiCocina);
-		auxiliarCocina.add(botonNoCocina);
-
-		// ventana
-		ButtonGroup grupoVentana = new ButtonGroup();
-		JRadioButton botonSiVentana = new JRadioButton("Sí");
-		botonSiVentana.setBackground(parametros.getColorCuerpo());
-		grupoVentana.add(botonSiVentana);
-		JRadioButton botonNoVentana = new JRadioButton("No");
-		botonNoVentana.setBackground(parametros.getColorCuerpo());
-		grupoVentana.add(botonNoVentana);
-
-		JPanel auxiliarVentana = new JPanel();
-		auxiliarVentana.setLayout(new FlowLayout());
-		auxiliarVentana.setBackground(parametros.getColorCuerpo());
-		auxiliarVentana.add(botonSiVentana);
-		auxiliarVentana.add(botonNoVentana);
-
-		// Capacidad
-		JPanel auxiliarCapacidad = new JPanel();
-		auxiliarCapacidad.setLayout(new FlowLayout());
-		auxiliarCapacidad.setBackground(parametros.getColorCuerpo());
-		JTextField capacidadTextField = new JTextField();
-		capacidadTextField.setPreferredSize(new Dimension(200, 58));
-		auxiliarCapacidad.add(capacidadTextField);
-
-		// tipo
-		ButtonGroup grupoTipo = new ButtonGroup();
-		JRadioButton botonTipoEstandar = new JRadioButton("Estándar");
-		botonTipoEstandar.setBackground(parametros.getColorCuerpo());
-		grupoTipo.add(botonTipoEstandar);
-		JRadioButton botonTipoSuite = new JRadioButton("Suite");
-		botonTipoSuite.setBackground(parametros.getColorCuerpo());
-		grupoTipo.add(botonTipoSuite);
-		JRadioButton botonTipoSuiteDoble = new JRadioButton("Suite Doble");
-		botonTipoSuiteDoble.setBackground(parametros.getColorCuerpo());
-		grupoTipo.add(botonTipoSuiteDoble);
-
-		JPanel auxiliarTipo = new JPanel();
-		auxiliarTipo.setLayout(new FlowLayout());
-		auxiliarTipo.setBackground(parametros.getColorCuerpo());
-		auxiliarTipo.add(botonTipoEstandar);
-		auxiliarTipo.add(botonTipoSuite);
-		auxiliarTipo.add(botonTipoSuiteDoble);
-
-		// Tarifa
-		JPanel auxiliarTarifa = new JPanel();
-		auxiliarTarifa.setLayout(new FlowLayout());
-		auxiliarTarifa.setBackground(parametros.getColorCuerpo());
-		JTextField tarifaTextField = new JTextField();
-		tarifaTextField.setPreferredSize(new Dimension(200, 58));
-		auxiliarTarifa.add(tarifaTextField);
-		
-		// ID
-		JPanel auxiliarId = new JPanel();
-		auxiliarId.setLayout(new FlowLayout());
-		auxiliarId.setBackground(parametros.getColorCuerpo());
-		JTextField idTextField = new JTextField();
-		idTextField.setPreferredSize(new Dimension(200, 58));
-		auxiliarId.add(idTextField);
-
-		/// ADD
-
-		add(id);
-		add(auxiliarId);
-		add(balcon);
-		add(auxiliarBalcon);
-		add(cocina);
-		add(auxiliarCocina);
-		add(ventana);
-		add(auxiliarVentana);
-		add(capacidad);
-		add(auxiliarCapacidad);
-		add(tipo);
-		add(auxiliarTipo);
-		add(tarifa);
-		add(auxiliarTarifa);
-
-	}
+//	public adminPestaniaCargarHabitacion() {
+//
+//		/// CONFIGURACION
+//		// setPreferredSize(parametros.getDimensionCuerpo());
+//		setBackground(parametros.getColorCuerpo());
+//		setLayout(new GridLayout(7, 2, 10, 5));
+//
+//		/// ELEMENTOS
+//		JLabel balcon = new JLabel("Balcon", SwingConstants.CENTER);
+//		JLabel cocina = new JLabel("Cocina", SwingConstants.CENTER);
+//		JLabel ventana = new JLabel("Ventana", SwingConstants.CENTER);
+//		JLabel capacidad = new JLabel("Capacidad", SwingConstants.CENTER);
+//		JLabel tipo = new JLabel("Tipo", SwingConstants.CENTER);
+//		JLabel tarifa = new JLabel("Tarifa", SwingConstants.CENTER);
+//		JLabel id = new JLabel("ID", SwingConstants.CENTER);
+//
+//		// balcon
+//		ButtonGroup grupoBalcon = new ButtonGroup();
+//		JRadioButton botonSiBalcon = new JRadioButton("Sí");
+//		botonSiBalcon.setBackground(parametros.getColorCuerpo());
+//		grupoBalcon.add(botonSiBalcon);
+//		JRadioButton botonNoBalcon = new JRadioButton("No");
+//		botonNoBalcon.setBackground(parametros.getColorCuerpo());
+//		grupoBalcon.add(botonNoBalcon);
+//
+//		JPanel auxiliarBalcon = new JPanel();
+//		auxiliarBalcon.setLayout(new FlowLayout());
+//		auxiliarBalcon.setBackground(parametros.getColorCuerpo());
+//		auxiliarBalcon.add(botonSiBalcon);
+//		auxiliarBalcon.add(botonNoBalcon);
+//
+//		// cocina
+//		ButtonGroup grupoCocina = new ButtonGroup();
+//		JRadioButton botonSiCocina = new JRadioButton("Sí");
+//		botonSiCocina.setBackground(parametros.getColorCuerpo());
+//		grupoCocina.add(botonSiCocina);
+//		JRadioButton botonNoCocina = new JRadioButton("No");
+//		botonNoCocina.setBackground(parametros.getColorCuerpo());
+//		grupoBalcon.add(botonNoCocina);
+//
+//		JPanel auxiliarCocina = new JPanel();
+//		auxiliarCocina.setLayout(new FlowLayout());
+//		auxiliarCocina.setBackground(parametros.getColorCuerpo());
+//		auxiliarCocina.add(botonSiCocina);
+//		auxiliarCocina.add(botonNoCocina);
+//
+//		// ventana
+//		ButtonGroup grupoVentana = new ButtonGroup();
+//		JRadioButton botonSiVentana = new JRadioButton("Sí");
+//		botonSiVentana.setBackground(parametros.getColorCuerpo());
+//		grupoVentana.add(botonSiVentana);
+//		JRadioButton botonNoVentana = new JRadioButton("No");
+//		botonNoVentana.setBackground(parametros.getColorCuerpo());
+//		grupoVentana.add(botonNoVentana);
+//
+//		JPanel auxiliarVentana = new JPanel();
+//		auxiliarVentana.setLayout(new FlowLayout());
+//		auxiliarVentana.setBackground(parametros.getColorCuerpo());
+//		auxiliarVentana.add(botonSiVentana);
+//		auxiliarVentana.add(botonNoVentana);
+//
+//		// Capacidad
+//		JPanel auxiliarCapacidad = new JPanel();
+//		auxiliarCapacidad.setLayout(new FlowLayout());
+//		auxiliarCapacidad.setBackground(parametros.getColorCuerpo());
+//		JTextField capacidadTextField = new JTextField();
+//		capacidadTextField.setPreferredSize(new Dimension(200, 58));
+//		auxiliarCapacidad.add(capacidadTextField);
+//
+//		// tipo
+//		ButtonGroup grupoTipo = new ButtonGroup();
+//		JRadioButton botonTipoEstandar = new JRadioButton("Estándar");
+//		botonTipoEstandar.setBackground(parametros.getColorCuerpo());
+//		grupoTipo.add(botonTipoEstandar);
+//		JRadioButton botonTipoSuite = new JRadioButton("Suite");
+//		botonTipoSuite.setBackground(parametros.getColorCuerpo());
+//		grupoTipo.add(botonTipoSuite);
+//		JRadioButton botonTipoSuiteDoble = new JRadioButton("Suite Doble");
+//		botonTipoSuiteDoble.setBackground(parametros.getColorCuerpo());
+//		grupoTipo.add(botonTipoSuiteDoble);
+//
+//		JPanel auxiliarTipo = new JPanel();
+//		auxiliarTipo.setLayout(new FlowLayout());
+//		auxiliarTipo.setBackground(parametros.getColorCuerpo());
+//		auxiliarTipo.add(botonTipoEstandar);
+//		auxiliarTipo.add(botonTipoSuite);
+//		auxiliarTipo.add(botonTipoSuiteDoble);
+//
+//		// Tarifa
+//		JPanel auxiliarTarifa = new JPanel();
+//		auxiliarTarifa.setLayout(new FlowLayout());
+//		auxiliarTarifa.setBackground(parametros.getColorCuerpo());
+//		JTextField tarifaTextField = new JTextField();
+//		tarifaTextField.setPreferredSize(new Dimension(200, 58));
+//		auxiliarTarifa.add(tarifaTextField);
+//		
+//		// ID
+//		JPanel auxiliarId = new JPanel();
+//		auxiliarId.setLayout(new FlowLayout());
+//		auxiliarId.setBackground(parametros.getColorCuerpo());
+//		JTextField idTextField = new JTextField();
+//		idTextField.setPreferredSize(new Dimension(200, 58));
+//		auxiliarId.add(idTextField);
+//
+//		/// ADD
+//
+//		add(id);
+//		add(auxiliarId);
+//		add(balcon);
+//		add(auxiliarBalcon);
+//		add(cocina);
+//		add(auxiliarCocina);
+//		add(ventana);
+//		add(auxiliarVentana);
+//		add(capacidad);
+//		add(auxiliarCapacidad);
+//		add(tipo);
+//		add(auxiliarTipo);
+//		add(tarifa);
+//		add(auxiliarTarifa);
+//
+//	}
 }
