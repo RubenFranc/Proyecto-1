@@ -89,8 +89,8 @@ public class login extends JFrame  {
         loginButton.setPreferredSize(dimensionBotonBarra);
         loginButton.addActionListener(event -> {
         	
-        	String user = "FrancoRuben"; //usuarioTextField.getText();
-        	String password = "654321"; //contraseniaTextField.getText();
+        	String user = usuarioTextField.getText();
+        	String password = contraseniaTextField.getText();
         	String mssg = verificacionIdentidad(user, password, hotel);
         	if (mssg.equals("A") || mssg.equals("R") || mssg.equals("E")) {
             	if (mssg.equals("A")) {

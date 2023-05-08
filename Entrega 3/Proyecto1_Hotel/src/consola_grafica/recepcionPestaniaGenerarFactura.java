@@ -83,18 +83,23 @@ public class recepcionPestaniaGenerarFactura extends JPanel {
 			String doc = documentoTextField.getText();
 			String fIn = fechaInicioTextField.getText();
 			String fFi = fechaFinTextField.getText();
-			ArrayList<Reserva> reservasHuesped = hotel.getReservas().get(doc);
-			Reserva reserva = null;
-			for (int index = 0; index < reservasHuesped.size(); index++) {
-				if (reservasHuesped.get(index).getfechaInicio().equals(fIn) & reservasHuesped.get(index).getfechaFinal().equals(fFi)) {
-					reserva = reservasHuesped.get(index);
-					break;
+			if (hotel.getReservas().containsKey(doc)) {
+				ArrayList<Reserva> reservasHuesped = hotel.getReservas().get(doc);
+				Reserva reserva = null;
+				for (int index = 0; index < reservasHuesped.size(); index++) {
+					if (reservasHuesped.get(index).getfechaInicio().equals(fIn) & reservasHuesped.get(index).getfechaFinal().equals(fFi)) {
+						reserva = reservasHuesped.get(index);
+						break;
+					}
+				}
+				String facturaFinal = controlador.generarFacturaFinal(reserva, hotel);
+				JOptionPane.showMessageDialog(null, facturaFinal);
+				for (HabitacionOcupada hab: reserva.getHabitacionesReserva()) {
+					controlador.desocuparHabitaciones(hotel, hab);
 				}
 			}
-			String facturaFinal = controlador.generarFacturaFinal(reserva, hotel);
-			JOptionPane.showMessageDialog(null, facturaFinal);
-			for (HabitacionOcupada hab: reserva.getHabitacionesReserva()) {
-				controlador.desocuparHabitaciones(hotel, hab);
+			else {
+				JOptionPane.showMessageDialog(null, "No hay ninguna factura pendiente registrada\nbajo el número de documento\n"+ doc +" en las fechas ingresadas");
 			}
 		});
 		
