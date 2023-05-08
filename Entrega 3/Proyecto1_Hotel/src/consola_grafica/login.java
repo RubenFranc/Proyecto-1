@@ -2,12 +2,22 @@ package consola_grafica;
 
 
 import javax.swing.*;
+
+import Controlador.ControladorPersistencia;
+import Model.Hotel;
+import Model.Usuario;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class login extends JFrame  {
+	
+	protected static Hotel hotel;
     
-    public login() {
+	public login(){
         JFrame frame = new JFrame("Iniciar Sescion HOTEL");
         JPanel encabezado = new JPanel();
         JPanel cuerpo = new JPanel();
@@ -73,9 +83,40 @@ public class login extends JFrame  {
         contraseniaTextField.setPreferredSize(new Dimension(200, 75));
         contraseniaTextField.setMaximumSize(new Dimension(200, 75));
 
+     
         // Botón
         JButton loginButton = new JButton("Login");
         loginButton.setPreferredSize(dimensionBotonBarra);
+        loginButton.addActionListener(event -> {
+        	
+        	String user = "rubenFranco"; //usuarioTextField.getText();
+        	String password = "123456"; //contraseniaTextField.getText();
+        	String mssg = verificacionIdentidad(user, password, hotel);
+        	if (mssg.equals("A") || mssg.equals("R") || mssg.equals("E")) {
+            	if (mssg.equals("A")) {
+            		cuerpo.removeAll();
+                	frame.removeAll();
+                	frame.dispose();
+                	JFrame menuAdministrador = new menu_administrador(hotel);
+                	menuAdministrador.setVisible(true);
+            	}
+            	else if (mssg.equals("R")) {
+            		cuerpo.removeAll();
+                	frame.removeAll();
+                	frame.dispose();
+                	JFrame menuRecepcionista = new menu_recepcionista(hotel);
+                	menuRecepcionista.setVisible(true);
+            	}
+            	else {
+            		cuerpo.removeAll();
+                	frame.removeAll();
+                	frame.dispose();
+                	JFrame menuEmpleado = new menu_empleado();
+                	menuEmpleado.setVisible(true);
+            	}
+        	}
+            
+         });
         //loginButton.setMinimumSize(dimensionSubtitulo);
 
         // Cuerpo
@@ -130,12 +171,79 @@ public class login extends JFrame  {
         frame.add(izquierda, BorderLayout.WEST);
         frame.add(derecha, BorderLayout.EAST);
 
+    	ControladorPersistencia controladorPersistencia= new ControladorPersistencia();
+        try {
+			controladorPersistencia.guardarArchivoHabitacionesOcupadas(hotel, "../baseDeDatosHotel/archivoHabitacionesOcupadas.txt");
+			controladorPersistencia.guardarArchivoHabitacionesDisponibles(hotel, "../baseDeDatosHotel/archivoHabitaciones.txt");
+			controladorPersistencia.guardarModificacionesTarifasHabitaciones(hotel, "../baseDeDatosHotel/archivoModificacionesTarifaHabitaciones.txt");
+			controladorPersistencia.guardarReservas(hotel, "../baseDeDatosHotel/archivoReservas.txt");
+			controladorPersistencia.guardarProductosMenuArchivo(hotel, "../baseDeDatosHotel/archivoMenuRestaurante.txt");
+			controladorPersistencia.guardarServiciosArchivo(hotel, "../baseDeDatosHotel/archivoServicios.txt");
+	        
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
         // Set Close
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Make visible
         frame.setVisible(true);
     }
-	
+    
+    public static void cargarUsuarios(String archivoUsuarios, Hotel hotel) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(archivoUsuarios));
+		String linea = br.readLine();
+		while (linea != null) {
+			String[] partes = linea.split(";");
+			String logIn = partes[0];
+			String password = partes[1];
+			String cargo = partes[2].replace("\n", "");
+			Usuario usuario = new Usuario(logIn, password, cargo);
+			hotel.getUsuarios().put(logIn, usuario);
+			linea = br.readLine();
+		}
+		br.close();
+	}
+    
+    public static String verificacionIdentidad(String logIn, String password, Hotel hotel) {
+		String mssg = "";
+		if (hotel.getUsuarios().containsKey(logIn)) {
+			Usuario usuario = hotel.getUsuarios().get(logIn);
+			if (usuario.verificarIdentificacion(password)) {
+				mssg = usuario.getCargo();
+			}
+			else {
+				mssg = "Contraseña incorrecta";
+			}
+		}
+		else { 
+			mssg = "El usuario " + logIn + " no se encuentra en la base de datos";
+		}
+		return mssg;
+	}
+    
+    public static void main(String[] args) throws IOException {
+    	hotel = new Hotel();
+    	try {
+			cargarUsuarios("../baseDeDatosHotel/archivoUsuarios.txt", hotel);
+		} 
+    	catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ControladorPersistencia controladorPersistencia= new ControladorPersistencia();
+		controladorPersistencia.cargarHabitacionesOcupadas(hotel, "../baseDeDatosHotel/archivoHabitacionesOcupadas.txt");
+		controladorPersistencia.cargarHabitacionesDisponibles(hotel, "../baseDeDatosHotel/archivoHabitaciones.txt");
+		controladorPersistencia.cargarModificacionesTarifasHabitaciones(hotel, "../baseDeDatosHotel/archivoModificacionesTarifaHabitaciones.txt");
+		controladorPersistencia.cargarReservas(hotel, "../baseDeDatosHotel/archivoReservas.txt");
+		controladorPersistencia.cargarProductosMenuArchivo(hotel, "../baseDeDatosHotel/archivoMenuRestaurante.txt");
+		controladorPersistencia.cargarServiciosArchivo(hotel, "../baseDeDatosHotel/archivoServicios.txt");
+    	JFrame login= new login();
+    	login.setVisible(true);
+    	
+    }
+
 }
 

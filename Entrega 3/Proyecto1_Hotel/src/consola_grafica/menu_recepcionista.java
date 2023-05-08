@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import Model.Hotel;
+
 public class menu_recepcionista extends JFrame implements ActionListener {
     
-    public static void main(String[] args) {
+    public menu_recepcionista(Hotel hotel) {
         JFrame frame = new JFrame("Menu Recepcionista");
         JPanel encabezado = new JPanel();
         JPanel cuerpo = new JPanel();
@@ -98,7 +100,7 @@ public class menu_recepcionista extends JFrame implements ActionListener {
         
         // Encabezado
         encabezado.setLayout(new BorderLayout());
-        JLabel titulo = new JLabel("MENÚ EMPLEADO", SwingConstants.CENTER);
+        JLabel titulo = new JLabel("MENÚ RECEPCIONISTA", SwingConstants.CENTER);
         titulo.setFont(fuenteTitulo);
         titulo.setPreferredSize(dimensionTitulo);
         encabezado.add(titulo, BorderLayout.CENTER);
@@ -117,7 +119,7 @@ public class menu_recepcionista extends JFrame implements ActionListener {
         //Pestañas
         JButton botonPestaniaHotel = new JButton("Hotel");
         botonPestaniaHotel.addActionListener(event -> {
-        	JPanel pestaniaHotel= recepcionPestaniaHotel.getPestania();
+        	JPanel pestaniaHotel= recepcionPestaniaHotel.getPestania(hotel);
         	//pestaniaHotel.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaHotel.setLocation(0,0);
         	//pestaniaHotel.setSize(500, 400);
@@ -129,7 +131,7 @@ public class menu_recepcionista extends JFrame implements ActionListener {
          });
         JButton botonPestaniaCrearReserva = new JButton("Crear Reserva");
         botonPestaniaCrearReserva.addActionListener(event -> {
-        	JPanel pestaniaCrearReserva= recepcionPestaniaCrearReserva.getPestania();
+        	JPanel pestaniaCrearReserva= recepcionPestaniaCrearReserva.getPestania(hotel);
         	//pestaniaCrearReserva.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaCrearReserva.setLocation(0,0);
         	//pestaniaCrearReserva.setSize(500, 400);
@@ -141,7 +143,7 @@ public class menu_recepcionista extends JFrame implements ActionListener {
          });
         JButton botonPestaniaCancelarReserva = new JButton("Cancelar Reserva");
         botonPestaniaCancelarReserva.addActionListener(event -> {
-        	JPanel pestaniaCancelarReserva= recepcionPestaniaCancelarReserva.getPestania();
+        	JPanel pestaniaCancelarReserva= recepcionPestaniaCancelarReserva.getPestania(hotel);
         	//pestaniaCancelarReserva.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaCancelarReserva.setLocation(0,0);
         	//pestaniaCancelarReserva.setSize(500, 400);
@@ -153,7 +155,7 @@ public class menu_recepcionista extends JFrame implements ActionListener {
          });
         JButton botonPestaniaGenerarFactura = new JButton("Generar Factura");
         botonPestaniaGenerarFactura.addActionListener(event -> {
-        	JPanel pestaniaGenerarFactura= recepcionPestaniaGenerarFactura.getPestania();
+        	JPanel pestaniaGenerarFactura= recepcionPestaniaGenerarFactura.getPestania(hotel);
         	//pestaniaGenerarFactura.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaGenerarFactura.setLocation(0,0);
         	//pestaniaGenerarFactura.setSize(500, 400);

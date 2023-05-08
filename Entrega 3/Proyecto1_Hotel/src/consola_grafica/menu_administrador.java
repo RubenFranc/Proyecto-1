@@ -2,16 +2,14 @@ package consola_grafica;
 
 import javax.swing.*;
 
-
+import Model.Hotel;
 
 import java.awt.*;
 import java.awt.event.*;
 
 public class menu_administrador extends JFrame {
-	
 
-    
-    public static void main(String[] args) {
+    public menu_administrador(Hotel hotel) {
         JFrame frame = new JFrame("Menu Administrador");
         JPanel encabezado = new JPanel();
         JPanel cuerpo = new JPanel();
@@ -127,9 +125,9 @@ public class menu_administrador extends JFrame {
         
         
         //Pestañas
-        JButton botonPestaniaCargarDatos = new JButton("Cargar Datos");
+        JButton botonPestaniaCargarDatos = new JButton("Cargar Habitaciones");
         botonPestaniaCargarDatos.addActionListener(event -> {
-        	JPanel pestaniaCargarDatos= adminPestaniaCargarDatos.getPestania();
+        	JPanel pestaniaCargarDatos = adminPestaniaCargarDatos.getPestania(hotel);
         	//pestaniaCargarDatos.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaCargarDatos.setLocation(0,0);
         	//pestaniaCargarDatos.setSize(500, 400);
@@ -142,7 +140,7 @@ public class menu_administrador extends JFrame {
         
         JButton botonPestaniaCrearHabitacion = new JButton("Crear Habitación");
         botonPestaniaCrearHabitacion.addActionListener(event -> {
-        	JPanel pestaniaCargarHabitacion= adminPestaniaCargarHabitacion.getPestania();
+        	JPanel pestaniaCargarHabitacion= adminPestaniaCargarHabitacion.getPestania(hotel);
         	//pestaniaCargarHabitacion.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaCargarHabitacion.setLocation(0,0);
         	//pestaniaCargarHabitacion.setSize(dimensionCuerpo);
@@ -155,7 +153,7 @@ public class menu_administrador extends JFrame {
         
         JButton botonPestaniaCargarMenu = new JButton("Cargar Menú");
         botonPestaniaCargarMenu.addActionListener(event -> {
-        	JPanel pestaniaCargarMenu= adminPestaniaCargarMenu.getPestania();
+        	JPanel pestaniaCargarMenu= adminPestaniaCargarMenu.getPestania(hotel);
         	//pestaniaCargarMenu.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaCargarMenu.setLocation(0,0);
         	//pestaniaCargarMenu.setSize(500, 200);
@@ -168,7 +166,7 @@ public class menu_administrador extends JFrame {
         
         JButton botonPestaniaCargarServicios = new JButton("Cargar Servicios");
         botonPestaniaCargarServicios.addActionListener(event -> {
-        	JPanel pestaniaCargarServicios= adminPestaniaCargarServicios.getPestania();
+        	JPanel pestaniaCargarServicios= adminPestaniaCargarServicios.getPestania(hotel);
         	//pestaniaCargarServicios.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaCargarServicios.setLocation(0,0);
         	//pestaniaCargarServicios.setSize(500, 200);
@@ -180,7 +178,7 @@ public class menu_administrador extends JFrame {
         });
         JButton botonPestaniaCambiarTarifaServicio = new JButton("Cambiar Tarifa Servicio");
         botonPestaniaCambiarTarifaServicio.addActionListener(event -> {
-        	JPanel pestaniaCambiarTarifaServicio= adminPestaniaCambiarTarifaServicio.getPestania();
+        	JPanel pestaniaCambiarTarifaServicio= adminPestaniaCambiarTarifaServicio.getPestania(hotel);
         	//pestaniaCambiarTarifaServicio.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaCambiarTarifaServicio.setLocation(0,0);
         	//pestaniaCambiarTarifaServicio.setSize(500, 200);
@@ -192,7 +190,7 @@ public class menu_administrador extends JFrame {
         });
         JButton botonPestaniaAsignarTarifaHabitacionFecha = new JButton("Asignar Tarifa Habitación por Fecha");
         botonPestaniaAsignarTarifaHabitacionFecha.addActionListener(event -> {
-        	JPanel pestaniaAsignarTarifaHabitacionFecha= adminPestaniaAsignarTarifaHabitacionFecha.getPestania();
+        	JPanel pestaniaAsignarTarifaHabitacionFecha= adminPestaniaAsignarTarifaHabitacionFecha.getPestania(hotel);
         	//pestaniaAsignarTarifaHabitacionFecha.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaAsignarTarifaHabitacionFecha.setLocation(0,0);
         	//pestaniaAsignarTarifaHabitacionFecha.setSize(500, 200);
@@ -204,7 +202,7 @@ public class menu_administrador extends JFrame {
         });
         JButton botonPestaniaEditarProductoMenu = new JButton("Editar Producto Menú");
         botonPestaniaEditarProductoMenu.addActionListener(event -> {
-        	JPanel pestaniaEditarProductoMenu= adminPestaniaEditarProductoMenu.getPestania();
+        	JPanel pestaniaEditarProductoMenu= adminPestaniaEditarProductoMenu.getPestania(hotel);
         	//pestaniaEditarProductoMenu.add(confirmarPanel, BorderLayout.SOUTH);
         	//pestaniaEditarProductoMenu.setLocation(0,0);
         	//pestaniaEditarProductoMenu.setSize(500, 200);

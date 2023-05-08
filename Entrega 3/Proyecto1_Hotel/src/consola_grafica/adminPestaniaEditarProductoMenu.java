@@ -1,13 +1,19 @@
 package consola_grafica;
 
 import javax.swing.*;
+
+import Controlador.ControladorAdministrador;
+import Model.Hotel;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class adminPestaniaEditarProductoMenu extends JPanel {
 
-	public static JPanel getPestania() {
+	public static JPanel getPestania(Hotel hotel) {
 
+        ControladorAdministrador controlador = new ControladorAdministrador();
 		JPanel panel = new JPanel();
 
 		/// CONFIGURACION
@@ -18,12 +24,16 @@ public class adminPestaniaEditarProductoMenu extends JPanel {
 		/// ELEMENTOS
 		JLabel producto = new JLabel("Producto", SwingConstants.CENTER);
 		JLabel servicioCuarto = new JLabel("¿Tiene servicio al cuarto?", SwingConstants.CENTER);
-		JLabel horaInicio = new JLabel("Hora de inicio", SwingConstants.CENTER);
-		JLabel horaFin = new JLabel("Hora de fin", SwingConstants.CENTER);
+		JLabel horaInicio = new JLabel("Hora de inicio (mmHH, 24h)", SwingConstants.CENTER);
+		JLabel horaFin = new JLabel("Hora de fin (mmHH, 24h)", SwingConstants.CENTER);
 		JLabel tarifa = new JLabel("Nueva tarifa", SwingConstants.CENTER);
 
 		// Producto
-		String[] productos = { "a", "b", "c", "d", "e" };
+		ArrayList<String> arregloProductos = new ArrayList();
+		for (String producto1: hotel.getMenuHotel().keySet()) {
+			arregloProductos.add(producto1);
+		}
+		String [] productos = arregloProductos.toArray(new String[0]);
 		// TODO agregar los productos correctos!!!
 		JComboBox comboProductos = new JComboBox(productos);
 
@@ -36,9 +46,11 @@ public class adminPestaniaEditarProductoMenu extends JPanel {
 		ButtonGroup grupoServicioCuarto = new ButtonGroup();
 		JRadioButton botonSi = new JRadioButton("Sí");
 		botonSi.setBackground(parametros.getColorCuerpo());
+		botonSi.setActionCommand("Sí");
 		grupoServicioCuarto.add(botonSi);
 		JRadioButton botonNo = new JRadioButton("No");
 		botonNo.setBackground(parametros.getColorCuerpo());
+		botonNo.setActionCommand("No");
 		grupoServicioCuarto.add(botonNo);
 
 		JPanel auxiliarServicioCuarto = new JPanel();
@@ -94,6 +106,24 @@ public class adminPestaniaEditarProductoMenu extends JPanel {
 
 		JButton botonContinuar = new JButton("Continuar");
 		botonContinuar.setPreferredSize(parametros.getDimensionBotonArriba());
+		botonContinuar.addActionListener(event -> {
+			ButtonModel servicioACuarto = grupoServicioCuarto.getSelection();
+			String servicio = servicioACuarto.getActionCommand();
+			boolean serv = false;
+			if (servicio.equals("Sí")) {
+				serv = true;
+			}
+			String nombre = (String) comboProductos.getSelectedItem();
+			String horaIni = horaInicioTextField.getText();
+			int ini = Integer.parseInt(horaIni);
+			String horaFina = horaFinTextField.getText();
+			int fina = Integer.parseInt(horaFina);
+			String nuevoPrecio = tarifaTextField.getText();
+			double tari = Double.parseDouble(nuevoPrecio);
+			String mssg = controlador.cambiarInfoProductoRestaurante(nombre, tari, serv, ini, fina, hotel);
+			System.out.println(mssg);
+		});
+		
 		JPanel continuarPanel = new JPanel();
 		continuarPanel.setLayout(new BoxLayout(continuarPanel, BoxLayout.X_AXIS));
 		continuarPanel.setPreferredSize(parametros.getDimensionBotonArriba());

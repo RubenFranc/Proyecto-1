@@ -1,13 +1,21 @@
 package consola_grafica;
 
 import javax.swing.*;
+
+import Controlador.ControladorAdministrador;
+import Model.Hotel;
+import Model.Servicio;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class adminPestaniaCambiarTarifaServicio extends JPanel {
 
-	public static JPanel getPestania() {
+	public static JPanel getPestania(Hotel hotel) {
 
+        ControladorAdministrador controlador = new ControladorAdministrador();
 		JPanel panel = new JPanel();
 
 		/// CONFIGURACION
@@ -20,7 +28,11 @@ public class adminPestaniaCambiarTarifaServicio extends JPanel {
 		JLabel nuevaTarifaLabel = new JLabel("Nueva Tarifa", SwingConstants.CENTER);
 
 		// Servicios
-		String[] servicios = { "a", "b", "c", "d", "e" };
+		ArrayList<String> arregloServicios = new ArrayList();
+		for (String servicio: hotel.getServiciosHotel().keySet()) {
+			arregloServicios.add(servicio);
+		}
+		String [] servicios = arregloServicios.toArray(new String[0]);
 		// TODO agregar los servicios correctos!!!
 		JComboBox comboServicios = new JComboBox(servicios);
 
@@ -54,6 +66,14 @@ public class adminPestaniaCambiarTarifaServicio extends JPanel {
 
 		JButton botonContinuar = new JButton("Continuar");
 		botonContinuar.setPreferredSize(parametros.getDimensionBotonArriba());
+		botonContinuar.addActionListener(event -> {
+			String nombre = (String) comboServicios.getSelectedItem();
+			String nuevoPrecio = nuevaTarifaTextField.getText();
+			double tari = Double.parseDouble(nuevoPrecio);
+			String mssg = controlador.cambiarTarifaServicio(nombre, tari, hotel);
+			System.out.println(mssg);
+		});
+		
 		JPanel continuarPanel = new JPanel();
 		continuarPanel.setLayout(new BoxLayout(continuarPanel, BoxLayout.X_AXIS));
 		continuarPanel.setPreferredSize(parametros.getDimensionBotonArriba());

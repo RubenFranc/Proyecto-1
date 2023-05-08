@@ -1,12 +1,15 @@
 package consola_grafica;
 
 import javax.swing.*;
+
+import Model.Hotel;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class recepcionPestaniaCancelarReserva extends JPanel {
 
-	public static JPanel getPestania() {
+	public static JPanel getPestania(Hotel hotel) {
 
 		JPanel panel = new JPanel();
 

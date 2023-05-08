@@ -1,13 +1,19 @@
 package consola_grafica;
 
 import javax.swing.*;
+
+import Controlador.ControladorAdministrador;
+import Model.Hotel;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class adminPestaniaCargarDatos extends JPanel {
 
-	public static JPanel getPestania() {
+	public static JPanel getPestania(Hotel hotel) {
 
+        ControladorAdministrador controlador = new ControladorAdministrador();
 		JPanel panel = new JPanel();
 
 		/// CONFIGURACION
@@ -20,9 +26,11 @@ public class adminPestaniaCargarDatos extends JPanel {
 		ButtonGroup grupo = new ButtonGroup();
 		JRadioButton botonSi = new JRadioButton("Sí");
 		botonSi.setBackground(parametros.getColorCuerpo());
+		botonSi.setActionCommand("Sí");
 		grupo.add(botonSi);
 		JRadioButton botonNo = new JRadioButton("No");
 		botonNo.setBackground(parametros.getColorCuerpo());
+		botonNo.setActionCommand("No");
 		grupo.add(botonNo);
 
 		/// ADD
@@ -45,6 +53,21 @@ public class adminPestaniaCargarDatos extends JPanel {
 
 		JButton botonContinuar = new JButton("Continuar");
 		botonContinuar.setPreferredSize(parametros.getDimensionBotonArriba());
+		botonContinuar.addActionListener(event -> {
+			ButtonModel modeloSeleccionado = grupo.getSelection();
+			String accion = modeloSeleccionado.getActionCommand();
+			if (accion.equals("Sí")) {
+				try {
+					controlador.cargarHabitacionesArchivo("../baseDeDatosHotel/archivoHabitaciones.txt", hotel);
+//					System.out.println(hotel.getHabitacionesDisponiblesHotel());
+				} 
+				catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		
 		JPanel continuarPanel = new JPanel();
 		continuarPanel.setLayout(new BoxLayout(continuarPanel, BoxLayout.X_AXIS));
 		continuarPanel.setPreferredSize(parametros.getDimensionBotonArriba());

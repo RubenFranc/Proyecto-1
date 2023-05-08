@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 public class menu_empleado extends JFrame implements ActionListener {
     
-    public static void main(String[] args) {
+    public menu_empleado() {
         JFrame frame = new JFrame("Menu Empleado");
         JPanel encabezado = new JPanel();
         JPanel cuerpo = new JPanel();

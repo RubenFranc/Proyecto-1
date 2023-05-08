@@ -1,12 +1,15 @@
 package consola_grafica;
 
 import javax.swing.*;
+
+import Model.Hotel;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class recepcionPestaniaCrearReserva extends JPanel {
 
-	public static JPanel getPestania() {
+	public static JPanel getPestania(Hotel hotel) {
 
 		JPanel panel = new JPanel();
 
@@ -118,6 +121,18 @@ public class recepcionPestaniaCrearReserva extends JPanel {
 
 		JButton botonContinuar = new JButton("Continuar");
 		botonContinuar.setPreferredSize(parametros.getDimensionBotonArriba());
+		botonContinuar.addActionListener(event -> {
+        	JPanel pestaniaAgregarHabitacion = recepcionPestaniaContinuarAgregarHabitacion.getPestania(hotel);
+        	//pestaniaCrearReserva.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaCrearReserva.setLocation(0,0);
+        	//pestaniaCrearReserva.setSize(500, 400);
+        	panel.removeAll();
+        	panel.add(pestaniaAgregarHabitacion, BorderLayout.CENTER);
+        	panel.revalidate();
+        	panel.repaint();
+            
+         });
+		
 		JPanel continuarPanel = new JPanel();
 		continuarPanel.setLayout(new BoxLayout(continuarPanel, BoxLayout.X_AXIS));
 		continuarPanel.setPreferredSize(parametros.getDimensionBotonArriba());

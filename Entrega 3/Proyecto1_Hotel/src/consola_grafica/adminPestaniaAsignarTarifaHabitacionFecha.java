@@ -1,34 +1,44 @@
 package consola_grafica;
 
 import javax.swing.*;
+
+import Controlador.ControladorAdministrador;
+import Model.Hotel;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class adminPestaniaAsignarTarifaHabitacionFecha extends JPanel {
 
-	public static JPanel getPestania() {
+	public static JPanel getPestania(Hotel hotel) {
+
+        ControladorAdministrador controlador = new ControladorAdministrador();
 		JPanel panel = new JPanel();
 
 		/// CONFIGURACION
 		panel.setPreferredSize(parametros.getDimensionCuerpo());
 		panel.setBackground(parametros.getColorCuerpo());
-		panel.setLayout(new GridLayout(3, 2, 10, 10));
+		panel.setLayout(new GridLayout(4, 2, 10, 10));
 
 		/// ELEMENTOS
 		JLabel tipo = new JLabel("Tipo", SwingConstants.CENTER);
-		JLabel fechaInicio = new JLabel("Fecha de inicio", SwingConstants.CENTER);
-		JLabel fechaFin = new JLabel("Fecha de fin", SwingConstants.CENTER);
+		JLabel fechaInicio = new JLabel("Fecha de inicio (dd/MM)", SwingConstants.CENTER);
+		JLabel fechaFin = new JLabel("Fecha de fin (dd/MM)", SwingConstants.CENTER);
+		JLabel tarifa = new JLabel("Tarifa", SwingConstants.CENTER);
 
 		// tipo
 		ButtonGroup grupoTipo = new ButtonGroup();
 		JRadioButton botonTipoEstandar = new JRadioButton("Estándar");
 		botonTipoEstandar.setBackground(parametros.getColorCuerpo());
+		botonTipoEstandar.setActionCommand("Estándar");
 		grupoTipo.add(botonTipoEstandar);
 		JRadioButton botonTipoSuite = new JRadioButton("Suite");
 		botonTipoSuite.setBackground(parametros.getColorCuerpo());
+		botonTipoSuite.setActionCommand("Suite");
 		grupoTipo.add(botonTipoSuite);
 		JRadioButton botonTipoSuiteDoble = new JRadioButton("Suite Doble");
 		botonTipoSuiteDoble.setBackground(parametros.getColorCuerpo());
+		botonTipoSuiteDoble.setActionCommand("Suite Doble");
 		grupoTipo.add(botonTipoSuiteDoble);
 
 		JPanel auxiliarTipo = new JPanel();
@@ -53,6 +63,14 @@ public class adminPestaniaAsignarTarifaHabitacionFecha extends JPanel {
 		JTextField fechaFinTextField = new JTextField();
 		fechaFinTextField.setPreferredSize(new Dimension(200, 75));
 		auxiliarFechaFin.add(fechaFinTextField);
+		
+		// Tarifa
+		JPanel auxiliarTarifa = new JPanel();
+		auxiliarTarifa.setLayout(new FlowLayout());
+		auxiliarTarifa.setBackground(parametros.getColorCuerpo());
+		JTextField tarifaTextField = new JTextField();
+		tarifaTextField.setPreferredSize(new Dimension(200, 58));
+		auxiliarTarifa.add(tarifaTextField);
 
 		/// ADD
 
@@ -62,6 +80,8 @@ public class adminPestaniaAsignarTarifaHabitacionFecha extends JPanel {
 		panel.add(auxiliarFechaInicio);
 		panel.add(fechaFin);
 		panel.add(auxiliarFechaFin);
+		panel.add(tarifa);
+		panel.add(auxiliarTarifa);
 
 		// FINAL
 
@@ -73,6 +93,27 @@ public class adminPestaniaAsignarTarifaHabitacionFecha extends JPanel {
 
 		JButton botonContinuar = new JButton("Continuar");
 		botonContinuar.setPreferredSize(parametros.getDimensionBotonArriba());
+		botonContinuar.addActionListener(event -> {
+			ButtonModel opcionTipo = grupoTipo.getSelection();
+			String opTipo = opcionTipo.getActionCommand();
+			String tipi = "";
+			if (opTipo.equals("Estándar")) {
+				tipi = "e";
+			}
+			else if (opTipo.equals("Suite")) {
+				tipi = "s";
+			}
+			else if (opTipo.equals("Suite Doble")) {
+				tipi = "sd";
+			}
+			String nuevoPrecio = tarifaTextField.getText();
+			double tari = Double.parseDouble(nuevoPrecio);
+			String fechaIni = fechaInicioTextField.getText();
+			String fechaFina = fechaFinTextField.getText();
+			controlador.asignarTarifasHabitaciones(tipi, fechaIni, fechaFina, tari, hotel);
+			System.out.println(hotel.getModificacionesHabitaciones());
+		});
+		
 		JPanel continuarPanel = new JPanel();
 		continuarPanel.setLayout(new BoxLayout(continuarPanel, BoxLayout.X_AXIS));
 		continuarPanel.setPreferredSize(parametros.getDimensionBotonArriba());
@@ -94,23 +135,27 @@ public class adminPestaniaAsignarTarifaHabitacionFecha extends JPanel {
 		/// CONFIGURACION
 		setPreferredSize(parametros.getDimensionCuerpo());
 		setBackground(parametros.getColorCuerpo());
-		setLayout(new GridLayout(3, 2, 10, 10));
+		setLayout(new GridLayout(4, 2, 10, 10));
 
 		/// ELEMENTOS
 		JLabel tipo = new JLabel("Tipo", SwingConstants.CENTER);
-		JLabel fechaInicio = new JLabel("Fecha de inicio", SwingConstants.CENTER);
-		JLabel fechaFin = new JLabel("Fecha de fin", SwingConstants.CENTER);
+		JLabel fechaInicio = new JLabel("Fecha de inicio (dd/MM)", SwingConstants.CENTER);
+		JLabel fechaFin = new JLabel("Fecha de fin (dd/MM)", SwingConstants.CENTER);
+		JLabel tarifa = new JLabel("Tarifa", SwingConstants.CENTER);
 
 		// tipo
 		ButtonGroup grupoTipo = new ButtonGroup();
 		JRadioButton botonTipoEstandar = new JRadioButton("Estándar");
 		botonTipoEstandar.setBackground(parametros.getColorCuerpo());
+		botonTipoEstandar.setActionCommand("Estándar");
 		grupoTipo.add(botonTipoEstandar);
 		JRadioButton botonTipoSuite = new JRadioButton("Suite");
 		botonTipoSuite.setBackground(parametros.getColorCuerpo());
+		botonTipoSuite.setActionCommand("Suite");
 		grupoTipo.add(botonTipoSuite);
 		JRadioButton botonTipoSuiteDoble = new JRadioButton("Suite Doble");
 		botonTipoSuiteDoble.setBackground(parametros.getColorCuerpo());
+		botonTipoSuiteDoble.setActionCommand("Suite Doble");
 		grupoTipo.add(botonTipoSuiteDoble);
 
 		JPanel auxiliarTipo = new JPanel();
@@ -135,6 +180,14 @@ public class adminPestaniaAsignarTarifaHabitacionFecha extends JPanel {
 		JTextField fechaFinTextField = new JTextField();
 		fechaFinTextField.setPreferredSize(new Dimension(200, 75));
 		auxiliarFechaFin.add(fechaFinTextField);
+		
+		// Tarifa
+		JPanel auxiliarTarifa = new JPanel();
+		auxiliarTarifa.setLayout(new FlowLayout());
+		auxiliarTarifa.setBackground(parametros.getColorCuerpo());
+		JTextField tarifaTextField = new JTextField();
+		tarifaTextField.setPreferredSize(new Dimension(200, 58));
+		auxiliarTarifa.add(tarifaTextField);
 
 		/// ADD
 
@@ -144,6 +197,8 @@ public class adminPestaniaAsignarTarifaHabitacionFecha extends JPanel {
 		add(auxiliarFechaInicio);
 		add(fechaFin);
 		add(auxiliarFechaFin);
+		add(tarifa);
+		add(auxiliarTarifa);
 
 	}
 
