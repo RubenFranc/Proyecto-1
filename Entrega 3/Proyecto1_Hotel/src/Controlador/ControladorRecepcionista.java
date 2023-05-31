@@ -89,11 +89,11 @@ public class ControladorRecepcionista {
 		
 	}
 	
-	public void crearReserva(Hotel hotel, String nombre, String documento, String correo, String celular, 
-			String fechaInicio, String fechaFinal, ArrayList<String> acompañantes) {
+	public void crearReserva(Hotel hotel, String nombre, String documento, String correo, String celular,  //AQUÍ SE AGREGÓ EL BOOLEANO PARA SABER SI SE HIZO PAGO INMEDIATO DE LA RESERVA
+			String fechaInicio, String fechaFinal, ArrayList<String> acompañantes,boolean pagoInmediato) {
 		Huesped huesped = new Huesped(nombre, documento, correo, celular);
 		huesped.setAcompañantes(acompañantes);
-		Reserva reserva = new Reserva(huesped, fechaInicio, fechaFinal);
+		Reserva reserva = new Reserva(huesped, fechaInicio, fechaFinal,pagoInmediato);
 		if (hotel.getReservas().containsKey(documento)){
 			hotel.getReservas().get(documento).add(reserva);
 		}
