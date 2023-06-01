@@ -15,6 +15,8 @@ public class Hotel {
 	private Map<String, Map<String, Double>> modificacionesTarifasHabitaciones;
 	private Map<String, ArrayList<Huesped>> huespedes;
 	
+	private String propiedades = "true,true,true,true,true,true,true,true";
+	
 	public Hotel() {
 		this.habitacionesDisponibles = new HashMap<>();
 		this.habitacionesOcupadas = new HashMap<>();
@@ -56,6 +58,10 @@ public class Hotel {
 	
 	public Map<String, ArrayList<Huesped>> getHuespedes(){
 		return huespedes;
+	}
+	
+	public String getPropiedadesHotel() {
+		return propiedades;
 	}
 			
 }

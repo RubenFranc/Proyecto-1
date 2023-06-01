@@ -9,9 +9,9 @@ public class HabitacionOcupada extends Habitacion{
 	private ArrayList<String> ocupantes;
 	private String documentoHuesped;
 
-	public HabitacionOcupada(String tipoHabitacion, int capacidad, boolean balcon, boolean ventana, boolean cocina,
+	public HabitacionOcupada(String tipoHabitacion, String propiedades,
 			double tarifa, String id, boolean disponibilidad) {
-		super(tipoHabitacion, capacidad, balcon, ventana, cocina, tarifa, id, disponibilidad);
+		super(tipoHabitacion, propiedades, tarifa, id, disponibilidad);
 		this.ocupantes = new ArrayList<>();
 	}
 	

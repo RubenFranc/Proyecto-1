@@ -28,26 +28,23 @@ public class ControladorPersistencia {
 			while (linea != null) {
 				String[] partes = linea.split(";");
 				String tipo = partes[0];
-				String capac = partes[1];
-				String balc = partes[2];
-				String vent = partes[3];
-				String coci = partes[4];
-				String tarif = partes[5];
-				String id = partes[6];
-				String disponib= partes[7];
-				String fechaInicio = partes[8];
-				String fechaFinal = partes[9];
-				String[] ocups = partes[10].split(",");
-				String documento = partes[11];
-				String cuenta = partes[12].replace("\n", "");
-				int capacidad = Integer.parseInt(capac);
-				boolean balcon = Boolean.parseBoolean(balc);
-				boolean ventana = Boolean.parseBoolean(vent);
-				boolean cocina = Boolean.parseBoolean(coci);
+				String propiedades = partes[1];
+				String tarif = partes[2];
+				String id = partes[3];
+				String disponib= partes[4];
+				String fechaInicio = partes[5];
+				String fechaFinal = partes[6];
+				String[] ocups = partes[7].split(",");
+				String documento = partes[8];
+				String cuenta = partes[9].replace("\n", "");
+//				int capacidad = Integer.parseInt(capac);
+//				boolean balcon = Boolean.parseBoolean(balc);
+//				boolean ventana = Boolean.parseBoolean(vent);
+//				boolean cocina = Boolean.parseBoolean(coci);
 				boolean disponibilidad = Boolean.parseBoolean(disponib);
 				double tarifa = Double.parseDouble(tarif);
 				double cuentaPendiente = Double.parseDouble(cuenta);
-				HabitacionOcupada habOcup = new HabitacionOcupada(tipo, capacidad, balcon, ventana, cocina, tarifa, id, disponibilidad);//, fechaInicio, fechaFinal, ocups, documento);
+				HabitacionOcupada habOcup = new HabitacionOcupada(tipo, propiedades, tarifa, id, disponibilidad);//, fechaInicio, fechaFinal, ocups, documento);
 				habOcup.setFechaInicio(fechaInicio);
 				habOcup.setFechaFinal(fechaFinal);
 				habOcup.setOcupantes();
@@ -89,8 +86,7 @@ public class ControladorPersistencia {
         	for (String id: habsOcups.get(tipo).keySet()) {
         		for (HabitacionOcupada hab: habsOcups.get(tipo).get(id)) {
         			String linea = "";
-        			linea += tipo + ";" + hab.getCapacidad() + ";" + hab.hasBalcon() + ";" + hab.hasVentana() + ";" +
-	        			hab.hasCocina() + ";" + hab.getTarifa() + ";" + hab.getId() + ";" + hab.getDisponibilidad() + ";" +
+        			linea += tipo + ";" + hab.getPropiedades() + ";" + hab.getTarifa() + ";" + hab.getId() + ";" + hab.getDisponibilidad() + ";" +
 	        			hab.getFechaInicio() + ";" + hab.getFechaFinal() + ";";
         			ArrayList<String> ocupantes = hab.getOcupantes();
         			for (String ocup: ocupantes) {
@@ -116,21 +112,23 @@ public class ControladorPersistencia {
 		if (linea != null) {
 			while (linea != null) {
 				String[] partes = linea.split(";");
-				String tipo = partes[1];
-				String capac = partes[2];
-				String balc = partes[3];
-				String vent = partes[4];
-				String coci = partes[5];
-				String tarif = partes[6];
 				String id = partes[0];
-				String disponib= partes[7].replace("\n", "");
-				int capacidad = Integer.parseInt(capac);
-				boolean balcon = Boolean.parseBoolean(balc);
-				boolean ventana = Boolean.parseBoolean(vent);
-				boolean cocina = Boolean.parseBoolean(coci);
+				String tipo = partes[1];
+				String prop = partes[2];
+//				String capac = partes[2];
+//				String balc = partes[3];
+//				String vent = partes[4];
+//				String coci = partes[5];
+				String tarif = partes[3];
+//				System.out.println(tarif);
+				String disponib= partes[4].replace("\n", "");
+//				int capacidad = Integer.parseInt(capac);
+//				boolean balcon = Boolean.parseBoolean(balc);
+//				boolean ventana = Boolean.parseBoolean(vent);
+//				boolean cocina = Boolean.parseBoolean(coci);
 				boolean disponibilidad = Boolean.parseBoolean(disponib);
 				double tarifa = Double.parseDouble(tarif);
-				Habitacion hab = new Habitacion(tipo, capacidad, balcon, ventana, cocina, tarifa, id, disponibilidad);//, fechaInicio, fechaFinal, ocups, documento);
+				Habitacion hab = new Habitacion(tipo, prop, tarifa, id, disponibilidad);//, fechaInicio, fechaFinal, ocups, documento);
 				if (hotel.getHabitacionesDisponiblesHotel().containsKey(tipo)) {
 					hotel.getHabitacionesDisponiblesHotel().get(tipo).put(id, hab);
 				}
@@ -151,8 +149,7 @@ public class ControladorPersistencia {
         	for (String id: habs.get(tipo).keySet()) {
         		Habitacion hab = hotel.getHabitacionesDisponiblesHotel().get(tipo).get(id);
     			String lineaHab = "";
-    			lineaHab += hab.getId() + ";" + tipo + ";" + hab.getCapacidad() + ";" + hab.hasBalcon() + ";" + hab.hasVentana() + ";" +
-        			hab.hasCocina() + ";" + hab.getTarifa() + ";" + hab.getDisponibilidad() + "\n";
+    			lineaHab += hab.getId() + ";" + tipo + ";" + hab.getPropiedades() + ";" + hab.getTarifa() + ";" + hab.getDisponibilidad() + "\n";
         		doc += lineaHab;
         	}
         }
@@ -206,6 +203,9 @@ public class ControladorPersistencia {
 		if (linea != null) {
 			while (linea != null) {
 				String[] partes = linea.split(";");
+//				for (String i : partes) {
+//					System.out.println(i);
+//				}
 				String documento = partes[0];
 				String fechaInicio = partes[1];
 				String fechaFinal = partes[2];
@@ -213,7 +213,9 @@ public class ControladorPersistencia {
 				String correo = partes[4];
 				String celular = partes[5];
 				String[] acomps = partes[6].split(",");
-				String[] habs = partes[7].replace("\n", "").split(",");
+				String[] habs = partes[7].split(",");
+				String pago = partes[8].replace("\n", "");
+				boolean pagi = Boolean.parseBoolean(pago);
 //				System.out.println(partes[7].replace("\n", "").split(",")[0]);
 				Huesped huesped = new Huesped(nombre, documento, correo, celular);
 				for (String acomp: acomps) {
@@ -238,7 +240,7 @@ public class ControladorPersistencia {
 						i += 1;
 					}
 				}
-				Reserva reserva = new Reserva(huesped, fechaInicio, fechaFinal);
+				Reserva reserva = new Reserva(huesped, fechaInicio, fechaFinal, pagi);
 				for (HabitacionOcupada habReserva: habsReserva) {
 					reserva.addHabitacionReserva(habReserva);
 				}
@@ -281,7 +283,7 @@ public class ControladorPersistencia {
         		for (HabitacionOcupada habOcup: it.getHabitacionesReserva()) {
         			linea1 += habOcup.getTipoHabitacion() + "-" + habOcup.getId() + ",";
         		}
-        		String lineaReserv = linea1.substring(0, linea1.length()-1) + "\n";
+        		String lineaReserv = linea1.substring(0, linea1.length()-1) + ";" + it.pagoInmediato() + "\n";
         		doc += lineaReserv;
         	}
 		}

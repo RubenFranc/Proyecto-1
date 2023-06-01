@@ -21,19 +21,19 @@ public class ControladorAdministrador {
 			String[] partes = linea.split(";");
 			String id = partes[0];
 			String tipo = partes[1];
-			String capac = partes[2];
-			String balc = partes[3];
-			String vent = partes[4];
-			String coci = partes[5];
+			String prop = partes[2];
+//			String balc = partes[3];
+//			String vent = partes[4];
+//			String coci = partes[5];
 			String tarif = partes[6];
 			String disponib = partes[7].replace("\n", "");
-			int capacidad = Integer.parseInt(capac);
-			boolean balcon = Boolean.parseBoolean(balc);
-			boolean ventana = Boolean.parseBoolean(vent);
-			boolean cocina = Boolean.parseBoolean(coci);
+//			int capacidad = Integer.parseInt(capac);
+//			boolean balcon = Boolean.parseBoolean(balc);
+//			boolean ventana = Boolean.parseBoolean(vent);
+//			boolean cocina = Boolean.parseBoolean(coci);
 			boolean disponibilidad = Boolean.parseBoolean(disponib);
 			double tarifa = Double.parseDouble(tarif);
-			Habitacion habitacion = new Habitacion(tipo, capacidad, balcon, ventana, cocina, tarifa, id, disponibilidad);
+			Habitacion habitacion = new Habitacion(tipo, prop, tarifa, id, disponibilidad);
 			if (hotel.getHabitacionesDisponiblesHotel().containsKey(tipo)) {
 				hotel.getHabitacionesDisponiblesHotel().get(tipo).put(id, habitacion);
 			}
@@ -47,9 +47,9 @@ public class ControladorAdministrador {
 		br.close();
 	}
 	
-	public void crearHabitacion(String id, String tipo, int capacidad, boolean balcon, boolean cocina,
-			boolean ventana, double tarifa, boolean disponibilidad, Hotel hotel) {
-		Habitacion habitacion = new Habitacion(tipo, capacidad, balcon, ventana, cocina, tarifa, id, disponibilidad);
+	public void crearHabitacion(String id, String tipo, String propiedades, double tarifa, 
+			boolean disponibilidad, Hotel hotel) {
+		Habitacion habitacion = new Habitacion(tipo, propiedades, tarifa, id, disponibilidad);
 		if (hotel.getHabitacionesDisponiblesHotel().containsKey(tipo)) {
 			hotel.getHabitacionesDisponiblesHotel().get(tipo).put(id, habitacion);
 		}

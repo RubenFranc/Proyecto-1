@@ -90,10 +90,10 @@ public class ControladorRecepcionista {
 	}
 	
 	public void crearReserva(Hotel hotel, String nombre, String documento, String correo, String celular,  //AQUÍ SE AGREGÓ EL BOOLEANO PARA SABER SI SE HIZO PAGO INMEDIATO DE LA RESERVA
-			String fechaInicio, String fechaFinal, ArrayList<String> acompañantes,boolean pagoInmediato) {
+			String fechaInicio, String fechaFinal, ArrayList<String> acompañantes, boolean pagoInmediato) {
 		Huesped huesped = new Huesped(nombre, documento, correo, celular);
 		huesped.setAcompañantes(acompañantes);
-		Reserva reserva = new Reserva(huesped, fechaInicio, fechaFinal,pagoInmediato);
+		Reserva reserva = new Reserva(huesped, fechaInicio, fechaFinal, pagoInmediato);
 		if (hotel.getReservas().containsKey(documento)){
 			hotel.getReservas().get(documento).add(reserva);
 		}
@@ -111,8 +111,7 @@ public class ControladorRecepcionista {
 			Set<String> keys = hotel.getHabitacionesDisponiblesHotel().get(tipoHabitacion).keySet();
 			ArrayList<String> ids = new ArrayList<>(keys);
 			Habitacion habitacion = hotel.getHabitacionesDisponiblesHotel().get(tipoHabitacion).get(ids.get(0));
-			HabitacionOcupada habOcup = new HabitacionOcupada(habitacion.getTipoHabitacion(), habitacion.getCapacidad(), 
-					habitacion.hasBalcon(), habitacion.hasVentana(), habitacion.hasCocina(), habitacion.getTarifa(), 
+			HabitacionOcupada habOcup = new HabitacionOcupada(habitacion.getTipoHabitacion(), habitacion.getPropiedades(), habitacion.getTarifa(), 
 					habitacion.getId(), habitacion.getDisponibilidad());
 			habOcup.setDisponibilidad(false);
 			habOcup.setFechaInicio(fechaInicio);
@@ -143,9 +142,8 @@ public class ControladorRecepcionista {
 						break;
 					}
 					else {
-						habOcup1 = new HabitacionOcupada(habitacion.getTipoHabitacion(), habitacion.getCapacidad(), 
-								habitacion.hasBalcon(), habitacion.hasVentana(), habitacion.hasCocina(), habitacion.getTarifa(), 
-								habitacion.getId(), habitacion.getDisponibilidad());;
+						habOcup1 = new HabitacionOcupada(habitacion.getTipoHabitacion(), habitacion.getPropiedades(), 
+								habitacion.getTarifa(), habitacion.getId(), habitacion.getDisponibilidad());;
 					}
 				}
 				if (cruzada == false) {				
@@ -158,7 +156,7 @@ public class ControladorRecepcionista {
 				}
 			}
 		}
-		HabitacionOcupada habOcup2 = new HabitacionOcupada("", 0, false, false, false, 0, "", false);
+		HabitacionOcupada habOcup2 = new HabitacionOcupada("", "", 0, "", false);
 		return habOcup2;
 	}
 	
@@ -242,8 +240,7 @@ public class ControladorRecepcionista {
 	public void desocuparHabitaciones(Hotel hotel, HabitacionOcupada habOcup) {
 		hotel.getHabitacionesOcupadasHotel().get(habOcup.getTipoHabitacion()).get(habOcup.getId()).remove(habOcup);
 		if (hotel.getHabitacionesOcupadasHotel().get(habOcup.getTipoHabitacion()).get(habOcup.getId()).size() == 0) {
-			Habitacion habitacion = new Habitacion(habOcup.getTipoHabitacion(), habOcup.getCapacidad(), habOcup.hasBalcon(), habOcup.hasVentana(), 
-					habOcup.hasCocina(), habOcup.getTarifa(), habOcup.getId(), habOcup.getDisponibilidad());
+			Habitacion habitacion = new Habitacion(habOcup.getTipoHabitacion(), habOcup.getPropiedades(), habOcup.getTarifa(), habOcup.getId(), habOcup.getDisponibilidad());
 			hotel.getHabitacionesDisponiblesHotel().get(habitacion.getTipoHabitacion()).put(habitacion.getId(), habitacion);
 		}
 	}

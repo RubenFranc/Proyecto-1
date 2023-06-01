@@ -10,11 +10,12 @@ public class Reserva {
 	private String fechaFinal;
 	private boolean pagoInmediato; // SE AGREGÓ ESTE NEVO ATRIBUTO PARA SABER SI SE HIZO PAGO INMEDIATO DE LA RESERVA POR MEDIO DE LA PASARELA DE PAGOS
 	
-	public Reserva(Huesped huesped, String fechaInicio, String fechaFinal) {
+	public Reserva(Huesped huesped, String fechaInicio, String fechaFinal, boolean pagoInmediato) {
 		this.habitacionesReserva = new ArrayList<>();
 		this.fechaFinal = fechaFinal;
 		this.fechaInicio = fechaInicio;
 		this.huesped = huesped;
+		this.pagoInmediato = pagoInmediato;
 	}
 	
 	public void addHabitacionReserva(HabitacionOcupada habitacion) {
