@@ -1,3 +1,2 @@
-17;sd;4;true;true;true;70000.0;false
-16;s;2;true;true;true;40000.0;false
-15;e;2;false;false;false;30000.0;false
+17;sd;2,true,true,true,27.0,true,true,g,true,true,true,true,220.0,true,true,true;70000.0;false
+16;s;2,true,true,true,27.0,true,true,g,true,true,true,true,220.0,true,true,true;40000.0;false

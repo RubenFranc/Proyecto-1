@@ -1,0 +1,1 @@
+e;2,true,ture,true,27.0,true,true,g,true,true,true,true,220.0,true,true,true;30000.0;15;false;09/09;12/09;Ruben;1002031703;0.0

@@ -6,21 +6,30 @@ public class Habitacion {
 
 	private String id;
 	private String tipoHabitacion;
-	private int capacidad;
-	private boolean balcon;
-	private boolean ventana;
-	private boolean cocina;
+	private String propiedades;
+//	private int capacidad;
+//	private boolean balcon;
+//	private boolean ventana;
+//	private boolean cocina;
+//	private double metrosCuadrados;
+//	private boolean aire;
+//	private boolean calefaccion;
+//	private String tamanioCama;
+//	private boolean cafetera;
+//	private boolean sabanasTapetes;
+//	private boolean plancha;
+//	private boolean secador;
+//	private float voltaje;
+//	private boolean usbA;
+//	private boolean usbC;
+//	private boolean incluyeDesayuno;
 	private ArrayList<String> ocupantes;
 	private double cuentaPendiente;
 	private double tarifa;
 	private boolean disponibilidad;
 	
-	public Habitacion(String tipoHabitacion, int capacidad, boolean balcon, boolean ventana, boolean cocina, 
-			double tarifa, String id, boolean disponibilidad) {
-		this.balcon = balcon;
-		this.capacidad = capacidad;
-		this.cocina = cocina;
-		this.ventana = ventana;
+	public Habitacion(String tipoHabitacion, String propiedades, double tarifa, String id, boolean disponibilidad) {
+		this.propiedades = propiedades;
 		this.cuentaPendiente = 0.0;
 		this.id = id;
 		this.tarifa = tarifa;
@@ -57,25 +66,29 @@ public class Habitacion {
 		return id;
 	}
 	
+	public String getPropiedades() {
+		return propiedades;
+	}
+	
 	public String getTipoHabitacion() {
 		return tipoHabitacion;
 	}
-	
-	public int getCapacidad() {
-		return capacidad;
-	}
-	
-	public boolean hasVentana() {
-		return ventana;
-	}
-	
-	public boolean hasCocina() {
-		return cocina;
-	}
-	
-	public boolean hasBalcon() {
-		return balcon;
-	}
+//	
+//	public int getCapacidad() {
+//		return capacidad;
+//	}
+//	
+//	public boolean hasVentana() {
+//		return ventana;
+//	}
+//	
+//	public boolean hasCocina() {
+//		return cocina;
+//	}
+//	
+//	public boolean hasBalcon() {
+//		return balcon;
+//	}
 	
 	public boolean getDisponibilidad() {
 		return disponibilidad;

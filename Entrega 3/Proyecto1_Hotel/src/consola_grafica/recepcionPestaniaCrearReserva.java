@@ -30,6 +30,7 @@ public class recepcionPestaniaCrearReserva extends JPanel {
 		JLabel fechaInicio = new JLabel("Fecha de inicio (DD/MM)", SwingConstants.CENTER);
 		JLabel fechaFin = new JLabel("Fecha de fin (DD/MM)", SwingConstants.CENTER);
 		JLabel acompaniantes = new JLabel("Nombre de acompañantes (separados por , 'coma')", SwingConstants.CENTER);
+		JLabel pagoInmediato = new JLabel("Pago inmediato", SwingConstants.CENTER);
 //		JLabel numeroHabitaciones = new JLabel("Número de habitaciones", SwingConstants.CENTER);
 
 		// Nombre
@@ -87,6 +88,23 @@ public class recepcionPestaniaCrearReserva extends JPanel {
 		JTextField acompanientesTextField = new JTextField();
 		acompanientesTextField.setPreferredSize(new Dimension(200, 20));
 		auxiliarAcompaniantes.add(acompanientesTextField);
+		
+		// Pago inmediato
+		ButtonGroup grupoPagoInmediato = new ButtonGroup();
+		JRadioButton botonSiPagoInmediato = new JRadioButton("Sí");
+		botonSiPagoInmediato.setBackground(parametros.getColorCuerpo());
+		botonSiPagoInmediato.setActionCommand("Sí");
+		grupoPagoInmediato.add(botonSiPagoInmediato);
+		JRadioButton botonNoPagoInmediato = new JRadioButton("No");
+		botonNoPagoInmediato.setBackground(parametros.getColorCuerpo());
+		botonNoPagoInmediato.setActionCommand("No");
+		grupoPagoInmediato.add(botonNoPagoInmediato);
+		
+		JPanel auxiliarPagoInmediato = new JPanel();
+		auxiliarPagoInmediato.setLayout(new FlowLayout());
+		auxiliarPagoInmediato.setBackground(parametros.getColorCuerpo());
+		auxiliarPagoInmediato.add(botonSiPagoInmediato);
+		auxiliarPagoInmediato.add(botonNoPagoInmediato);
 
 		// Acompañantes
 //		JPanel auxiliarNumeroHabitaciones = new JPanel();
@@ -112,6 +130,8 @@ public class recepcionPestaniaCrearReserva extends JPanel {
 		panel.add(auxiliarFechaFin);
 		panel.add(acompaniantes);
 		panel.add(auxiliarAcompaniantes);
+		panel.add(pagoInmediato);
+		panel.add(auxiliarPagoInmediato);
 //		panel.add(numeroHabitaciones);
 //		panel.add(auxiliarNumeroHabitaciones);
 
@@ -135,9 +155,15 @@ public class recepcionPestaniaCrearReserva extends JPanel {
 			String acomp = acompanientesTextField.getText();
 			String[] partes = acomp.split(",");
 			ArrayList<String> aco = new ArrayList<String>(Arrays.asList(partes));
+			ButtonModel opcionPagoInmediato = grupoPagoInmediato.getSelection();
+			String opPagoInmediato = opcionPagoInmediato.getActionCommand();
+			boolean pag = false;
+			if (opPagoInmediato.equals("Sí")) {
+				pag = true;
+			}
 			if (!(nom.equals("") || doc.equals("") || num.equals("") || cor.equals("") || fIn.equals("") || fFi.equals(""))) {
 //				System.out.println("ENtró");
-				controlador.crearReserva(hotel, nom, doc, cor, num, fIn, fFi, aco);
+				controlador.crearReserva(hotel, nom, doc, cor, num, fIn, fFi, aco, pag);
 				
 	        	JPanel pestaniaAgregarHabitacion = recepcionPestaniaContinuarAgregarHabitacion.getPestania(hotel, doc, fIn, fFi, nom);
 	        	panelFinal.removeAll();

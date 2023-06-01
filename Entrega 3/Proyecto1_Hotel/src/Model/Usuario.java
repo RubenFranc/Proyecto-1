@@ -16,6 +16,14 @@ public class Usuario {
 		return cargo;
 	}
 
+	public String getlogIn() { // SE AGREGÓ ESTE MÉTODO
+		return logIn;
+	}
+	
+	public String getpassword() { // SE AGREGÓ ESTE MÉTODO
+		return password;
+	}
+
 	public boolean verificarIdentificacion(String contrasenia) {
 		if (password.equals(contrasenia)) {
 			return true;
