@@ -19,7 +19,7 @@ public class adminPestaniaCargarHabitacion extends JPanel {
 		/// CONFIGURACION
 		// setPreferredSize(parametros.getDimensionCuerpo());
 		panel.setBackground(parametros.getColorCuerpo());
-		panel.setLayout(new GridLayout(16, 2, 4, 5));
+		panel.setLayout(new GridLayout(19, 2, 1, 1));
 
 		/// ELEMENTOS
 		JLabel balcon = new JLabel("Balcon", SwingConstants.CENTER);
