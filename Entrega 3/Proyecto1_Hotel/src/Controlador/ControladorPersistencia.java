@@ -197,6 +197,24 @@ public class ControladorPersistencia {
         bw.close();
 	}
 	
+	public void guardarUsuariosArchivo(Hotel hotel, String archivoUsuarios) throws IOException { // SE AGREGÓ ESTE MÉTODO
+		File file = new File(archivoUsuarios);
+		FileWriter fw = new FileWriter(file);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter wr = new PrintWriter(bw);  
+        String doc = "";
+        Map<String, Usuario> usuarios = hotel.getUsuarios();
+		for (String login: usuarios.keySet()) {
+        	Usuario usuario=usuarios.get(login);
+        	String lineaMod = usuario.getlogIn() + ";" +usuario.getpassword()+ ";" + usuario.getCargo() + "\n";
+        	doc += lineaMod;
+        	
+		}
+		wr.write(doc);
+        wr.close();
+        bw.close();
+	}
+	
 	public void cargarReservas(Hotel hotel, String archivoReservas) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(archivoReservas));
 		String linea = br.readLine();
