@@ -1,5 +1,6 @@
 package Controlador;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,10 +9,11 @@ import Model.Habitacion;
 import Model.HabitacionOcupada;
 import Model.Hotel;
 import Model.Huesped;
+import Model.PasarelaDePagos;
 import Model.Reserva;
 import Model.Usuario;
 
-public class ControladorUsuario extends controladorRecepcionista{
+public class ControladorUsuario extends ControladorRecepcionista{
 	
 	public ControladorUsuario() {
 		
@@ -44,7 +46,7 @@ public class ControladorUsuario extends controladorRecepcionista{
 		ArrayList<String> tipos = new ArrayList<>(keys);
 		for (String tipo: tipos) {
 			Set<String> ids = habsDispo.get(tipo).keySet();
-			if (hotel.getHabitacionesDisponiblesHotel().get(tipoHabitacion).size() != 0) {
+			if (hotel.getHabitacionesDisponiblesHotel().get(tipo).size() != 0) {
 			for (String id: ids) {
 				
 				Habitacion habitacion = habsDispo.get(tipo).get(id);
@@ -82,7 +84,7 @@ public class ControladorUsuario extends controladorRecepcionista{
 	}
 	
 	
-	public String generarFacturaReserva(Reserva reserva, Hotel hotel, boolean Pago_inmediato) {
+	public String[] generarFacturaReserva(Reserva reserva, Hotel hotel, String clasePasarela) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		ArrayList<String> noches = fechasEnRango(reserva.getfechaInicio(), reserva.getfechaFinal());
 		int numeroNoches = noches.size();
 		double totalTotal = 0.0;
@@ -113,17 +115,28 @@ public class ControladorUsuario extends controladorRecepcionista{
 			factura += consumoHabitacion;
 			totalTotal += tarifaTotalNochesHabitacion;
 		}
-		if (Pago_inmediato) {
+		if (reserva.pagoInmediato()) {
 			 totalTotal=totalTotal*(1-(10/100));
 		}
 		
 		factura += "---------------------------------------\n";
 		factura += "TOTAL A PAGAR: " + totalTotal;
 		factura += "\n****************************************\n\n¡Gracias por su pago temprano de la reserva!";
-		hotel.getReservas().get(reserva.getHuesped().getDocumento()).remove(reserva);
-		return factura;
+		
+		Class clase = Class.forName(clasePasarela);
+		PasarelaDePagos pasarela = (PasarelaDePagos) clase.getDeclaredConstructor(null).newInstance(null);
+		String mensajeTransaccion = pasarela.validarPago(reserva.getHuesped().getTarjeta(), totalTotal);
+		
+		if (mensajeTransaccion.equals("Transacción exitosa")) {
+			String[] rta = {factura, (Double.toString(totalTotal)), mensajeTransaccion};
+			return rta;
+		}
+		else {
+			String[] rta = {mensajeTransaccion};
+			return rta;
+		}
 	}
-}
+
 
 public String verificacionIdentidad(String logIn, String password, Hotel hotel) {
 	String mssg = "";

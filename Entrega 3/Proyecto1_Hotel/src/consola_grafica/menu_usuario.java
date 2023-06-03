@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import Model.Hotel;
+
 public class menu_usuario extends JFrame implements ActionListener {
     
     public menu_usuario(Hotel hotel) {
@@ -76,7 +78,7 @@ public class menu_usuario extends JFrame implements ActionListener {
         	cuerpo.removeAll();
         	frame.removeAll();
         	frame.dispose();
-        	JFrame login= new loginUsuario();
+        	JFrame login= new loginUsuario(hotel);
         	login.setVisible(true);
         	
             

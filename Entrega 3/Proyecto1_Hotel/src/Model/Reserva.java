@@ -41,4 +41,8 @@ public class Reserva {
 	public boolean pagoInmediato() {
 		return pagoInmediato;
 	}
+	
+	public void setPago(boolean set) {
+		this.pagoInmediato = set;
+	}
 }

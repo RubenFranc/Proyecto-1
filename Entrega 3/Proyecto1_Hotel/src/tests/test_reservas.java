@@ -27,6 +27,7 @@ import Model.Hotel;
 import Model.ProductoMenu;
 import Model.Reserva;
 import Model.Servicio;
+import Model.TarjetaPago;
 import Model.Usuario;
 
 import org.junit.jupiter.api.Assertions;
@@ -179,7 +180,8 @@ class test_reservas {
 		controladorPersistencia.cargarModificacionesTarifasHabitaciones(hotel_test, "../baseDeDatosHotel/archivoModificacionesTarifaHabitaciones.txt");
 		
 		ControladorRecepcionista contRecep = new ControladorRecepcionista();
-		contRecep.crearReserva(hotel_test, "Mario", "1000471000", null, null, "03/06", "07/06", null, true);
+		TarjetaPago tarj = new TarjetaPago(123456789,"9999999999","1234");
+		contRecep.crearReserva(hotel_test, "Mario", "1000471000", null, null, "03/06", "07/06", null, true, tarj);
 		
 		Collection<ArrayList<Reserva>> collection_test = hotel_test.getReservas().values();
 		java.util.Iterator<ArrayList<Reserva>>  iterator = collection_test.iterator();
@@ -198,7 +200,8 @@ class test_reservas {
 		controladorPersistencia.cargarModificacionesTarifasHabitaciones(hotel_test, "../baseDeDatosHotel/archivoModificacionesTarifaHabitaciones.txt");
 		
 		ControladorRecepcionista contRecep = new ControladorRecepcionista();
-		contRecep.crearReserva(hotel_test, "Mario", "1000471000", null, null, "03/06", "07/06", null, true);
+		TarjetaPago tarj = new TarjetaPago(123456789,"9999999999","1234");
+		contRecep.crearReserva(hotel_test, "Mario", "1000471000", null, null, "03/06", "07/06", null, true, tarj);
 		
 		Collection<ArrayList<Reserva>> collection_test = hotel_test.getReservas().values();
 		java.util.Iterator<ArrayList<Reserva>>  iterator = collection_test.iterator();
@@ -217,7 +220,8 @@ class test_reservas {
 		controladorPersistencia.cargarModificacionesTarifasHabitaciones(hotel_test, "../baseDeDatosHotel/archivoModificacionesTarifaHabitaciones.txt");
 		
 		ControladorRecepcionista contRecep = new ControladorRecepcionista();
-		contRecep.crearReserva(hotel_test, "Mario", "1000471000", null, null, "03/06", "07/06", null, true);
+		TarjetaPago tarj = new TarjetaPago(123456789,"9999999999","1234");
+		contRecep.crearReserva(hotel_test, "Mario", "1000471000", null, null, "03/06", "07/06", null, true, tarj);
 		
 		Collection<ArrayList<Reserva>> collection_test = hotel_test.getReservas().values();
 		java.util.Iterator<ArrayList<Reserva>>  iterator = collection_test.iterator();
@@ -236,7 +240,8 @@ class test_reservas {
 		controladorPersistencia.cargarModificacionesTarifasHabitaciones(hotel_test, "../baseDeDatosHotel/archivoModificacionesTarifaHabitaciones.txt");
 		
 		ControladorRecepcionista contRecep = new ControladorRecepcionista();
-		contRecep.crearReserva(hotel_test, "Mario", "1000471000", null, null, "03/06", "07/06", null, true);
+		TarjetaPago tarj = new TarjetaPago(123456789,"9999999999","1234");
+		contRecep.crearReserva(hotel_test, "Mario", "1000471000", null, null, "03/06", "07/06", null, true, tarj);
 		
 		Collection<ArrayList<Reserva>> collection_test = hotel_test.getReservas().values();
 		java.util.Iterator<ArrayList<Reserva>>  iterator = collection_test.iterator();

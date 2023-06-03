@@ -1,0 +1,5 @@
+PayPal;1002031703;Transacción exitosa;9999999999;150000.0
+PayPal;1140894822;Cuenta inválida;2112212;80000.0
+PayPal;32750194;Transacción exitosa;9999999999;0.0
+PayPal;1002031703;Transacción exitosa;9999999999;420000.0
+PayPal;1002031703;Transacción exitosa;9999999999;420000.0

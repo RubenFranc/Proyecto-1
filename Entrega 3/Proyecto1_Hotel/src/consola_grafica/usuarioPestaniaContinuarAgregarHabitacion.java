@@ -106,7 +106,7 @@ public class usuarioPestaniaContinuarAgregarHabitacion extends JPanel {
 			}
 			else {
 				String mssg = "";
-				mssg += "\nSe encontró una habitación: habitación " + habOcup.getId() + "\nCapacidad: " + habOcup.getCapacidad() + "\n";
+				mssg += "\nSe encontró una habitación: habitación " + habOcup.getId() + "\nCapacidad: " + habOcup.getPropiedades().split(",")[0] + "\n";
 				ArrayList<String> fechasEnRango = controlador.fechasEnRango(fIn, fFi);
 				double tarifa = 0.0;
 				double totalTarifa = 0.0;
@@ -170,7 +170,7 @@ public class usuarioPestaniaContinuarAgregarHabitacion extends JPanel {
 	        	panelFinal.removeAll();
 	        	panelFinal.add(pestaniaGenerarFactura, BorderLayout.CENTER);
 	        	panelFinal.revalidate();
-	        	panelFinal.repaint();}
+	        	panelFinal.repaint();
 			}
 		});
 		

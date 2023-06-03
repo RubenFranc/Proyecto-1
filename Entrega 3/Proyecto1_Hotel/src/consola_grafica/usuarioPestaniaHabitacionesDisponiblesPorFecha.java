@@ -65,11 +65,11 @@ public class usuarioPestaniaHabitacionesDisponiblesPorFecha extends JPanel {
 			String fFi = fechaFinTextField.getText();
 			Map<String , ArrayList<Habitacion>> habitacionesDisponibles = controlador.consultarHabitacionesDisponiblesporFecha(hotel,fIn, fFi);
 			String mssg = "*Estándar:";
-			Set<String> habitacionesTipo = habitacionesDisponibles.get("e");
+			ArrayList<Habitacion> habitacionesTipo = habitacionesDisponibles.get("e");
 			for (Habitacion habitacion: habitacionesTipo) {
 				String propiedades = habitacion.getPropiedades();
 				String[] partes = propiedades.split(",");
-				mssg += "\n\n    -Habitación " + id + ":";
+				mssg += "\n\n    -Habitación " + habitacion.getId() + ":";
 				mssg += "\n       Capacidad: " + partes[0];
 				mssg += "\n       Con balcón: " + partes[1];
 				mssg += "\n       Con ventana: " + partes[2];
@@ -112,11 +112,11 @@ public class usuarioPestaniaHabitacionesDisponiblesPorFecha extends JPanel {
 			String fFi = fechaFinTextField.getText();
 			Map<String , ArrayList<Habitacion>> habitacionesDisponibles = controlador.consultarHabitacionesDisponiblesporFecha(hotel,fIn, fFi);
 			String mssg = "*Suites:";
-			Set<String> habitacionesTipo = habitacionesDisponibles.get("s");
+			ArrayList<Habitacion> habitacionesTipo = habitacionesDisponibles.get("s");
 			for (Habitacion habitacion: habitacionesTipo) {
 				String propiedades = habitacion.getPropiedades();
 				String[] partes = propiedades.split(",");
-				mssg += "\n\n    -Habitación " + id + ":";
+				mssg += "\n\n    -Habitación " + habitacion.getId() + ":";
 				mssg += "\n       Capacidad: " + partes[0];
 				mssg += "\n       Con balcón: " + partes[1];
 				mssg += "\n       Con ventana: " + partes[2];
@@ -158,12 +158,12 @@ public class usuarioPestaniaHabitacionesDisponiblesPorFecha extends JPanel {
 			String fFi = fechaFinTextField.getText();
 			Map<String , ArrayList<Habitacion>> habitacionesDisponibles = controlador.consultarHabitacionesDisponiblesporFecha(hotel,fIn, fFi);
 			String mssg = "*Suites dobles:";
-			Set<String> habitacionesTipo = habitacionesDisponibles.get("sd");
+			ArrayList<Habitacion> habitacionesTipo = habitacionesDisponibles.get("sd");
 			for (Habitacion habitacion: habitacionesTipo) {
-				mssg += "\n    -Habitación " + id + ":";
+				mssg += "\n    -Habitación " + habitacion.getId() + ":";
 				String propiedades = habitacion.getPropiedades();
 				String[] partes = propiedades.split(",");
-				mssg += "\n\n    -Habitación " + id + ":";
+				mssg += "\n\n    -Habitación " + habitacion.getId() + ":";
 				mssg += "\n       Capacidad: " + partes[0];
 				mssg += "\n       Con balcón: " + partes[1];
 				mssg += "\n       Con ventana: " + partes[2];

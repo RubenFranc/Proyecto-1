@@ -9,13 +9,14 @@ import Model.Reserva;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class recepcionPestaniaContinuarAgregarHabitacion extends JPanel {
 
-	public static JPanel getPestania(Hotel hotel, String doc, String fIn, String fFi, String nom) {
+	public static JPanel getPestania(Hotel hotel, String doc, String fIn, String fFi, String nom, boolean pag) {
 
 		ControladorRecepcionista controlador = new ControladorRecepcionista();
 		JPanel panel = new JPanel();
@@ -80,6 +81,8 @@ public class recepcionPestaniaContinuarAgregarHabitacion extends JPanel {
 		panelFinal.setPreferredSize(parametros.getDimensionCuerpo());
 		panelFinal.setBackground(parametros.getColorCuerpo());
 		panelFinal.setLayout(new BorderLayout());
+		
+		ArrayList<Integer> indexi = new ArrayList<>();
 
 		JButton botonContinuar = new JButton("Agregar habitación");
 		botonContinuar.setPreferredSize(new Dimension(200,100));
@@ -149,6 +152,7 @@ public class recepcionPestaniaContinuarAgregarHabitacion extends JPanel {
 						controlador.agregarHabitacionAReserva(hotel.getReservas().get(doc).get(indexReserva), hotel.getHabitacionesOcupadasHotel().get(habOcup.getTipoHabitacion()).get(habOcup.getId()).get(last));
 					}
 				}
+				indexi.add(indexReserva);
 			}
 			
 		});
@@ -156,12 +160,20 @@ public class recepcionPestaniaContinuarAgregarHabitacion extends JPanel {
 		JButton botonTerminar = new JButton("Dejar de agregar habitaciones");
 		botonTerminar.setPreferredSize(new Dimension(200,100));
 		botonTerminar.addActionListener(event -> {
-			JOptionPane.showMessageDialog(null, "Reserva a nombre de " + nom + " creada.");
-			JPanel pestaniaCrearReserva= recepcionPestaniaCrearReserva.getPestania(hotel);
-        	panelFinal.removeAll();
-        	panelFinal.add(pestaniaCrearReserva, BorderLayout.CENTER);
-        	panelFinal.revalidate();
-        	panelFinal.repaint();
+			if (pag) {
+				int indexReserva = indexi.get(0);
+				JPanel pestaniaCambiarTarjeta = recepcionPestaniaCambiarInfoTarjeta.getPestania(hotel, hotel.getReservas().get(doc).get(indexReserva),pag);
+	        	panelFinal.removeAll();
+	        	panelFinal.add(pestaniaCambiarTarjeta, BorderLayout.CENTER);
+	        	panelFinal.revalidate();
+	        	panelFinal.repaint();
+			}
+//			JOptionPane.showMessageDialog(null, "Reserva a nombre de " + nom + " creada.");
+//			JPanel pestaniaCrearReserva= recepcionPestaniaCrearReserva.getPestania(hotel);
+//        	panelFinal.removeAll();
+//        	panelFinal.add(pestaniaCrearReserva, BorderLayout.CENTER);
+//        	panelFinal.revalidate();
+//        	panelFinal.repaint();
 		});
 		
 		

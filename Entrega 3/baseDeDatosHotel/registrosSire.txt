@@ -1,0 +1,2 @@
+Sire;1002031703;Saldo insuficiente;1221;240000.0
+Sire;1002031703;Transacción exitosa;9999999999;0.0

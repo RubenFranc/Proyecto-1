@@ -1,5 +1,6 @@
 package Controlador;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,9 @@ import Model.Habitacion;
 import Model.HabitacionOcupada;
 import Model.Hotel;
 import Model.Huesped;
+import Model.PasarelaDePagos;
 import Model.Reserva;
+import Model.TarjetaPago;
 
 public class ControladorRecepcionista {
 	
@@ -90,8 +93,8 @@ public class ControladorRecepcionista {
 	}
 	
 	public void crearReserva(Hotel hotel, String nombre, String documento, String correo, String celular,  //AQUÍ SE AGREGÓ EL BOOLEANO PARA SABER SI SE HIZO PAGO INMEDIATO DE LA RESERVA
-			String fechaInicio, String fechaFinal, ArrayList<String> acompañantes, boolean pagoInmediato) {
-		Huesped huesped = new Huesped(nombre, documento, correo, celular);
+			String fechaInicio, String fechaFinal, ArrayList<String> acompañantes, boolean pagoInmediato, TarjetaPago tarjeta) {
+		Huesped huesped = new Huesped(nombre, documento, correo, celular, tarjeta);
 		huesped.setAcompañantes(acompañantes);
 		Reserva reserva = new Reserva(huesped, fechaInicio, fechaFinal, pagoInmediato);
 		if (hotel.getReservas().containsKey(documento)){
@@ -199,7 +202,7 @@ public class ControladorRecepcionista {
 		return consumoTotal;
 	}
 	
-	public String generarFacturaFinal(Reserva reserva, Hotel hotel) {
+	public String[] generarFacturaFinal(Reserva reserva, Hotel hotel, String clasePasarela) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		ArrayList<String> noches = fechasEnRango(reserva.getfechaInicio(), reserva.getfechaFinal());
 		int numeroNoches = noches.size();
 		double totalTotal = 0.0;
@@ -228,13 +231,32 @@ public class ControladorRecepcionista {
 			}
 			String consumoHabitacion = "Habitación " + habitacion.getId() + " (Tarifa total: $" + tarifaTotalNochesHabitacion + "),\n consumo servicios: $" + habitacion.getCuentaPendiente() + "\n";
 			factura += consumoHabitacion;
-			totalTotal += tarifaTotalNochesHabitacion + habitacion.getCuentaPendiente();
+			if (! reserva.pagoInmediato() ) {
+				totalTotal += tarifaTotalNochesHabitacion;
+				totalTotal += habitacion.getCuentaPendiente();
+			}
+			else {
+				totalTotal += tarifaTotalNochesHabitacion;
+				reserva.setPago(false);
+			}
 		}
 		factura += "---------------------------------------\n";
 		factura += "TOTAL A PAGAR: " + totalTotal;
 		factura += "\n****************************************\n\n¡Vuelva pronto!";
-		hotel.getReservas().get(reserva.getHuesped().getDocumento()).remove(reserva);
-		return factura;
+		
+		Class clase = Class.forName(clasePasarela);
+		PasarelaDePagos pasarela = (PasarelaDePagos) clase.getDeclaredConstructor(null).newInstance(null);
+		String mensajeTransaccion = pasarela.validarPago(reserva.getHuesped().getTarjeta(), totalTotal);
+		if (mensajeTransaccion.equals("Transacción exitosa")) {
+			String[] rta = {factura, (Double.toString(totalTotal)), mensajeTransaccion};
+			return rta;
+		}
+		else {
+			String[] rta = {factura, (Double.toString(totalTotal)), mensajeTransaccion};
+			return rta;
+		}
+		
+		
 	}
 	
 	public void desocuparHabitaciones(Hotel hotel, HabitacionOcupada habOcup) {

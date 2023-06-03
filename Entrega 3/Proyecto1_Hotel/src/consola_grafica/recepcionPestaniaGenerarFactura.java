@@ -9,6 +9,8 @@ import Model.Reserva;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class recepcionPestaniaGenerarFactura extends JPanel {
@@ -28,6 +30,8 @@ public class recepcionPestaniaGenerarFactura extends JPanel {
 		JLabel documento = new JLabel("Documento del huésped", SwingConstants.CENTER);
 		JLabel fechaInicio = new JLabel("Fecha de inicio (DD/MM)", SwingConstants.CENTER);
 		JLabel fechaFin = new JLabel("Fecha de fin (DD/MM)", SwingConstants.CENTER);
+		JLabel pasarelaDePago = new JLabel("PasarelaDePago", SwingConstants.CENTER);
+		
 
 		// Documento
 		JPanel auxiliarDocumento = new JPanel();
@@ -52,11 +56,33 @@ public class recepcionPestaniaGenerarFactura extends JPanel {
 		JTextField fechaFinTextField = new JTextField();
 		fechaFinTextField.setPreferredSize(new Dimension(200, 20));
 		auxiliarFechaFin.add(fechaFinTextField);
+		
+		// Pasarela
+		ButtonGroup grupoPasarela = new ButtonGroup();
+		JRadioButton botonPayPal = new JRadioButton("PayPal");
+		botonPayPal.setBackground(parametros.getColorCuerpo());
+		botonPayPal.setActionCommand("PayPal");
+		grupoPasarela.add(botonPayPal);
+		JRadioButton botonPayU = new JRadioButton("PayU");
+		botonPayU.setBackground(parametros.getColorCuerpo());
+		botonPayU.setActionCommand("PayU");
+		grupoPasarela.add(botonPayU);
+		JRadioButton botonSire = new JRadioButton("Sire");
+		botonSire.setBackground(parametros.getColorCuerpo());
+		botonSire.setActionCommand("Sire");
+		grupoPasarela.add(botonSire);
+
+		JPanel auxiliarPasarela = new JPanel();
+		auxiliarPasarela.setLayout(new FlowLayout());
+		auxiliarPasarela.setBackground(parametros.getColorCuerpo());
+		auxiliarPasarela.add(botonPayPal);
+		auxiliarPasarela.add(botonPayU);
+		auxiliarPasarela.add(botonSire);
 
 		/// ADD
 
 		JPanel auxiliar = new JPanel();
-		auxiliar.setLayout(new GridLayout(3, 2, 10, 80));
+		auxiliar.setLayout(new GridLayout(4, 2, 10, 80));
 		auxiliar.setBackground(parametros.getColorCuerpo());
 
 		auxiliar.add(documento);
@@ -65,6 +91,9 @@ public class recepcionPestaniaGenerarFactura extends JPanel {
 		auxiliar.add(auxiliarFechaInicio);
 		auxiliar.add(fechaFin);
 		auxiliar.add(auxiliarFechaFin);
+		auxiliar.add(pasarelaDePago);
+		auxiliar.add(auxiliarPasarela);
+		
 
 		panel.add(auxiliar);
 //		panel.add(titulo, BorderLayout.NORTH);
@@ -83,6 +112,15 @@ public class recepcionPestaniaGenerarFactura extends JPanel {
 			String doc = documentoTextField.getText();
 			String fIn = fechaInicioTextField.getText();
 			String fFi = fechaFinTextField.getText();
+			ButtonModel opcionPasarela = grupoPasarela.getSelection();
+			String opPasarela = opcionPasarela.getActionCommand();
+			String pasa = "Model.PayPal";
+			try {
+				pasa = hotel.escogerPasarela(opPasarela);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			if (hotel.getReservas().containsKey(doc)) {
 				ArrayList<Reserva> reservasHuesped = hotel.getReservas().get(doc);
 				Reserva reserva = null;
@@ -92,10 +130,62 @@ public class recepcionPestaniaGenerarFactura extends JPanel {
 						break;
 					}
 				}
-				String facturaFinal = controlador.generarFacturaFinal(reserva, hotel);
-				JOptionPane.showMessageDialog(null, facturaFinal);
-				for (HabitacionOcupada hab: reserva.getHabitacionesReserva()) {
-					controlador.desocuparHabitaciones(hotel, hab);
+				String[] facturaFinal = {};
+				try {
+					facturaFinal = controlador.generarFacturaFinal(reserva, hotel, pasa);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, facturaFinal[2]);
+				if (facturaFinal[2].equals("Transacción exitosa")) {
+					for (HabitacionOcupada hab: reserva.getHabitacionesReserva()) {
+						controlador.desocuparHabitaciones(hotel, hab);
+					}
+					hotel.getReservas().get(reserva.getHuesped().getDocumento()).remove(reserva);
+					try {
+						hotel.guardarRegistroTransaccion(opPasarela, facturaFinal[2], reserva.getHuesped().getTarjeta(), doc, facturaFinal[1]);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null, facturaFinal[0]);
+					JPanel pestaniaGenerarFactura = recepcionPestaniaGenerarFactura.getPestania(hotel);
+		        	panelFinal.removeAll();
+		        	panelFinal.add(pestaniaGenerarFactura, BorderLayout.CENTER);
+		        	panelFinal.revalidate();
+		        	panelFinal.repaint();
+				}
+				else {
+					try {
+						hotel.guardarRegistroTransaccion(opPasarela, facturaFinal[2], reserva.getHuesped().getTarjeta(), doc, facturaFinal[1]);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JPanel pestaniaCambiarTarjeta = recepcionPestaniaCambiarInfoTarjeta.getPestania(hotel, reserva, false);
+		        	panelFinal.removeAll();
+		        	panelFinal.add(pestaniaCambiarTarjeta, BorderLayout.CENTER);
+		        	panelFinal.revalidate();
+		        	panelFinal.repaint();
 				}
 			}
 			else {

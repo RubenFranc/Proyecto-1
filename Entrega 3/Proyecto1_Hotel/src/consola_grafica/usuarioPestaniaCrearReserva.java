@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import Controlador.ControladorUsuario;
 import Model.Hotel;
+import Model.TarjetaPago;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -31,6 +32,10 @@ public class usuarioPestaniaCrearReserva extends JPanel {
 		JLabel fechaInicio = new JLabel("Fecha de inicio (DD/MM)", SwingConstants.CENTER);
 		JLabel fechaFin = new JLabel("Fecha de fin (DD/MM)", SwingConstants.CENTER);
 		JLabel acompaniantes = new JLabel("Nombre de acompañantes (separados por , 'coma')", SwingConstants.CENTER);
+				
+		JLabel numero = new JLabel("Número de la tarjeta (10 dígitos)", SwingConstants.CENTER);
+		JLabel saldo = new JLabel("Saldo disponible", SwingConstants.CENTER);
+		JLabel contrasenia = new JLabel("Contraseña de la tarjeta", SwingConstants.CENTER);
 //		JLabel numeroHabitaciones = new JLabel("Número de habitaciones", SwingConstants.CENTER);
 
 		// Nombre
@@ -88,8 +93,30 @@ public class usuarioPestaniaCrearReserva extends JPanel {
 		JTextField acompanientesTextField = new JTextField();
 		acompanientesTextField.setPreferredSize(new Dimension(200, 20));
 		auxiliarAcompaniantes.add(acompanientesTextField);
+		
+		// NumeroTarjeta
+		JPanel auxiliarNumeroTarjeta = new JPanel();
+		auxiliarNumeroTarjeta.setLayout(new FlowLayout());
+		auxiliarNumeroTarjeta.setBackground(parametros.getColorCuerpo());
+		JTextField numeroTarjetaTextField = new JTextField();
+		numeroTarjetaTextField.setPreferredSize(new Dimension(200, 20));
+		auxiliarNumeroTarjeta.add(numeroTarjetaTextField);
 
-
+		// Saldo
+		JPanel auxiliarSaldo = new JPanel();
+		auxiliarSaldo.setLayout(new FlowLayout());
+		auxiliarSaldo.setBackground(parametros.getColorCuerpo());
+		JTextField saldoTextField = new JTextField();
+		saldoTextField.setPreferredSize(new Dimension(200, 20));
+		auxiliarSaldo.add(saldoTextField);
+		
+		// Contrasenia
+		JPanel auxiliarContrasenia = new JPanel();
+		auxiliarContrasenia.setLayout(new FlowLayout());
+		auxiliarContrasenia.setBackground(parametros.getColorCuerpo());
+		JTextField contraseniaTextField = new JTextField();
+		contraseniaTextField.setPreferredSize(new Dimension(200, 20));
+		auxiliarContrasenia.add(contraseniaTextField);
 
 		/// ADD
 
@@ -107,6 +134,12 @@ public class usuarioPestaniaCrearReserva extends JPanel {
 		panel.add(auxiliarFechaFin);
 		panel.add(acompaniantes);
 		panel.add(auxiliarAcompaniantes);
+		panel.add(numero);
+		panel.add(auxiliarNumeroTarjeta);
+		panel.add(saldo);
+		panel.add(auxiliarSaldo);
+		panel.add(contrasenia);
+		panel.add(auxiliarContrasenia);
 //		panel.add(numeroHabitaciones);
 //		panel.add(auxiliarNumeroHabitaciones);
 
@@ -127,12 +160,17 @@ public class usuarioPestaniaCrearReserva extends JPanel {
 			String cor = correoTextField.getText();
 			String fIn = fechaInicioTextField.getText();
 			String fFi = fechaFinTextField.getText();
+			String numt = numeroTarjetaTextField.getText();
+			String saldi = saldoTextField.getText();
+			String cont = contraseniaTextField.getText();
+			double sald = Double.parseDouble(saldi);
+			TarjetaPago tarj = new TarjetaPago(sald, numt, cont);
 			String acomp = acompanientesTextField.getText();
 			String[] partes = acomp.split(",");
 			ArrayList<String> aco = new ArrayList<String>(Arrays.asList(partes));
 			if (!(nom.equals("") || doc.equals("") || num.equals("") || cor.equals("") || fIn.equals("") || fFi.equals(""))) {
 //				System.out.println("ENtró");
-				controlador.crearReserva(hotel, nom, doc, cor, num, fIn, fFi, aco, false);
+				controlador.crearReserva(hotel, nom, doc, cor, num, fIn, fFi, aco, false, tarj);
 				
 	        	JPanel pestaniaAgregarHabitacion = usuarioPestaniaContinuarAgregarHabitacion.getPestania(hotel, doc, fIn, fFi, nom, false);
 	        	panelFinal.removeAll();
@@ -154,12 +192,17 @@ public class usuarioPestaniaCrearReserva extends JPanel {
 			String cor = correoTextField.getText();
 			String fIn = fechaInicioTextField.getText();
 			String fFi = fechaFinTextField.getText();
+			String numt = numeroTarjetaTextField.getText();
+			String saldi = saldoTextField.getText();
+			String cont = contraseniaTextField.getText();
+			double sald = Double.parseDouble(saldi);
+			TarjetaPago tarj = new TarjetaPago(sald, numt, cont);
 			String acomp = acompanientesTextField.getText();
 			String[] partes = acomp.split(",");
 			ArrayList<String> aco = new ArrayList<String>(Arrays.asList(partes));
 			if (!(nom.equals("") || doc.equals("") || num.equals("") || cor.equals("") || fIn.equals("") || fFi.equals(""))) {
 //				System.out.println("ENtró");
-				controlador.crearReserva(hotel, nom, doc, cor, num, fIn, fFi, aco, true);
+				controlador.crearReserva(hotel, nom, doc, cor, num, fIn, fFi, aco, true, tarj);
 				
 	        	JPanel pestaniaAgregarHabitacion = usuarioPestaniaContinuarAgregarHabitacion.getPestania(hotel, doc, fIn, fFi, nom, true);
 	        	panelFinal.removeAll();
@@ -187,3 +230,4 @@ public class usuarioPestaniaCrearReserva extends JPanel {
 
 		return panelFinal;
 	}
+}

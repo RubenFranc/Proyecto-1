@@ -18,6 +18,8 @@ import Model.Huesped;
 import Model.ProductoMenu;
 import Model.Reserva;
 import Model.Servicio;
+import Model.TarjetaPago;
+import Model.Usuario;
 
 public class ControladorPersistencia {
 
@@ -232,10 +234,15 @@ public class ControladorPersistencia {
 				String celular = partes[5];
 				String[] acomps = partes[6].split(",");
 				String[] habs = partes[7].split(",");
-				String pago = partes[8].replace("\n", "");
+				String pago = partes[8];
+				String numeroTarjeta = partes[9];
+				String saldo = partes[10];
+				String contrasenia = partes[11].replace("\n", "");
+				double saldi = Double.parseDouble(saldo);
+				TarjetaPago tarjeta = new TarjetaPago(saldi, numeroTarjeta, contrasenia);
 				boolean pagi = Boolean.parseBoolean(pago);
 //				System.out.println(partes[7].replace("\n", "").split(",")[0]);
-				Huesped huesped = new Huesped(nombre, documento, correo, celular);
+				Huesped huesped = new Huesped(nombre, documento, correo, celular, tarjeta);
 				for (String acomp: acomps) {
 					huesped.addAcompañante(acomp);
 				}
@@ -245,6 +252,7 @@ public class ControladorPersistencia {
 //					System.out.println(info[0]);
 					String id = info[1];
 					String tipo = info[0];
+					System.out.println(id +" "+tipo);
 					ArrayList<HabitacionOcupada> habsOcup = hotel.getHabitacionesOcupadasHotel().get(tipo).get(id);
 					boolean encontroHabitacion = false;
 					int i = 0;
@@ -301,8 +309,9 @@ public class ControladorPersistencia {
         		for (HabitacionOcupada habOcup: it.getHabitacionesReserva()) {
         			linea1 += habOcup.getTipoHabitacion() + "-" + habOcup.getId() + ",";
         		}
-        		String lineaReserv = linea1.substring(0, linea1.length()-1) + ";" + it.pagoInmediato() + "\n";
-        		doc += lineaReserv;
+        		String lineaReserv = linea1.substring(0, linea1.length()-1) + ";" + it.pagoInmediato();
+        		doc += lineaReserv + ";" + it.getHuesped().getTarjeta().getNumeroDeCuenta() + ";" +
+        				it.getHuesped().getTarjeta().getSaldo() + ";" + it.getHuesped().getTarjeta().getContrasenia() + "\n";
         	}
 		}
         wr.write(doc);

@@ -1,5 +1,12 @@
 package Model;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,6 +69,44 @@ public class Hotel {
 	
 	public String getPropiedadesHotel() {
 		return propiedades;
+	}
+	
+	public String escogerPasarela(String nombrePasarela) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader("../baseDeDatosHotel/pasarelasDePago.txt"));
+		String linea = br.readLine();
+		String clasePasarela = "";
+		if (linea != null) {
+			boolean cent = false;
+			while (linea != null & !cent) {
+				if (linea.contains(nombrePasarela)) {
+					clasePasarela = linea.replace("\n", "");
+					cent = true;
+				}
+				linea = br.readLine();
+			}
+		}
+		return clasePasarela;
+	}
+	
+	public void guardarRegistroTransaccion(String nombrePasarela, String resultado, TarjetaPago tarjeta, 
+			String documentoHuesped, String cantidadPagar) throws IOException {
+		File archivo = new File("../baseDeDatosHotel/registros" + nombrePasarela + ".txt");
+		FileReader lectorArchivo = new FileReader(archivo);
+		BufferedReader bufferLectura = new BufferedReader(lectorArchivo);
+		String linea;
+		StringBuilder contenidoArchivo = new StringBuilder();
+
+		while ((linea = bufferLectura.readLine()) != null) {
+		    contenidoArchivo.append(linea).append("\n");
+		}
+		contenidoArchivo.append(nombrePasarela + ";" + documentoHuesped + ";" + resultado + ";" + tarjeta.getNumeroDeCuenta() + ";" +
+								cantidadPagar + "\n");
+
+		bufferLectura.close();
+		
+		FileWriter escritorArchivo = new FileWriter(archivo, false);
+		escritorArchivo.write(contenidoArchivo.toString());
+		escritorArchivo.close();
 	}
 			
 }
