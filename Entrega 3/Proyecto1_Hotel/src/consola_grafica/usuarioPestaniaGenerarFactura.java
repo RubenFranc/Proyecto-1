@@ -140,10 +140,10 @@ public class usuarioPestaniaGenerarFactura extends JPanel {
 				}
 				JOptionPane.showMessageDialog(null, facturaFinal[2]);
 				if (facturaFinal[2].equals("Transacción exitosa")) {
-					for (HabitacionOcupada hab: reserva.getHabitacionesReserva()) {
-						controlador.desocuparHabitaciones(hotel, hab);
-					}
-					hotel.getReservas().get(reserva.getHuesped().getDocumento()).remove(reserva);
+//					for (HabitacionOcupada hab: reserva.getHabitacionesReserva()) {
+//						controlador.desocuparHabitaciones(hotel, hab);
+//					}
+//					hotel.getReservas().get(reserva.getHuesped().getDocumento()).remove(reserva);
 					try {
 						hotel.guardarRegistroTransaccion(opPasarela, facturaFinal[2], reserva.getHuesped().getTarjeta(), doc, facturaFinal[1]);
 					} catch (IOException e) {
@@ -151,6 +151,19 @@ public class usuarioPestaniaGenerarFactura extends JPanel {
 						e.printStackTrace();
 					}
 					JOptionPane.showMessageDialog(null, facturaFinal[0]);
+				}
+				else {
+					try {
+						hotel.guardarRegistroTransaccion(opPasarela, facturaFinal[2], reserva.getHuesped().getTarjeta(), doc, facturaFinal[1]);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					JPanel pestaniaCambiarTarjeta = usuarioPestaniaCambiarInfoTarjeta.getPestania(hotel, reserva, false);
+		        	panelFinal.removeAll();
+		        	panelFinal.add(pestaniaCambiarTarjeta, BorderLayout.CENTER);
+		        	panelFinal.revalidate();
+		        	panelFinal.repaint();
 				}
 			}
 			else {

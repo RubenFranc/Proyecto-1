@@ -18,7 +18,7 @@ import java.util.Collections;
 
 public class usuarioPestaniaCambiarInfoTarjeta extends JPanel {
 
-	public static JPanel getPestania(Hotel hotel, Reserva reserva) {
+	public static JPanel getPestania(Hotel hotel, Reserva reserva, boolean adelanto) {
 
 		ControladorRecepcionista controlador = new ControladorRecepcionista();
 		JPanel panel = new JPanel();
@@ -162,7 +162,14 @@ public class usuarioPestaniaCambiarInfoTarjeta extends JPanel {
 	        	panelFinal.repaint();
 			}
 			else {
-				JPanel pestaniaCambiarTarjeta = usuarioPestaniaCambiarInfoTarjeta.getPestania(hotel, reserva);
+				JOptionPane.showMessageDialog(null, facturaFinal[2]);					
+				try {
+					hotel.guardarRegistroTransaccion(opPasarela, facturaFinal[2], reserva.getHuesped().getTarjeta(), reserva.getHuesped().getDocumento(), facturaFinal[1]);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				JPanel pestaniaCambiarTarjeta = usuarioPestaniaCambiarInfoTarjeta.getPestania(hotel, reserva, adelanto);
 	        	panelFinal.removeAll();
 	        	panelFinal.add(pestaniaCambiarTarjeta, BorderLayout.CENTER);
 	        	panelFinal.revalidate();
