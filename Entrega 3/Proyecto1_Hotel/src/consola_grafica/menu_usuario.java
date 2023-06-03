@@ -147,7 +147,7 @@ public class menu_usuario extends JFrame implements ActionListener {
         	cuerpo.revalidate();
         	cuerpo.repaint();
             
-     
+         });
         
         botonPestaniaHabitacionesDisponibles.setPreferredSize(dimensionBotonBarra);
         botonPestaniaCrearReserva.setPreferredSize(dimensionBotonBarra);
