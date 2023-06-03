@@ -1,3 +1,4 @@
+package consola_grafica;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,7 +18,7 @@ import javax.swing.SwingConstants;
 public class menu_usuario extends JFrame implements ActionListener {
     
     public menu_usuario(Hotel hotel) {
-        JFrame frame = new JFrame("Menu Recepcionista");
+        JFrame frame = new JFrame("Menu Usuario");
         JPanel encabezado = new JPanel();
         JPanel cuerpo = new JPanel();
         JPanel pieDePagina = new JPanel();
@@ -148,7 +149,7 @@ public class menu_usuario extends JFrame implements ActionListener {
             
      
         
-        botonPestaniaGenerarFactura.setPreferredSize(dimensionBotonBarra);
+        botonPestaniaHabitacionesDisponibles.setPreferredSize(dimensionBotonBarra);
         botonPestaniaCrearReserva.setPreferredSize(dimensionBotonBarra);
         
         //Izquierda
@@ -156,7 +157,7 @@ public class menu_usuario extends JFrame implements ActionListener {
         izquierda.setBackground(colorIzquierda);
         izquierda.setPreferredSize(dimensionIzquierda);
         
-        izquierda.add(botonPestaniaGenerarFactura);     
+        izquierda.add(botonPestaniaHabitacionesDisponibles);     
         izquierda.add(botonPestaniaCrearReserva);
            
         
@@ -188,4 +189,3 @@ public class menu_usuario extends JFrame implements ActionListener {
 		
 	}
 }
-

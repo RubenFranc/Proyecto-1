@@ -1,3 +1,4 @@
+package consola_grafica;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,7 +7,9 @@ import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import Controlador.ControladorPersistencia;
+import Model.Hotel;
+import Model.Usuario;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -118,12 +121,9 @@ public class loginUsuario extends JFrame  {
             cuerpo.removeAll();
             frame.removeAll();
             frame.dispose();
-                	JFrame crearUsuario = new usuarioPestaniaCrearUsuario(hotel);
-                	crearUsuario.setVisible(true);
-            	}
-        	else {
-        		JOptionPane.showMessageDialog(null, mssg);
-        	}
+            JFrame crearUsuario = new usuarioPestaniaCrearUsuario(hotel);
+            crearUsuario.setVisible(true);
+            	
             
          });
         //loginButton.setMinimumSize(dimensionSubtitulo);
