@@ -20,8 +20,11 @@ import org.junit.jupiter.api.Test;
 import Consola.AplicacionPrincipal;
 import Controlador.ControladorAdministrador;
 import Controlador.ControladorPersistencia;
+import Model.Habitacion;
 import Model.HabitacionOcupada;
 import Model.Hotel;
+import Model.ProductoMenu;
+import Model.Servicio;
 import Model.Usuario;
 
 import org.junit.jupiter.api.Assertions;
@@ -208,7 +211,7 @@ class test_carga {
 			controladorPersistencia.cargarHabitacionesOcupadas(hotel_test, "../baseDeDatosHotel/archivoHabitacionesOcupadas.txt");
 			Collection<Map<String, ArrayList<HabitacionOcupada>>> collection_test = hotel_test.getHabitacionesOcupadasHotel().values();
 			java.util.Iterator<Map<String, ArrayList<HabitacionOcupada>>>  iterator = collection_test.iterator();
-			System.out.println(collection_test.size());
+			//System.out.println(collection_test.size());
 			Map<String, ArrayList<HabitacionOcupada>> valor = iterator.next();
 			while (iterator.hasNext()) {
 				//System.out.println(valor);
@@ -216,9 +219,6 @@ class test_carga {
 			}
 			ArrayList<HabitacionOcupada> list_hab_test = valor.get("15");
 			HabitacionOcupada hab_test = list_hab_test.get(0);
-			//System.out.print(hab_test);
-			//ArrayList<HabitacionOcupada> test = hotel_test.getHabitacionesOcupadasHotel().get("15").get("15");
-			//System.out.print(test);
 			
 			Assertions.assertEquals("1002031703", hab_test.getDocumentoHuesped());
 		}
@@ -233,7 +233,7 @@ class test_carga {
 			controladorPersistencia.cargarHabitacionesOcupadas(hotel_test, "../baseDeDatosHotel/archivoHabitacionesOcupadas.txt");
 			Collection<Map<String, ArrayList<HabitacionOcupada>>> collection_test = hotel_test.getHabitacionesOcupadasHotel().values();
 			java.util.Iterator<Map<String, ArrayList<HabitacionOcupada>>>  iterator = collection_test.iterator();
-			System.out.println(collection_test.size());
+			//System.out.println(collection_test.size());
 			Map<String, ArrayList<HabitacionOcupada>> valor = iterator.next();
 			while (iterator.hasNext()) {
 				//System.out.println(valor);
@@ -241,9 +241,6 @@ class test_carga {
 			}
 			ArrayList<HabitacionOcupada> list_hab_test = valor.get("15");
 			HabitacionOcupada hab_test = list_hab_test.get(0);
-			//System.out.print(hab_test);
-			//ArrayList<HabitacionOcupada> test = hotel_test.getHabitacionesOcupadasHotel().get("15").get("15");
-			//System.out.print(test);
 			
 			Assertions.assertEquals("09/09", hab_test.getFechaInicio());
 		}
@@ -258,7 +255,7 @@ class test_carga {
 			controladorPersistencia.cargarHabitacionesOcupadas(hotel_test, "../baseDeDatosHotel/archivoHabitacionesOcupadas.txt");
 			Collection<Map<String, ArrayList<HabitacionOcupada>>> collection_test = hotel_test.getHabitacionesOcupadasHotel().values();
 			java.util.Iterator<Map<String, ArrayList<HabitacionOcupada>>>  iterator = collection_test.iterator();
-			System.out.println(collection_test.size());
+			//System.out.println(collection_test.size());
 			Map<String, ArrayList<HabitacionOcupada>> valor = iterator.next();
 			while (iterator.hasNext()) {
 				//System.out.println(valor);
@@ -266,11 +263,220 @@ class test_carga {
 			}
 			ArrayList<HabitacionOcupada> list_hab_test = valor.get("15");
 			HabitacionOcupada hab_test = list_hab_test.get(0);
-			//System.out.print(hab_test);
-			//ArrayList<HabitacionOcupada> test = hotel_test.getHabitacionesOcupadasHotel().get("15").get("15");
-			//System.out.print(test);
 			
 			Assertions.assertEquals("12/09", hab_test.getFechaFinal());
 		}
+		
+		/// Pruebas Cargar Habitacion Desocupada
+		
+		@Test
+		void test_habitacion_1() throws IOException {
+			Hotel hotel_test = new Hotel();
+			
+			String linea1 = "17;sd;2,true,true,true,27.0,true,true,g,true,true,true,true,220.0,true,true,true;70000.0;false";
+			String linea2 = "16;s;2,true,true,true,27.0,true,true,g,true,true,true,true,220.0,true,true,true;40000.0;false";
+			
+			/// Prueba
+			ControladorPersistencia controladorPersistencia= new ControladorPersistencia();	
+			controladorPersistencia.cargarHabitacionesDisponibles(hotel_test, "../baseDeDatosHotel/archivoHabitaciones.txt");
+			Collection<Map<String, Habitacion>> collection_test = hotel_test.getHabitacionesDisponiblesHotel().values();
+			java.util.Iterator<Map<String, Habitacion>>  iterator = collection_test.iterator();
+			//System.out.println(collection_test.size());
+			Map<String, Habitacion> valor = iterator.next();
+			while (iterator.hasNext()) {
+				//System.out.println(valor);
+				Map<String, Habitacion> valor2 = iterator.next();
+			}
+			Habitacion hab_test = valor.get("17");
+			//System.out.print(valor);
+			
+			Assertions.assertEquals(70000.0, hab_test.getTarifa());
+		}
+		
+		@Test
+		void test_habitacion_2() throws IOException {
+			Hotel hotel_test = new Hotel();
+			
+			String linea1 = "17;sd;2,true,true,true,27.0,true,true,g,true,true,true,true,220.0,true,true,true;70000.0;false";
+			String linea2 = "16;s;2,true,true,true,27.0,true,true,g,true,true,true,true,220.0,true,true,true;40000.0;false";
+			
+			/// Prueba
+			ControladorPersistencia controladorPersistencia= new ControladorPersistencia();	
+			controladorPersistencia.cargarHabitacionesDisponibles(hotel_test, "../baseDeDatosHotel/archivoHabitaciones.txt");
+			Collection<Map<String, Habitacion>> collection_test = hotel_test.getHabitacionesDisponiblesHotel().values();
+			java.util.Iterator<Map<String, Habitacion>>  iterator = collection_test.iterator();
+			//System.out.println(collection_test.size());
+			Map<String, Habitacion> valor = iterator.next();
+			while (iterator.hasNext()) {
+				//System.out.println(valor);
+				Map<String, Habitacion> valor2 = iterator.next();
+			}
+			//System.out.print(valor);
+			Habitacion hab_test = valor.get("17");
+			
+			
+			Assertions.assertEquals("sd", hab_test.getTipoHabitacion());
+		}
+		
+		@Test
+		void test_habitacion_3() throws IOException {
+			Hotel hotel_test = new Hotel();
+			
+			String linea1 = "17;sd;2,true,true,true,27.0,true,true,g,true,true,true,true,220.0,true,true,true;70000.0;false";
+			String linea2 = "16;s;2,true,true,true,27.0,true,true,g,true,true,true,true,220.0,true,true,true;40000.0;false";
+			
+			/// Prueba
+			ControladorPersistencia controladorPersistencia= new ControladorPersistencia();	
+			controladorPersistencia.cargarHabitacionesDisponibles(hotel_test, "../baseDeDatosHotel/archivoHabitaciones.txt");
+			Collection<Map<String, Habitacion>> collection_test = hotel_test.getHabitacionesDisponiblesHotel().values();
+			java.util.Iterator<Map<String, Habitacion>>  iterator = collection_test.iterator();
+			//System.out.println(collection_test.size());
+			Map<String, Habitacion> valor = iterator.next();
+			while (iterator.hasNext()) {
+				//System.out.println(valor);
+				Map<String, Habitacion> valor2 = iterator.next();
+			}
+			//System.out.print(valor);
+			Habitacion hab_test = valor.get("17");
+			
+			
+			Assertions.assertEquals("2,true,true,true,27.0,true,true,g,true,true,true,true,220.0,true,true,true", hab_test.getPropiedades());
+		}
+		
+		/// Pruebas Cargar Menu
+		
+				@Test
+				void test_menu_1() throws IOException {
+					Hotel hotel_test = new Hotel();
+					
+					String linea1 = "desayuno;9000.0;1000 cal;true;230;1030";
+					String linea2 = "gaseosa;5500.0;800 cal;false;1000;1200";
+					
+					/// Prueba
+					ControladorPersistencia controladorPersistencia= new ControladorPersistencia();	
+					controladorPersistencia.cargarProductosMenuArchivo(hotel_test, "../baseDeDatosHotel/archivoMenuRestaurante.txt");
+					Collection<ProductoMenu> collection_test = hotel_test.getMenuHotel().values();
+					java.util.Iterator<ProductoMenu>  iterator = collection_test.iterator();
+					//System.out.println(collection_test.size());
+					ProductoMenu valor = iterator.next();
+					//System.out.print(valor);
+					
+					Assertions.assertEquals(9000.0, valor.getPrecio());
+				}
+				
+				@Test
+				void test_menu_2() throws IOException {
+					Hotel hotel_test = new Hotel();
+					
+					String linea1 = "desayuno;9000.0;1000 cal;true;230;1030";
+					String linea2 = "gaseosa;5500.0;800 cal;false;1000;1200";
+					
+					/// Prueba
+					ControladorPersistencia controladorPersistencia= new ControladorPersistencia();	
+					controladorPersistencia.cargarProductosMenuArchivo(hotel_test, "../baseDeDatosHotel/archivoMenuRestaurante.txt");
+					Collection<ProductoMenu> collection_test = hotel_test.getMenuHotel().values();
+					java.util.Iterator<ProductoMenu>  iterator = collection_test.iterator();
+					//System.out.println(collection_test.size());
+					ProductoMenu valor = iterator.next();
+					//System.out.print(valor);
+					
+					Assertions.assertEquals(230, valor.getHoraInicioDisponibilidad());
+				}
+				
+				@Test
+				void test_menu_3() throws IOException {
+					Hotel hotel_test = new Hotel();
+					
+					String linea1 = "desayuno;9000.0;1000 cal;true;230;1030";
+					String linea2 = "gaseosa;5500.0;800 cal;false;1000;1200";
+					
+					/// Prueba
+					ControladorPersistencia controladorPersistencia= new ControladorPersistencia();	
+					controladorPersistencia.cargarProductosMenuArchivo(hotel_test, "../baseDeDatosHotel/archivoMenuRestaurante.txt");
+					Collection<ProductoMenu> collection_test = hotel_test.getMenuHotel().values();
+					java.util.Iterator<ProductoMenu>  iterator = collection_test.iterator();
+					//System.out.println(collection_test.size());
+					ProductoMenu valor = iterator.next();
+					//System.out.print(valor);
+					
+					Assertions.assertEquals(1030, valor.getHoraFinDisponibilidad());
+				}
+				
+				/// Pruebas Cargar Servicios
+				
+				@Test
+				void test_servicios_1() throws IOException {
+					Hotel hotel_test = new Hotel();
+					
+					String linea1 = "spa;14000.0;false;descripcionSpa";
+					String linea2 = "guia turistica;45000.0;true;descripcionGuiaTuristica";
+					
+					/// Prueba
+					ControladorPersistencia controladorPersistencia= new ControladorPersistencia();	
+					controladorPersistencia.cargarServiciosArchivo(hotel_test, "../baseDeDatosHotel/archivoServicios.txt");
+					Collection<Servicio> collection_test = hotel_test.getServiciosHotel().values();
+					java.util.Iterator<Servicio>  iterator = collection_test.iterator();
+					//System.out.println(collection_test.size());
+					Servicio valor = iterator.next();
+					//System.out.print(valor);
+					
+					Assertions.assertEquals(14000.0, valor.getPrecio());
+				}
 
+				@Test
+				void test_servicios_2() throws IOException {
+					Hotel hotel_test = new Hotel();
+					
+					String linea1 = "spa;14000.0;false;descripcionSpa";
+					String linea2 = "guia turistica;45000.0;true;descripcionGuiaTuristica";
+					
+					/// Prueba
+					ControladorPersistencia controladorPersistencia= new ControladorPersistencia();	
+					controladorPersistencia.cargarServiciosArchivo(hotel_test, "../baseDeDatosHotel/archivoServicios.txt");
+					Collection<Servicio> collection_test = hotel_test.getServiciosHotel().values();
+					java.util.Iterator<Servicio>  iterator = collection_test.iterator();
+					//System.out.println(collection_test.size());
+					Servicio valor = iterator.next();
+					//System.out.print(valor);
+					
+					Assertions.assertEquals("descripcionSpa", valor.getDescripcion());
+				}
+				
+				@Test
+				void test_servicios_3() throws IOException {
+					Hotel hotel_test = new Hotel();
+					
+					String linea1 = "spa;14000.0;false;descripcionSpa";
+					String linea2 = "guia turistica;45000.0;true;descripcionGuiaTuristica";
+					
+					/// Prueba
+					ControladorPersistencia controladorPersistencia= new ControladorPersistencia();	
+					controladorPersistencia.cargarServiciosArchivo(hotel_test, "../baseDeDatosHotel/archivoServicios.txt");
+					Collection<Servicio> collection_test = hotel_test.getServiciosHotel().values();
+					java.util.Iterator<Servicio>  iterator = collection_test.iterator();
+					//System.out.println(collection_test.size());
+					Servicio valor = iterator.next();
+					//System.out.print(valor);
+					
+					Assertions.assertEquals("spa", valor.getNombre());
+				}
+				
+				@Test
+				void test_servicios_4() throws IOException {
+					Hotel hotel_test = new Hotel();
+					
+					String linea1 = "spa;14000.0;false;descripcionSpa";
+					String linea2 = "guia turistica;45000.0;true;descripcionGuiaTuristica";
+					
+					/// Prueba
+					ControladorPersistencia controladorPersistencia= new ControladorPersistencia();	
+					controladorPersistencia.cargarServiciosArchivo(hotel_test, "../baseDeDatosHotel/archivoServicios.txt");
+					Collection<Servicio> collection_test = hotel_test.getServiciosHotel().values();
+					java.util.Iterator<Servicio>  iterator = collection_test.iterator();
+					//System.out.println(collection_test.size());
+					Servicio valor = iterator.next();
+					//System.out.print(valor);
+					
+					Assertions.assertEquals(false, valor.getEnGrupo());
+				}
 }
