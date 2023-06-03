@@ -24,7 +24,7 @@ import javax.swing.SwingConstants;
 public class usuarioPestaniaCrearUsuario extends JFrame  {
 	
     
-	public loginUsuario(Hotel hotel){
+	public usuarioPestaniaCrearUsuario(Hotel hotel){
 		ControladorUsuario controlador = new ControladorUsuario();
         JFrame frame = new JFrame("Registro de Usuario HOTEL");
         JPanel encabezado = new JPanel();
