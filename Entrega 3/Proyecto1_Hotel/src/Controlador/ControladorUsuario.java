@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import Model.Habitacion;
+import Model.HabitacionOcupada;
+import Model.Hotel;
+import Model.Huesped;
+import Model.Reserva;
+import Model.Usuario;
 
 public class ControladorUsuario extends controladorRecepcionista{
 	
