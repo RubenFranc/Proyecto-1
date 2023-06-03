@@ -76,7 +76,7 @@ public class menu_usuario extends JFrame implements ActionListener {
         	cuerpo.removeAll();
         	frame.removeAll();
         	frame.dispose();
-        	JFrame login= new login();
+        	JFrame login= new loginUsuario();
         	login.setVisible(true);
         	
             
