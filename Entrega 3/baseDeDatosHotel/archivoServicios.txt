@@ -1,2 +1,2 @@
-spa;14000.0;false;descripcionSpa
-guia turistica;45000.0;true;descripcionGuiaTuristica
+spa;14000.0;false;descripcionSpa;4
+guia turistica;45000.0;true;descripcionGuiaTuristica;2

@@ -10,7 +10,7 @@ public class ProductoMenu extends Servicio{
 	
 	public ProductoMenu(String nombre, double precio, String descripcion, boolean servicioACuarto,
 			int horaInicioDisponibilidad, int horaFinDisponibilidad, int unidades) {
-		super(nombre, precio, descripcion, enGrupo);
+		super(nombre, precio, descripcion, enGrupo, unidades);
 		this.servicioACuarto = servicioACuarto;
 		this.horaInicioDisponibilidad = horaInicioDisponibilidad;
 		this.horaFinDisponibilidad = horaFinDisponibilidad;	

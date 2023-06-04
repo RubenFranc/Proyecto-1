@@ -23,7 +23,7 @@ public class usuarioPestaniaHabitacionesDisponiblesPorFecha extends JPanel {
 		/// CONFIGURACION
 		panel.setPreferredSize(parametros.getDimensionCuerpo());
 		panel.setBackground(parametros.getColorCuerpo());
-		panel.setLayout(new GridLayout(2, 1, 20, 20));
+		panel.setLayout(new GridLayout(5, 2, 10, 10));
 
 		/// ELEMENTOS
 		JLabel fechaInicio = new JLabel("Fecha de inicio (DD/MM)", SwingConstants.CENTER);

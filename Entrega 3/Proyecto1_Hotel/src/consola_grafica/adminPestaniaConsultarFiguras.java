@@ -9,8 +9,10 @@ import Controlador.ControladorEmpleado;
 import Model.Habitacion;
 import Model.Hotel;
 import figuras.GraficaRelacionRestauranteTarifa;
+import figuras.GraficaRelacionServiciosTarifa;
 import figuras.GraficaValorFacturas;
 import figuras.GraficaVentasRestaurante;
+import figuras.GraficaVentasServicios;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -35,15 +37,23 @@ public class adminPestaniaConsultarFiguras extends JPanel {
 
 		// Botones
 		JButton ventasRestaurante = new JButton("Ventas restaurante");
+		JButton ventasServicios = new JButton("Servicios ofrecidos");
 		JButton valorFacturas = new JButton("Suma Total de las facturas a lo largo del tiempo");
 		JButton relacionRestauranteTarifa = new JButton("Relación tarifaHabitación/consumoRestaurante");
+		JButton relacionServicioTarifa = new JButton("Relación tarifaHabitación/consumoServicios");
 
 		ventasRestaurante.setPreferredSize(parametros.getDimensionBotonBarra());
 		valorFacturas.setPreferredSize(parametros.getDimensionBotonBarra());
 		relacionRestauranteTarifa.setPreferredSize(parametros.getDimensionBotonBarra());
+		relacionServicioTarifa.setPreferredSize(parametros.getDimensionBotonBarra());
+		ventasServicios.setPreferredSize(parametros.getDimensionBotonBarra());
 
 		ventasRestaurante.addActionListener(event -> {
 			new GraficaVentasRestaurante(hotel);
+			JOptionPane.showMessageDialog(null, "Consulte la carpeta 'Figuras' de la base de datos");
+		});
+		ventasServicios.addActionListener(event -> {
+			new GraficaVentasServicios(hotel);
 			JOptionPane.showMessageDialog(null, "Consulte la carpeta 'Figuras' de la base de datos");
 		});
 		valorFacturas.addActionListener(event -> {
@@ -54,6 +64,10 @@ public class adminPestaniaConsultarFiguras extends JPanel {
 			new GraficaRelacionRestauranteTarifa(hotel);
 			JOptionPane.showMessageDialog(null, "Consulte la carpeta 'Figuras' de la base de datos");
 		});
+		relacionServicioTarifa.addActionListener(event -> {
+			new GraficaRelacionServiciosTarifa(hotel);
+			JOptionPane.showMessageDialog(null, "Consulte la carpeta 'Figuras' de la base de datos");
+		});
 
 		JPanel auxiliar = new JPanel();
 		auxiliar.setLayout(new BoxLayout(auxiliar, BoxLayout.Y_AXIS));
@@ -62,9 +76,13 @@ public class adminPestaniaConsultarFiguras extends JPanel {
 		auxiliar.add(Box.createVerticalGlue());
 		auxiliar.add(ventasRestaurante);
 		auxiliar.add(Box.createVerticalGlue());
+		auxiliar.add(ventasServicios);
+		auxiliar.add(Box.createVerticalGlue());
 		auxiliar.add(valorFacturas);
 		auxiliar.add(Box.createVerticalGlue());
 		auxiliar.add(relacionRestauranteTarifa);
+		auxiliar.add(Box.createVerticalGlue());
+		auxiliar.add(relacionServicioTarifa);
 		auxiliar.add(Box.createVerticalGlue());
 
 		/// ADD

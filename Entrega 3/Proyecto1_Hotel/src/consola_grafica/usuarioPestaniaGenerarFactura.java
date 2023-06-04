@@ -81,7 +81,7 @@ public class usuarioPestaniaGenerarFactura extends JPanel {
 		/// ADD
 
 		JPanel auxiliar = new JPanel();
-		auxiliar.setLayout(new GridLayout(3, 2, 10, 80));
+		auxiliar.setLayout(new GridLayout(4, 2, 10, 20));
 		auxiliar.setBackground(parametros.getColorCuerpo());
 
 		auxiliar.add(documento);

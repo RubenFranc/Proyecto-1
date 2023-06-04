@@ -6,12 +6,14 @@ public class Servicio {
 	private double precio;
 	private String descripcion;
 	private boolean enGrupo;
+	private int vecesOfrecido;
 	
-	public Servicio(String nombre, double precio, String descripcion,boolean enGrupo) {
+	public Servicio(String nombre, double precio, String descripcion,boolean enGrupo, int veces) {
 		this.nombre = nombre;
 		this.precio = precio;
 		this.descripcion = descripcion;
 		this.enGrupo = enGrupo;
+		this.vecesOfrecido = veces;
 	}
 	
 	public void setPrecio(double nuevoPrecio) {
@@ -32,6 +34,14 @@ public class Servicio {
 	
 	public boolean getEnGrupo() {
 		return enGrupo;
+	}
+	
+	public void ofrecido() {
+		this.vecesOfrecido += 1;
+	}
+	
+	public int getVecesOfrecido() {
+		return vecesOfrecido;
 	}
 	
 }

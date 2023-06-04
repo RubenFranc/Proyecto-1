@@ -372,9 +372,11 @@ public class ControladorPersistencia {
 			String costo = partes[1];
 			String grupo = partes[2];
 			String descripcion = partes[3].replace("\n", "");
+			String vecesOfrecido = partes[4].replace("\n", "");
 			double precio = Double.parseDouble(costo);
 			boolean enGrupo = Boolean.parseBoolean(grupo);
-			Servicio servicio = new Servicio(nombre, precio, descripcion, enGrupo);
+			int veces = Integer.parseInt(vecesOfrecido);
+			Servicio servicio = new Servicio(nombre, precio, descripcion, enGrupo, veces);
 			hotel.getServiciosHotel().put(nombre, servicio);
 			linea = br.readLine();
 		}
@@ -391,7 +393,7 @@ public class ControladorPersistencia {
 		for (String nombreServ: servicios.keySet()) {
 			Servicio serv = servicios.get(nombreServ);
 			String linea = serv.getNombre() + ";" + serv.getPrecio() + ";" + serv.getEnGrupo() + 
-				";" + serv.getDescripcion() + "\n";
+				";" + serv.getDescripcion() + ";" + serv.getVecesOfrecido() + "\n";
 			doc += linea;
 		}
 		wr.write(doc);
@@ -451,6 +453,37 @@ public class ControladorPersistencia {
         PrintWriter wr = new PrintWriter(bw);  
         String doc = "";
 		Map<Double, Double> relaciones = hotel.getRelacion();
+		for (double tarifa: relaciones.keySet()) {
+			String linea = tarifa + ";" + relaciones.get(tarifa) + "\n";
+			doc += linea;
+		}
+		wr.write(doc);
+        wr.close();
+        bw.close();
+	}
+	
+	public void cargarRelacionServiciosTarifa(Hotel hotel, String archivoRelaciones) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(archivoRelaciones));
+		String linea = br.readLine();
+		while (linea != null) {
+			String[] partes = linea.split(";");
+			String tarifa = partes[0];
+			String servicio = partes[1].replace("\n", "");
+			double precio = Double.parseDouble(tarifa);
+			double consumo = Double.parseDouble(servicio);
+			hotel.getRelacionServicio().put(precio, consumo);
+			linea = br.readLine();
+		}
+		br.close();
+	}
+	
+	public void guardarRelacionServiciosTarifaArchivo(Hotel hotel, String archivoRelaciones) throws IOException {
+		File file = new File(archivoRelaciones);
+		FileWriter fw = new FileWriter(file);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter wr = new PrintWriter(bw);  
+        String doc = "";
+		Map<Double, Double> relaciones = hotel.getRelacionServicio();
 		for (double tarifa: relaciones.keySet()) {
 			String linea = tarifa + ";" + relaciones.get(tarifa) + "\n";
 			doc += linea;

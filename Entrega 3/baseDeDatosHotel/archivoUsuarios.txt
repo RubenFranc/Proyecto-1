@@ -2,3 +2,4 @@ r.franco;123456;A
 huesped1;123456;U
 FrancoRuben;654321;E
 rubenFranco;123456;R
+huesped2;123456;U

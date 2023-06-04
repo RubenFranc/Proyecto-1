@@ -23,6 +23,7 @@ public class Hotel {
 	private Map<String, ArrayList<Huesped>> huespedes;
 	private Map<String, Double> registroValorFacturas;
 	private Map<Double, Double> relacionPrecioRestauranteHabitacion;
+	private Map<Double, Double> relacionPrecioServiciosHabitacion;
 	
 	private String propiedades = "true,true,true,true,true,true,true,true";
 	
@@ -46,6 +47,7 @@ public class Hotel {
 			
 		}
 		this.relacionPrecioRestauranteHabitacion = new HashMap<>();
+		this.relacionPrecioServiciosHabitacion = new HashMap<>();
 	}
 	
 	public Map<String, Map<String, Habitacion>> getHabitacionesDisponiblesHotel(){
@@ -79,6 +81,10 @@ public class Hotel {
 	public Map<Double, Double> getRelacion(){
 		return relacionPrecioRestauranteHabitacion;
 	}
+
+	public Map<Double, Double> getRelacionServicio(){
+		return relacionPrecioServiciosHabitacion;
+	}
 	
 	public Map<String, Map<String, Double>> getModificacionesHabitaciones(){
 		return modificacionesTarifasHabitaciones;
@@ -98,6 +104,10 @@ public class Hotel {
 	
 	public void registrarRelacion(double tarifa, double consumo) {
 		this.relacionPrecioRestauranteHabitacion.put(tarifa, consumo);
+	}
+	
+	public void registrarRelacionServicio(double tarifa, double precioServicio) {
+		this.relacionPrecioServiciosHabitacion.put(tarifa, precioServicio);
 	}
 	
 	public String escogerPasarela(String nombrePasarela) throws IOException {

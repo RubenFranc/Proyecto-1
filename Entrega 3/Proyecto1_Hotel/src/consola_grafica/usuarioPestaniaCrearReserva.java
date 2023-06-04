@@ -22,7 +22,7 @@ public class usuarioPestaniaCrearReserva extends JPanel {
 		/// CONFIGURACION
 		panel.setPreferredSize(parametros.getDimensionCuerpo());
 		panel.setBackground(parametros.getColorCuerpo());
-		panel.setLayout(new GridLayout(8, 2, 10, 10));
+		panel.setLayout(new GridLayout(12, 2, 10, 10));
 
 		/// ELEMENTOS
 		JLabel nombre = new JLabel("Nombre del titular", SwingConstants.CENTER);
@@ -152,7 +152,7 @@ public class usuarioPestaniaCrearReserva extends JPanel {
 		panelFinal.setLayout(new BorderLayout());
 
 		JButton botonContinuarYCerrar = new JButton("Continuar y cerrar");
-		botonContinuarYCerrar.setPreferredSize(parametros.getDimensionBotonArriba());
+		botonContinuarYCerrar.setPreferredSize(new Dimension(200,100));
 		botonContinuarYCerrar.addActionListener(event -> {
 			String nom = nombreTextField.getText(); // falta agregar lo del pboton de pago inmediato
 			String doc = documentoTextField.getText();
@@ -184,7 +184,7 @@ public class usuarioPestaniaCrearReserva extends JPanel {
 		
 		
 		JButton botonContinuarYPagar = new JButton("Continuar y pagar");
-		botonContinuarYPagar.setPreferredSize(parametros.getDimensionBotonArriba());
+		botonContinuarYPagar.setPreferredSize(new Dimension(200,100));
 		botonContinuarYPagar.addActionListener(event -> {
 			String nom = nombreTextField.getText(); // falta agregar lo del pboton de pago inmediato
 			String doc = documentoTextField.getText();
@@ -221,6 +221,8 @@ public class usuarioPestaniaCrearReserva extends JPanel {
 		continuarPanel.add(Box.createVerticalGlue());
 		continuarPanel.add(Box.createHorizontalGlue());
 		continuarPanel.add(botonContinuarYCerrar);
+		continuarPanel.add(Box.createVerticalGlue());
+		continuarPanel.add(Box.createHorizontalGlue());
 		continuarPanel.add(botonContinuarYPagar);
 		continuarPanel.add(Box.createVerticalGlue());
 		continuarPanel.add(Box.createHorizontalGlue());

@@ -93,10 +93,12 @@ public class ControladorAdministrador {
 			String nombre = partes[0];
 			String costo = partes[1];
 			String grupo = partes[2];
-			String descripcion = partes[3].replace("\n", "");
+			String descripcion = partes[3];
+			String vecesOfrecido = partes[4].replace("\n", "");
 			double precio = Double.parseDouble(costo);
 			boolean enGrupo = Boolean.parseBoolean(grupo);
-			Servicio servicio = new Servicio(nombre, precio, descripcion, enGrupo);
+			int veces = Integer.parseInt(vecesOfrecido);
+			Servicio servicio = new Servicio(nombre, precio, descripcion, enGrupo, veces);
 			hotel.getServiciosHotel().put(nombre, servicio);
 			linea = br.readLine();
 		}

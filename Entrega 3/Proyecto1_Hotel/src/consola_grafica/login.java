@@ -89,8 +89,8 @@ public class login extends JFrame  {
         loginButton.setPreferredSize(dimensionBotonBarra);
         loginButton.addActionListener(event -> {
         	
-        	String user = "r.franco";//usuarioTextField.getText();
-        	String password = "123456";//contraseniaTextField.getText();
+        	String user = usuarioTextField.getText();
+        	String password = contraseniaTextField.getText();
         	String mssg = verificacionIdentidad(user, password, hotel);
         	if (mssg.equals("A") || mssg.equals("R") || mssg.equals("E")) {
             	if (mssg.equals("A")) {
@@ -184,6 +184,7 @@ public class login extends JFrame  {
 			controladorPersistencia.guardarServiciosArchivo(hotel, "../baseDeDatosHotel/archivoServicios.txt");;
 			controladorPersistencia.guardarValoresFacturasArchivo(hotel, "../baseDeDatosHotel/archivoFacturas.txt");
 			controladorPersistencia.guardarRelacionRestauranteTarifaArchivo(hotel, "../baseDeDatosHotel/archivoRelacionRestauranteHabitacion.txt");
+			controladorPersistencia.guardarRelacionServiciosTarifaArchivo(hotel, "../baseDeDatosHotel/archivoRelacionServiciosHabitacion.txt");
 	        
         } catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -247,6 +248,7 @@ public class login extends JFrame  {
 		controladorPersistencia.cargarServiciosArchivo(hotel, "../baseDeDatosHotel/archivoServicios.txt");
 		controladorPersistencia.cargarValoresFacturas(hotel, "../baseDeDatosHotel/archivoFacturas.txt");
 		controladorPersistencia.cargarRelacionRestauranteTarifa(hotel, "../baseDeDatosHotel/archivoRelacionRestauranteHabitacion.txt");
+		controladorPersistencia.cargarRelacionServiciosTarifa(hotel, "../baseDeDatosHotel/archivoRelacionServiciosHabitacion.txt");
     	JFrame login= new login();
     	login.setVisible(true);
     	
