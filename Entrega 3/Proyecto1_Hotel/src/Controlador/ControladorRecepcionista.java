@@ -244,6 +244,8 @@ public class ControladorRecepcionista {
 		factura += "TOTAL A PAGAR: " + totalTotal;
 		factura += "\n****************************************\n\n¡Vuelva pronto!";
 		
+		hotel.registrarValorFactura(reserva.getfechaInicio().split("/")[1], totalTotal);
+		
 		Class clase = Class.forName(clasePasarela);
 		PasarelaDePagos pasarela = (PasarelaDePagos) clase.getDeclaredConstructor(null).newInstance(null);
 		String mensajeTransaccion = pasarela.validarPago(reserva.getHuesped().getTarjeta(), totalTotal);

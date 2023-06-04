@@ -330,12 +330,14 @@ public class ControladorPersistencia {
 			String servicioCuarto = partes[3];
 			String horaInicio = partes[4];
 			String horaFin = partes[5].replace("\n", "");
+			String unidades = partes[6].replace("\n", "");
 			double precio = Double.parseDouble(costo);
 			boolean servicioACuarto = Boolean.parseBoolean(servicioCuarto);
 			int horaInicioDisponibilidad = Integer.parseInt(horaInicio);
 			int horaFinDisponibilidad = Integer.parseInt(horaFin);
+			int unidadesVendidas = Integer.parseInt(unidades);
 			ProductoMenu producto = new ProductoMenu(nombre, precio, descripcion, servicioACuarto,
-					horaInicioDisponibilidad, horaFinDisponibilidad);
+					horaInicioDisponibilidad, horaFinDisponibilidad, unidadesVendidas);
 			hotel.getMenuHotel().put(nombre, producto);
 			linea = br.readLine();
 		}
@@ -353,7 +355,7 @@ public class ControladorPersistencia {
 			ProductoMenu prod = menu.get(nombreProd);
 			String linea = prod.getNombre() + ";" + prod.getPrecio() + ";" + prod.getDescripcion() + 
 				";" + prod.getServicioACuarto() + ";" + prod.getHoraInicioDisponibilidad() + 
-				";" + prod.getHoraFinDisponibilidad() + "\n";
+				";" + prod.getHoraFinDisponibilidad() + ";" + prod.getUnidadesVendidas() + "\n";
 			doc += linea;
 		}
 		wr.write(doc);
@@ -390,6 +392,67 @@ public class ControladorPersistencia {
 			Servicio serv = servicios.get(nombreServ);
 			String linea = serv.getNombre() + ";" + serv.getPrecio() + ";" + serv.getEnGrupo() + 
 				";" + serv.getDescripcion() + "\n";
+			doc += linea;
+		}
+		wr.write(doc);
+        wr.close();
+        bw.close();
+	}
+	
+	public void cargarValoresFacturas(Hotel hotel, String archivoFacturas) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(archivoFacturas));
+		String linea = br.readLine();
+		while (linea != null) {
+			String[] partes = linea.split(";");
+			String mes = partes[0];
+			String valor = partes[1].replace("\n", "");
+			double precio = Double.parseDouble(valor);
+			hotel.getRegistroFacturas().put(mes, precio);
+			linea = br.readLine();
+		}
+		br.close();
+	}
+	
+	public void guardarValoresFacturasArchivo(Hotel hotel, String archivoFacturas) throws IOException {
+		File file = new File(archivoFacturas);
+		FileWriter fw = new FileWriter(file);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter wr = new PrintWriter(bw);  
+        String doc = "";
+		Map<String, Double> valoresFacturas = hotel.getRegistroFacturas();
+		for (String mes: valoresFacturas.keySet()) {
+			String linea = mes + ";" + valoresFacturas.get(mes) + "\n";
+			doc += linea;
+		}
+		wr.write(doc);
+        wr.close();
+        bw.close();
+	}
+	
+	public void cargarRelacionRestauranteTarifa(Hotel hotel, String archivoRelaciones) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(archivoRelaciones));
+		String linea = br.readLine();
+		while (linea != null) {
+			String[] partes = linea.split(";");
+			String tarifa = partes[0];
+			String restaurante = partes[1].replace("\n", "");
+			double precio = Double.parseDouble(tarifa);
+			double consumo = Double.parseDouble(restaurante);
+			hotel.getRelacion().put(precio, consumo);
+			linea = br.readLine();
+		}
+		br.close();
+	}
+	
+	public void guardarRelacionRestauranteTarifaArchivo(Hotel hotel, String archivoRelaciones) throws IOException {
+		File file = new File(archivoRelaciones);
+		FileWriter fw = new FileWriter(file);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter wr = new PrintWriter(bw);  
+        String doc = "";
+		Map<Double, Double> relaciones = hotel.getRelacion();
+		for (double tarifa: relaciones.keySet()) {
+			String linea = tarifa + ";" + relaciones.get(tarifa) + "\n";
 			doc += linea;
 		}
 		wr.write(doc);

@@ -98,6 +98,7 @@ public class ControladorEmpleado {
 		for (String nombre: nombres) {
 			ProductoMenu producto = hotel.getMenuHotel().get(nombre);
 			if (producto.getHoraInicioDisponibilidad() <= horaActual & producto.getHoraFinDisponibilidad() >= horaActual) {
+				hotel.getMenuHotel().get(nombre).unidadVendida();;
 				total += producto.getPrecio();
 				detalleConsumo += "*" + nombre + " -> $" + producto.getPrecio() + "\n";
 				}
@@ -112,7 +113,17 @@ public class ControladorEmpleado {
 			factura += detalleConsumo;
 			factura += "---------------------------------------\n";
 			factura += "Total a pagar: $" + total;
+			
+			//Encontrar tarifa habitación
+			double tarifa = habitacion.getTarifa();
+			if (hotel.getModificacionesHabitaciones().keySet().contains(habitacion.getTipoHabitacion())) {
+				if (hotel.getModificacionesHabitaciones().get(habitacion.getTipoHabitacion()).containsKey(habitacion.getFechaInicio())) {
+					tarifa = hotel.getModificacionesHabitaciones().get(habitacion.getTipoHabitacion()).get(habitacion.getFechaInicio());
+				}
+			}
+			hotel.registrarRelacion(tarifa, total);
 		}
+		
 		return factura;
 	}
 	

@@ -212,6 +212,18 @@ public class menu_administrador extends JFrame {
         	cuerpo.repaint();
             
         });
+        JButton botonPestaniaConsultarFiguras= new JButton("Generar gráficas");
+        botonPestaniaConsultarFiguras.addActionListener(event -> {
+        	JPanel pestaniaConsultarFiguras= adminPestaniaConsultarFiguras.getPestania(hotel);
+        	//pestaniaCambiarTarifaServicio.add(confirmarPanel, BorderLayout.SOUTH);
+        	//pestaniaCambiarTarifaServicio.setLocation(0,0);
+        	//pestaniaCambiarTarifaServicio.setSize(500, 200);
+        	cuerpo.removeAll();
+        	cuerpo.add(pestaniaConsultarFiguras, BorderLayout.CENTER);
+        	cuerpo.revalidate();
+        	cuerpo.repaint();
+            
+        });
         
         botonPestaniaCargarDatos.setPreferredSize(dimensionBotonBarra);
         botonPestaniaCrearHabitacion.setPreferredSize(dimensionBotonBarra);
@@ -220,6 +232,7 @@ public class menu_administrador extends JFrame {
         botonPestaniaCambiarTarifaServicio.setPreferredSize(dimensionBotonBarra);
         botonPestaniaAsignarTarifaHabitacionFecha.setPreferredSize(dimensionBotonBarra);
         botonPestaniaEditarProductoMenu.setPreferredSize(dimensionBotonBarra);
+        botonPestaniaConsultarFiguras.setPreferredSize(dimensionBotonBarra);
         
         //Izquierda
         izquierda.setLayout(new FlowLayout());
@@ -233,6 +246,7 @@ public class menu_administrador extends JFrame {
         izquierda.add(botonPestaniaCambiarTarifaServicio);
         izquierda.add(botonPestaniaAsignarTarifaHabitacionFecha);
         izquierda.add(botonPestaniaEditarProductoMenu);
+        izquierda.add(botonPestaniaConsultarFiguras);
         
         
         // Derecha

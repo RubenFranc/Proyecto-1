@@ -6,13 +6,15 @@ public class ProductoMenu extends Servicio{
 	private boolean servicioACuarto;
 	private int horaInicioDisponibilidad;
 	private int horaFinDisponibilidad;
+	private int unidadesVendidas;
 	
 	public ProductoMenu(String nombre, double precio, String descripcion, boolean servicioACuarto,
-			int horaInicioDisponibilidad, int horaFinDisponibilidad) {
+			int horaInicioDisponibilidad, int horaFinDisponibilidad, int unidades) {
 		super(nombre, precio, descripcion, enGrupo);
 		this.servicioACuarto = servicioACuarto;
 		this.horaInicioDisponibilidad = horaInicioDisponibilidad;
 		this.horaFinDisponibilidad = horaFinDisponibilidad;	
+		this.unidadesVendidas = unidades;
 	}
 
 	public boolean getServicioACuarto() {
@@ -37,6 +39,14 @@ public class ProductoMenu extends Servicio{
 	
 	public void setHoraFinDisponibilidad(int horaFinDisponibilidad) {
 		this.horaFinDisponibilidad = horaFinDisponibilidad;
+	}
+	
+	public void unidadVendida() {
+		this.unidadesVendidas += 1;
+	}
+	
+	public int getUnidadesVendidas() {
+		return unidadesVendidas;
 	}
 	
 }

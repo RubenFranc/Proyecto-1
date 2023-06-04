@@ -70,13 +70,15 @@ public class ControladorAdministrador {
 			String descripcion = partes[2];
 			String servicioCuarto = partes[3];
 			String horaInicio = partes[4];
-			String horaFin = partes[5].replace("\n", "");
+			String horaFin = partes[5];
+			String unidades = partes[6].replace("\n", "");
 			double precio = Double.parseDouble(costo);
 			boolean servicioACuarto = Boolean.parseBoolean(servicioCuarto);
 			int horaInicioDisponibilidad = Integer.parseInt(horaInicio);
 			int horaFinDisponibilidad = Integer.parseInt(horaFin);
+			int unidadesVendidas = Integer.parseInt(unidades);
 			ProductoMenu producto = new ProductoMenu(nombre, precio, descripcion, servicioACuarto,
-					horaInicioDisponibilidad, horaFinDisponibilidad);
+					horaInicioDisponibilidad, horaFinDisponibilidad, unidadesVendidas);
 			hotel.getMenuHotel().put(nombre, producto);
 			linea = br.readLine();
 		}

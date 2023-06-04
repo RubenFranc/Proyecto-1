@@ -21,6 +21,8 @@ public class Hotel {
 	private Map<String, ArrayList<Reserva>> reservas;
 	private Map<String, Map<String, Double>> modificacionesTarifasHabitaciones;
 	private Map<String, ArrayList<Huesped>> huespedes;
+	private Map<String, Double> registroValorFacturas;
+	private Map<Double, Double> relacionPrecioRestauranteHabitacion;
 	
 	private String propiedades = "true,true,true,true,true,true,true,true";
 	
@@ -33,6 +35,17 @@ public class Hotel {
 		this.reservas = new HashMap<>();
 		this.modificacionesTarifasHabitaciones = new HashMap<>();	
 		this.huespedes = new HashMap<>();
+		this.registroValorFacturas = new HashMap<>();
+		for (int i=1; i<13;i++) {
+			if (i<=9) {
+				this.registroValorFacturas.put("0" + Integer.toString(i), 0.0);
+			}
+			else {
+				this.registroValorFacturas.put(Integer.toString(i), 0.0);
+			}
+			
+		}
+		this.relacionPrecioRestauranteHabitacion = new HashMap<>();
 	}
 	
 	public Map<String, Map<String, Habitacion>> getHabitacionesDisponiblesHotel(){
@@ -59,6 +72,14 @@ public class Hotel {
 		return usuarios;
 	}
 	
+	public Map<String, Double> getRegistroFacturas(){
+		return registroValorFacturas;
+	}
+	
+	public Map<Double, Double> getRelacion(){
+		return relacionPrecioRestauranteHabitacion;
+	}
+	
 	public Map<String, Map<String, Double>> getModificacionesHabitaciones(){
 		return modificacionesTarifasHabitaciones;
 	}
@@ -69,6 +90,14 @@ public class Hotel {
 	
 	public String getPropiedadesHotel() {
 		return propiedades;
+	}
+	
+	public void registrarValorFactura(String mes, double valor) {
+		this.registroValorFacturas.put(mes, registroValorFacturas.get(mes) + valor);
+	}
+	
+	public void registrarRelacion(double tarifa, double consumo) {
+		this.relacionPrecioRestauranteHabitacion.put(tarifa, consumo);
 	}
 	
 	public String escogerPasarela(String nombrePasarela) throws IOException {

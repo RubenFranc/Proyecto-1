@@ -190,6 +190,8 @@ public class loginUsuario extends JFrame  {
 			controladorPersistencia.guardarProductosMenuArchivo(hotel, "../baseDeDatosHotel/archivoMenuRestaurante.txt");
 			controladorPersistencia.guardarServiciosArchivo(hotel, "../baseDeDatosHotel/archivoServicios.txt");
 			controladorPersistencia.guardarUsuariosArchivo(hotel, "../baseDeDatosHotel/archivoUsuarios.txt");
+			controladorPersistencia.guardarValoresFacturasArchivo(hotel, "../baseDeDatosHotel/archivoFacturas.txt");
+			controladorPersistencia.guardarRelacionRestauranteTarifaArchivo(hotel, "../baseDeDatosHotel/archivoRelacionRestauranteHabitacion.txt");
         } catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -249,6 +251,8 @@ public class loginUsuario extends JFrame  {
 		controladorPersistencia.cargarReservas(hotel, "../baseDeDatosHotel/archivoReservas.txt");
 		controladorPersistencia.cargarProductosMenuArchivo(hotel, "../baseDeDatosHotel/archivoMenuRestaurante.txt");
 		controladorPersistencia.cargarServiciosArchivo(hotel, "../baseDeDatosHotel/archivoServicios.txt");
+		controladorPersistencia.cargarValoresFacturas(hotel, "../baseDeDatosHotel/archivoFacturas.txt");
+		controladorPersistencia.cargarRelacionRestauranteTarifa(hotel, "../baseDeDatosHotel/archivoRelacionRestauranteHabitacion.txt");
     	new loginUsuario(hotel);
     	//loginU.setVisible(true);
     	
